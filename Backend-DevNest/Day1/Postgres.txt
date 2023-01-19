@@ -1,0 +1,133 @@
+postgre is database where we store so much of data 
+
+
+install postgre SQL
+set the path -  in environment variables 
+1.C:\Program Files\PostgreSQL\15\bin
+2.C:\Program Files\PostgreSQL\15\lib 
+
+now open command prompt
+
+psql -U postgres 
+
+and enter the password
+
+C:\Users\MOULALI>psql -U postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+to create a user:
+CREATE USER userName WITH PASSWORD 'password'
+
+postgres=# CREATE DATABASE devs
+postgres-# GRANT ALL PRIVILAGES ON DATABASE devs to postgres 
+
+to grant only query PRIVILAGES
+postgres-# GRANT SELECT PRIVILAGES ON DATABASE devs to postgres 
+
+to grant only insert 
+postgres-# GRANT INSERT PRIVILAGES ON DATABASE devs to postgres 
+
+to grant only update
+postgres-# GRANT UPDATE PRIVILAGES ON DATABASE devs to postgres 
+
+
+to grant only delete
+postgres-# GRANT DELETE PRIVILAGES ON DATABASE devs to postgres 
+
+=======================================================
+
+to see list of all databases
+
+\l 
+
+=======================================================
+
+to remove database 
+
+DROP DATABASE devs ;
+
+
+=======================================================
+
+using semicolon is must , lets see create database , check if its created , and connect to it
+
+
+C:\Users\MOULALI>psql -U postgres
+Password for user postgres:
+psql (15.1)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# CREATE DATABASE devs;
+CREATE DATABASE
+postgres=# \l
+                                                         List of databases
+    Name    |  Owner   | Encoding |      Collate       |       Ctype        | ICU Locale | Locale Provider |   Access privileges
+------------+----------+----------+--------------------+--------------------+------------+-----------------+-----------------------
+ demo       | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            |
+ devs       | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            |
+ greencycle | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            |
+ postgres   | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            |
+ template0  | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            | =c/postgres          +
+            |          |          |                    |                    |            |                 | postgres=CTc/postgres
+ template1  | postgres | UTF8     | English_India.1252 | English_India.1252 |            | libc            | =c/postgres          +
+            |          |          |                    |                    |            |                 | postgres=CTc/postgres
+(6 rows)
+
+
+postgres=# \c devs
+You are now connected to database "devs" as user "postgres".
+devs=#
+
+=======================================================
+
+create table and check if it is created 
+
+devs=# CREATE TABLE COMPANY(
+devs(# ID INT NOT NULL,
+devs(# NAME CHAR[50],
+devs(# AGE INT,
+devs(# ADDRESS TEXT
+devs(# );
+CREATE TABLE
+devs=# \d
+          List of relations
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | company | table | postgres
+(1 row)
+
+
+
+to see the table , with its column and type  ---> \d tableName
+
+devs=# \d company
+                  Table "public.company"
+ Column  |      Type      | Collation | Nullable | Default
+---------+----------------+-----------+----------+---------
+ id      | integer        |           | not null |
+ name    | character(1)[] |           |          |
+ age     | integer        |           |          |
+ address | text           |           |          |
+
+=======================================================
+DROP TABLE company;
+
+devs=# DROP TABLE company;
+DROP TABLE
+
+=======================================================
+
+to come out of postgres inside cmd 
+
+\q  
+
+
+

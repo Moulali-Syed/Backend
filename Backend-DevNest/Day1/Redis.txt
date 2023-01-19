@@ -1,0 +1,260 @@
+REDIS  - is like caching in backend[store data temporarily on server side] , 
+        similar to what we have local storage , session storage in frontend
+
+=============================================
+
+Install REDIS in different OS
+
+
+to install in linux 
+apt-get redis
+
+to install in mac
+brew install redis
+
+to install in windows , we need to switch to linux
+apt-get redis 
+
+to install on windows
+step1: go to link -->  https://github.com/microsoftarchive/redis/releases
+step2: download Redis-x64.. .msi file
+step3: click install - next - * check mark the add to env variables
+default port: 6379
+
+Once redis is installed , open cmd 
+
+write --->  redis-cli 
+this will show port number on which redis is running
+
+C:\Users\MOULALI>redis-cli
+127.0.0.1:6379> set key1 Moulali
+OK
+127.0.0.1:6379> get key1
+"Moulali"
+127.0.0.1:6379>
+
+we can store some variable and access it as above using set and get 
+it store as string values only , numbers also stored as string only
+=========================================================================================
+set , get , del [operations]
+
+127.0.0.1:6379> set name "apple"
+OK
+127.0.0.1:6379> get name
+"apple"
+127.0.0.1:6379> del name
+(integer) 1
+127.0.0.1:6379> set age 1
+OK
+127.0.0.1:6379> get age
+"1"
+127.0.0.1:6379> del age
+(integer) 1
+
+
+
+=========================================================================================
+to check if some is present or not 
+
+if present gives 1, if not then gives  0
+
+127.0.0.1:6379> set age 1
+OK
+127.0.0.1:6379> EXISTS age
+(integer) 1
+127.0.0.1:6379> EXISTS age1
+(integer) 0
+=========================================================================================
+
+to get list of all keys:
+
+KEYS *
+
+127.0.0.1:6379> KEYS *
+1) "key1"
+2) "age"
+=========================================================================================
+to delete all KEYS 
+
+FLUSHALL
+
+127.0.0.1:6379> FLUSHALL
+OK
+127.0.0.1:6379> KEYS *
+(empty list or set)
+
+after FLUSHALL , when we check for all keys , we get empty list
+
+
+use --> clear , to clean the cmd
+=========================================================================================
+to set an expiration to a key 
+
+if no expiration set then 
+when we check
+
+ttl keyName
+
+we get -1 [which means no expiration is set]
+
+
+say now i want to set expiration 
+
+expire name 10
+
+now the key - name will get deleted after 10 seconds
+if we check after 10 seconds - KEYS * , then it will be empty 
+
+
+example:
+
+127.0.0.1:6379> set k happy
+OK
+127.0.0.1:6379> ttl k
+(integer) -1
+127.0.0.1:6379> expire k 10
+(integer) 1
+127.0.0.1:6379> KEYS *
+(empty list or set)
+
+=========================================================================================
+to give expiry time when setting value:
+
+setex keyName seconds value [syntax]
+
+setex name 10 happy
+
+127.0.0.1:6379> setex name 10 apple
+OK
+127.0.0.1:6379> KEYS *
+1) "name"
+127.0.0.1:6379> KEYS *
+(empty list or set)
+127.0.0.1:6379>
+
+
+ttl name -> ttl is time to live
+=========================================================================================
+
+SET name apple 
+GET name
+DEL name
+KEYS *
+EXISTS name
+FLUSHALL
+ttl name
+expire name 10
+setex name 10 hello
+
+=========================================================================================
+
+dealing with arrays in redis 
+
+
+to push at 0th index - lpush
+to push at last index - rpush
+
+to pop from 0th index - lpop
+to pop at last index - rpop
+
+127.0.0.1:6379> lpush friends john
+(integer) 1
+127.0.0.1:6379> LRANGE friends 0 -1
+1) "john"
+127.0.0.1:6379> rpush friends romy
+(integer) 2
+127.0.0.1:6379> lrange friends 0 -1
+1) "john"
+2) "romy"
+127.0.0.1:6379> lpush friends arun
+(integer) 3
+127.0.0.1:6379> lrange friends 0 -1
+1) "arun"
+2) "john"
+3) "romy"
+
+---
+
+
+127.0.0.1:6379> lpop friends
+"arun"
+127.0.0.1:6379> rpop friends
+"romy"
+127.0.0.1:6379> lrange friends 0 -1
+1) "john"
+=========================================================================================
+
+to have only unique values 
+we use sadd
+
+
+127.0.0.1:6379> sadd hobbies "w"
+(integer) 1
+127.0.0.1:6379> sadd hobbies "w"
+(integer) 0
+
+only one time inserted , we get output as 1 , second time it will not insert 
+so showing 0
+
+-----------
+
+to see values in sadd , we use SMEMBERS 
+
+127.0.0.1:6379> SMEMBERS hobbies
+1) "w"
+2) "weight lifting"
+3) "weight"
+
+=========================================================================================
+
+to add objects:
+
+we call object as hset
+
+{
+    person:{
+        name : apple
+    }
+}
+
+to add a key inside other key 
+
+hset person name apple
+
+
+127.0.0.1:6379> hset person name apple
+(integer) 1
+127.0.0.1:6379> hget person name
+"apple"
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "apple"
+127.0.0.1:6379> hset person age 1
+(integer) 1
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "apple"
+3) "age"
+4) "1"
+
+
+127.0.0.1:6379> hdel person age
+(integer) 1
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "apple"
+127.0.0.1:6379> hexists person name
+(integer) 1
+127.0.0.1:6379> hexists person age
+(integer) 0
+
+====================================
+
+to access array particular index , say index 1
+lrange friends 1 1
+
+
+===================
+come out of redis in cmd
+
+exit 
