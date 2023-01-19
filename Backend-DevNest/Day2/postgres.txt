@@ -1,0 +1,97 @@
+psql -U postgres
+
+give password - password
+-----------------------------------------
+CREATE USER user1 WITH PASSWORD 'password';
+
+postgres=# CREATE USER user1 WITH PASSWORD 'password';
+CREATE ROLE
+
+postgres=# CREATE DATABASE devsDB;
+CREATE DATABASE
+
+
+GRANT ALL PRIVILEGES ON DATABASE devsDB to user1;
+
+
+DROP DATABASE IF EXISTS devsDB;
+
+to see all databases:
+\l 
+
+connect database
+\c devsDB;
+
+
+create table:
+
+CREATE TABLE COMPANY(
+    ID INT PRIMARY KEY NOT NULL,
+    NAME TEXT NOT NULL,
+    AGE INT NOT NULL,
+    ADDRESS CHAR[50],
+    SALARY REAL
+);
+
+DROP TABLE company;
+
+to see table
+
+\d 
+
+to see all table details 
+
+\d company
+===========================================================================
+
+CREATE TABLE DEPARTMENT(
+    ID INT PRIMARY KEY NOT NULL,
+    DEPT CHAR[50] NOT NULL,
+    EMP_ID INT NOT NULL
+);
+
+we can consider our database as storage area like C drive , D drive 
+as we have folders inside the drives , similarly we have the schemas 
+
+CREATE SCHEMA mySchema; //is like creating a folder inside drive 
+
+create table inside schemas
+
+CREATE TABLE mySchema.company(
+    ID INT NOT NULL,
+    NAME VARCHAR(20) NOT NULL,
+    AGE INT NOT NULL,
+    ADDRESS CHAR[25],
+    SALARY DECIMAL(18,2),
+    PRIMARY KEY(ID)
+);
+
+\d 
+
+drop schema:
+DROP SCHEMA mySchema;
+
+as Schema has data we can tell to delete everything inside using below
+DROP SCHEMA mySchema CASCADE;
+
+===========================================================================
+
+INSERT INTO COMPANY(ID,NAME, AGE ,ADDRESS , SALARY) VALUES
+            (1,'Paul',12,'California',1000000);
+
+
+===========================================================================
+
+DROP TABLE IF EXISTS COMPANY;
+
+CREATE TABLE company(
+    ID INT PRIMARY KEY NOT NULL,
+    NAME TEXT NOT NULL,
+    AGE INT NOT NULL,
+    ADDRESS CHAR[50],
+    SALARY real ,
+    JOIN_DATE DATE
+);
+
+INSERT INTO COMPANY(ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES 
+            (1,'Paul',32,'California',20000,'2001-07-13');

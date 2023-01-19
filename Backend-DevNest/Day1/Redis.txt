@@ -54,7 +54,7 @@ OK
 
 
 =========================================================================================
-to check if some is present or not 
+to check if some key is present or not 
 
 if present gives 1, if not then gives  0
 
@@ -86,7 +86,7 @@ OK
 after FLUSHALL , when we check for all keys , we get empty list
 
 
-use --> clear , to clean the cmd
+use --> clear , to clean the cmd of redis cli 
 =========================================================================================
 to set an expiration to a key 
 

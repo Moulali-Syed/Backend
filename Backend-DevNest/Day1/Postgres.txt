@@ -23,21 +23,21 @@ Type "help" for help.
 to create a user:
 CREATE USER userName WITH PASSWORD 'password'
 
-postgres=# CREATE DATABASE devs
-postgres-# GRANT ALL PRIVILAGES ON DATABASE devs to postgres 
+postgres=# CREATE DATABASE devs;
+postgres-# GRANT ALL PRIVILAGES ON DATABASE devs to postgres; 
 
 to grant only query PRIVILAGES
-postgres-# GRANT SELECT PRIVILAGES ON DATABASE devs to postgres 
+postgres-# GRANT SELECT PRIVILAGES ON DATABASE devs to postgres; 
 
 to grant only insert 
-postgres-# GRANT INSERT PRIVILAGES ON DATABASE devs to postgres 
+postgres-# GRANT INSERT PRIVILAGES ON DATABASE devs to postgres; 
 
 to grant only update
-postgres-# GRANT UPDATE PRIVILAGES ON DATABASE devs to postgres 
+postgres-# GRANT UPDATE PRIVILAGES ON DATABASE devs to postgres; 
 
 
 to grant only delete
-postgres-# GRANT DELETE PRIVILAGES ON DATABASE devs to postgres 
+postgres-# GRANT DELETE PRIVILAGES ON DATABASE devs to postgres; 
 
 =======================================================
 
