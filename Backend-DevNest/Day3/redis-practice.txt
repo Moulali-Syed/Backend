@@ -1,0 +1,171 @@
+when we comment on youtube video , then it will show on the spot
+
+in redis we have publisher and supplier 
+
+for this lets see example
+
+open 3 redis shell
+redis-cli
+
+commentter - publisher
+people seeing comment - subscriber
+
+channel - its like in our whatsapp we send message to particular contact 
+        only he receives , no other
+==================================================
+lets subscribe through 2 cmd and publish through open 
+
+SUBSCRIBE devsnest
+
+PUBLISH devsnest hello
+
+now 2 cmd will show this hello , as they are subscribed
+
+127.0.0.1:6379> publish devsnest hello
+(integer) 2
+127.0.0.1:6379>
+------------------------------
+
+127.0.0.1:6379> SUBSCRIBE devsnest
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "devsnest"
+3) (integer) 1
+1) "message"
+2) "devsnest"
+3) "hello"
+------------------------------
+127.0.0.1:6379> subscribe devsnest
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "devsnest"
+3) (integer) 1
+1) "message"
+2) "devsnest"
+3) "hello"
+
+==========================================================
+to subscribe all channels , we have pattern matching psubscribe
+
+PSUBSCRIBE d*
+
+this will subscribe all publishers starting from devsnest
+
+==========================================================
+
+to unsubscribe  a particular channel
+
+UNSUBSCRIBE devnest   //unsubscribe channelName
+
+to unsubscribe all matching a particular pattern , as below starting with d 
+
+PUNSUBSCRIBE d*
+
+==========================================================
+
+in redis 5.0 we got streams , we can get history using this
+
+say we create then as - XADD mystream uniqueId key value
+
+
+XADD mystream 10000 name Anna
+
+XADD mystream 10001 name Bert
+
+XADD mystream 10002 name Cathy
+
+if we dont want to add id , and want to get unique id assigned by redis we can use *
+
+XADD mystream * name Tom
+
+this will be useful , say a user is joining a live stream after 5 minutes , still
+he will be accessible with live chat 
+
+
+by using some unique id , we can have access to that key in front end 
+if using random we dont have control of this 
+
+-----------
+
+limit the entries
+
+XADD mystream MAXLEN 100000 * name devs 
+ 
+To read 
+XREAD COUNT 200 STREAMS mystream 0  //start index 0 , end index 200 
+
+--------
+sometimes we need to disconnect user after 60 seconds
+
+XREAD BLOCK 10000 STREAMS mystream 0 //disconnet after 10 seconds 
+
+-----
+not to disconnect anytime
+
+XREAD BLOCK 0 STREAMS mystream 10002-0  //10002-0 is an id 
+
+=============================
+
+to have connection continuosly for 10 seconds  , if it gets data with in 10 seconds
+it will show data , otherwise it will disconnect
+
+XREAD BLOCK 10000 STREAMS mystream $ // this is like subscribing
+
+now from other cmd redis-cli , we publish within 10 seconds it will show in above cmd
+XADD mystream * name devsnest 
+
+
+=========================
+
+to show data from a particular id 
+
+XRANGE mystream 10001-0 163033-0 //startId  endId
+
+we can also specify the number of data we need , using COUNT
+XRANGE mystream 10001-0 163033-0 COUNT 3
+
+=========================
+if u dont know the ids , then we can specify - and +
+
+XRANGE mystream - + COUNT 2
+
+to read from reverse
+XREVRANGE mystream + - COUNT 2
+
+=====================================================================================
+
+SUBSCRIBE redis //in cmd1
+PUBLISH redis 1 //in cmd2 
+
+PSUBSCRIBE r*//in cmd1
+PUBLISH redis 1
+PUBLSIH reachit 2
+
+
+UNSUBSCRIBE redis 
+
+to maintain history and to be scalable we got streams from redis 5.0 
+
+XADD mystream 10000 name Anna //xadd streamName id key value 
+XADD mystream * name apple // this adds the unique id based on timestamp
+
+XADD mystream MAXLEN 100000 * name devs // we are MAXLEN of 100000 , only upto this it will get added , upper bound
+
+XREAD COUNT 200 STREAMS mystream 10002-0 //10002-0 is id here 
+
+XREAD BLOCK 10000 STREAM mystream 0 // if data is received with in given time here 10000 milliseconds
+                                    // it will show else it will disconnect
+
+XREAD BLOCK 0 STREAM mystream 0 // this will not get disconnected anytime 
+
+to behave pub - sub 
+XREAD BLOCK 10000 STREAMS mystream $
+
+XRANGE mystream 10001-0 16303344 //startId endId 
+
+XRANGE mystream - + COUNT 2 // - represents begining , + end 
+
+
+XREVRANGE mystream + -  COUNT 2 
+
+
