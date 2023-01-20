@@ -1,0 +1,74 @@
+data reaches satellite and then reach us
+
+lets say our computer connected to internet
+
+our computer has a IP address, which varies
+
+say i searched google.com , it has some IP address = 152.22.152.3
+we get this from a DNS server
+
+--------------------------
+
+rules by which data is transferred is protocols
+we have TCP/IP - transports data    
+        HTTP/HTTPS - Web Access
+        RTP - Live video , Streaming , VOIP calls
+
+
+===========================================================================
+
+API
+Application programming Interface - set of programming codes that enables data transmission
+    between one software product and another
+
+
+    WebApp in Browser --Request--> Internet -----> API ----->  WebServer ----> Database
+
+    WebServer is not an api , we develop api on it 
+
+
+There are three approaches to API release policies
+
+Private - the API is only for use internally , this gives companies the most control over their API 
+            like Node apps, react apps running on local server 
+Partner - APIs is shared with specific business partners , this can provide additional
+        revenue streams witjout compromising quality
+        like apis used to have access only to employees in a company
+
+Public - API is available to everyone , this allows third parties to develop
+        apps that interact with your api and can be a source for innovation
+
+ VPN -  to protect from hacking , vpn will sends its IP address , instead of ours 
+        thus vpn will be safe and not accessible to others
+
+=========================================================
+
+REST - representational state transfer
+    it is a set of rules which says how do we handle req and response 
+
+    instead of REST we have SOAP and many
+
+Simple and Standard
+Scalable and stateless
+High Performance , can be cached
+
+
+CREATE - POST 
+READ  - GET 
+Update - PUT 
+Delete - DELETE 
+
+===================================================================
+Node JS
+
+we create APIs using Node JS 
+
+accept a request , process it , if need to save on DB save it , send the response 
+
+Node js - can deal with high latency
+node js is very easy way to build scalable rest api projects 
+because it has event loop 
+
+it is very to work on json , node is very secure and performant , a high developer 
+community as front end and backend developers both know this 
+
