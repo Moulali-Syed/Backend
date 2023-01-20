@@ -95,3 +95,89 @@ CREATE TABLE company(
 
 INSERT INTO COMPANY(ID,NAME,AGE,ADDRESS,SALARY,JOIN_DATE) VALUES 
             (1,'Paul',32,'California',20000,'2001-07-13');
+
+
+===========================================================================
+
+day2 - part2
+
+CREATE SCHEMA mySchema;
+CREATE TABLE mySchema.company
+DROP SCHEMA mySchema CASCADE; //removes the data also
+
+INSERT INTO COMPANY(ID,NAME,AGE,ADDRESS) VALUES (4,'Tom',25,'Rich Mond');
+
+
+\d company // shows table structure
+
+select * from company;
+
+SELECT (15+2) as addition;
+SELECT (15*2) as multiplication;
+
+to see number of records
+select count(*) as "records" from company; 
+
+select current_timestamp;
+
+select * from company where age>=25 and salary>=50000;
+
+select * from company where age>=25 or salary>=65000;
+
+select * from company where age is not NULL;
+
+select * from company where salary is null;
+
+select name from company where name like 'P%';//name starting with P 
+
+select * from company where name like 'P_ul';//_ one character , can be anything here 
+
+Type casting:
+:: means we are changing its type
+select * from company where salary::TEXT LIKE '200%';
+
+select * from company where age between 25 and 27;
+
+select * from company where age in (25,27);
+
+select * from company where age not in (25,27);
+
+UPDATE company set salary = 15000 where id = 3;
+
+UPDATE company set address='Texas' , SALARY=20000 where id=2;
+
+DELETE from company where id=2;
+
+===========================================================================
+connect tables using primary key 
+
+foriegn key: the column which connects one table with other 
+
+
+GENERATED ALWAYS AS IDENTITY , generates a unique number 
+
+
+CREATE TABLE CUSTOMERS(
+    customer_id INT NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
+    PRIMARY KEY(customer_id)
+);
+
+CREATE TABLE CONTACTS(
+    contact_id INT NOT NULL,
+    customer_id INT,
+    contact_name VARCHAR(255) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    PRIMARY KEY(contact_id)
+    CONSTRAINT foreign_key_customer
+    FOREIGN KEY(customer_id)
+    REFERENCES customers(customer_id)
+    ON DELETE CASCADE
+);
+
+i want to use customer_id column , to create a connection between two tables above 
+
+
+ON DELETE CASCADE , means say i have deleted  a customer from customers table, then
+its corresponding customer_id row from contacts table should also be deleted 
