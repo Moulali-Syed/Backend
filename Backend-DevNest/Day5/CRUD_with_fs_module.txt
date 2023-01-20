@@ -1,0 +1,97 @@
+node js works on specific folder
+
+so go to a path in cmd
+
+then write --> node
+
+D:\Learning\NodeJs\Backend-DevNest>node
+Welcome to Node.js v16.14.0.
+Type ".help" for more information.
+
+=========================================================
+fs - means file system , we can read and write any file 
+
+var fs = require("fs");
+
+
+create a folder , using fs 
+--------------------------
+fs.mkdirSync('day_1');
+
+create a file inside folder 
+------------------------
+
+fs.writeFileSync("day_1/hello.txt", "hello",function(err){
+     if(err){
+      console.log(err);
+     }
+    });
+
+update file:
+-----------
+
+fs.appendFileSync("day_1/hello.txt"," appended");
+
+read file:
+---------
+fs.readFileSync("day_1/hello.txt");
+
+gives data as buffer 48 65 6c 6f ......
+
+to see in english
+
+var data = fs.readFileSync("day_1/hello.txt","utf-8");
+console.log(data);
+------------------------
+
+rename in sync mode:
+-----------------
+fs.renameSync("day_1/hello.txt","day_1/hello2.txt");
+
+
+delete :
+------
+first we should remove file , then we can remove folder 
+
+fs.unlinkSync("day_1/hello2.txt");//this deletes file
+fs.rmdirSync("day_1");
+
+====================================================================================
+to exit node js - .exit 
+
+REPL - read execute print loop , upto now what we have done is called repl 
+
+say
+1+1   //read  , execute 
+2 //print 
+>//goes to new line - loop
+
+====================================================================================
+
+create a file index.js
+
+var fs = require('fs');
+fs.mkdirSync('demo');
+
+fs.writeFileSync('demo/hello.txt', 'hello there');
+
+to run -  node index.js 
+
+====================================================================================
+
+create a file require_test.js 
+
+class Test {
+  print() {
+    console.log('Iam inside require_test');
+  }
+}
+
+module.exports = Test;
+
+
+now in index.js write 
+
+var test = require('./require_test');
+var obj = new Test();
+console.log(obj.print());
