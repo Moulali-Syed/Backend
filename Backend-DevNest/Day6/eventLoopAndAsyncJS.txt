@@ -1,0 +1,84 @@
+Event Loop and Async Javascript:
+
+event loop is nothing but an algorithm that handles async nature of javascript 
+
+any heavy tasks can be handled by some one by holding it for sometime
+ , so that we dont wait for it - for this purpose event loop came
+
+How Javascript works?
+it is single threaded , non blocking , asynchronous , concurret 
+I have call stack , event loop , call back Queue , Some other APIs
+
+single threaded - that it doesnot have total power of ram , works on one thread 
+
+
+javascript is compiled by v8 engine 
+do v8 engine has all the call stack, event loop , call back Queue , some other APIs?
+it has call stack and Heap only 
+
+heap - is where memory getting allocated
+stack - is where the execution is happening 
+
+
+call stack:
+one thread == one call stack == one thing at a time 
+=====================================================================
+
+function multiply(a,b){
+    return a*b;
+}
+
+function square(a){
+    return multiply(a,a);
+}
+
+function printSquare(n){
+    var squared = square(n);
+    console.log(squared);
+}
+
+printSquare(4);
+
+
+the above code will run in stack as 
+
+multiply()
+square()
+printSquare(4)
+main()
+
+stack follows LIFO 
+
+
+=================================================================
+say a function is returning itself , recursively
+
+function foo(){
+    return foo();
+}
+at sometime stack will get filled , then we get error
+
+Maximum call stack size exceeded
+
+=================================================================
+
+
+Call stack          Web Apis 
+
+        Event Loop 
+
+    Call back Queue 
+
+
+setTimeout, setInterval these are webapis 
+
+what event loop does is if it has something in call back Queue and it sees
+call stack is free then it pushes the queue things to stack , so that it gets executed 
+
+what ever functions u get execute them in stack as LIFO manner -call stack
+Whatever time taking things are there they will be part of web apis - WebApis 
+when time comes to execute , the web apis they get moved to call back Queue 
+the event loop will be checking continuoulsy and move the things in call back queue to call stack , if stack is free 
+so that they get executed 
+
+
