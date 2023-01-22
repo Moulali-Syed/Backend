@@ -1,0 +1,150 @@
+Express Js is a framework for Node Js 
+
+can make server in an easy way 
+
+go to Express folder - demo 
+
+npm init
+
+npm i express 
+
+=====================================================================
+Lets create a server:
+
+step1: import expresss
+step2: save express to a variable
+step3: use get and specify path , req and res
+step4:listen to server
+
+const express = require('express');
+
+const app = express();
+const port = 4000;
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hello World</h1>');
+});
+
+app.get('/about', (req, res) => {
+  res.send('<h1>About Page</h1>');
+});
+
+app.get('/contact', (req, res) => {
+  res.send('<h1>Contact Page</h1>');
+});
+
+app.listen(port, () => {
+  console.log(`Server is working on port : ${port}`);
+});
+===========================================================
+
+In any full stack app we have Create Read Update Delete functionalities 
+
+//in apis we call them - GET , POST , PUT, DELETE 
+
+
+lets send data from form , to a specific end point
+
+<form action="/api/v1/login" method="POST">
+
+</form>
+
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 4000;
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.post('/api/v1/login', (req, res) => {
+  //   const userName = req.body.name;
+  res.send('<h1>DONE</h1>');
+  console.log('name');
+});
+
+app.listen(port, () => {
+  console.log(`Server is working on port : ${port}`);
+});
+
+=====================================================
+
+to access content in body ,we use body-parser
+
+npm i body-parser 
+
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 4000;
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.post('/api/v1/login', (req, res) => {
+  //   const userName = req.body.name;
+  res.send(`<h1>DONE Mr.${req.body.name}</h1> <h2>Your Email is 
+  ${req.body.email}</h2>  <h3>Your password is ${req.body.password}</h3>`);
+  console.log(req.body);
+});
+
+app.listen(port, () => {
+  console.log(`Server is working on port : ${port}`);
+});
+
+=====================================================
+
+API:
+
+REST(Representational State Transfer) is an API that defines a set of 
+functions that programmers can use to send requests and receive responses 
+using HTTP protocol methods such as GET and POST 
+
+
+in api we send json file , we are transferring data - Javascript Object 
+
+Use ThunderClient extension in vs code to run api in local vs code
+
+
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 4000;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.get('/api/v1/userdata', (req, res) => {
+  res.json({
+    name: 'Apple',
+    email: 'sample@gmail.com',
+    password: 'hexed',
+  });
+});
+app.post('/api/v1/register', (req, res) => {
+  const userName = req.body.name;
+  const userEmail = req.body.email;
+  const userPassword = req.body.password;
+
+  res.json({
+    success: true,
+    name: userName,
+    email: userEmail,
+    password: userPassword,
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is working on port : ${port}`);
+});
+
+
+in thunder client , select POST , pass json in Body and Send 
+
+=========================================================================
