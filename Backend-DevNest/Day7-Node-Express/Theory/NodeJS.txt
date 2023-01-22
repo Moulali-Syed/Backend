@@ -1,0 +1,427 @@
+Install Node Js
+
+Node js is backend framework
+
+like chrome as v8 engine 
+
+Node js is a run time environment
+using this we can run in command prompt
+we can run js code in terminal now 
+
+=======================================================
+create a index.js file , write
+
+console.log('Hello world');
+
+
+we can run in terminal - node index.js 
+
+=======================================================
+
+npm - node package manager - we can download any package using it 
+
+to initialize we use 
+
+npm init 
+
+give some package name - as app here
+version ; press enter
+description - this is node app , any desc 
+entry point - index.js
+
+click enter -- enter and so on 
+this creates package.json file
+
+=======================================================
+
+package.json helps to have a record of all the packages we install 
+
+lets install a package , express 
+
+npm install express
+or 
+npm i express
+
+this will add node modules folder , package-lock.json this has dependecies of dependecies
+
+package.json we get 
+the dependency we added
+
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+
+  say now we removed node modules , if we have package-lock.json and package.json 
+  then we can install the node modules again
+  by simply doing
+
+  npm install
+
+  ===============================================
+  we have so many packages , we can see the top 10 packages 
+
+package is a bundle of code 
+
+cloudinary , express ,Nodist , ...
+  ==================================================
+  to uninstall a package 
+
+  npm uninstall express 
+
+  to clear the terminal 
+  clear 
+
+==================================================
+console.log(window);
+
+this will run in browser but cannot run in node env , because it is part of browser 
+
+==================================================
+everything in node js is a module , a simple or complex funtionality orgainzed in 
+single or multiple javascript files which can be reused through out the Node 
+
+Types of modules:
+1.file based modules :
+
+create a file index.js - write 
+const a = 400;
+
+module.exports = a; 
+
+create another file app.js 
+
+const a = require('./index');
+console.log(a);
+  
+----------
+
+index.js 
+
+// console.log('Hello world');
+
+const a = 20;
+
+const obj = {
+  average: (a, b) => {
+    console.log((a + b) / 2);
+  },
+  percent: (a, b) => {
+    console.log((a / b) * 100);
+  },
+};
+module.exports = a;
+module.exports = obj;
+
+app.js
+
+const a = require('./index.js');
+const obj = require('./index');
+console.log(a);
+
+obj.average(10, 20);
+obj.percent(70, 90);
+
+------------
+
+2.Built In Modules 
+
+fs - file system module 
+
+const fs = require('fs');
+console.log(fs);
+
+--------
+lets create a file and read its content 
+
+create a file sample.txt
+ 
+then in index.js read its content
+
+const fs = require('fs');
+
+fs.readFile('./sample.txt', (err, data) => {
+  if (err) {
+    throw err;
+  }
+  console.log(data);
+});
+
+this gives us buffered output
+<Buffer 48 65 6c 4c 6f 20 4e 6f 64 65>
+
+to get the actual content , specify the encoding format - utf-8 as second parameter 
+
+const fs = require('fs');
+
+fs.readFile('./sample.txt', 'utf-8', (err, data) => {
+  if (err) {
+    throw err;
+  }
+  console.log(data);
+});
+
+---------
+
+readFile is asynchronous method
+
+const fs = require('fs');
+
+fs.readFile('./sample.txt', 'utf-8', (err, data) => {
+  if (err) {
+    throw err;
+  }
+  console.log(data);
+});
+
+console.log('Hey There');
+
+output:
+Hey There
+HelLo Node
+
+as readFile is asynchrounous , the file reading might take some time  so it allows 
+the other code to run first 
+
+But we can make readFile synchronous , using readFileSync 
+
+const fs = require('fs');
+
+const a = fs.readFileSync('./sample.txt', 'utf-8');
+console.log(a);
+
+console.log('Hey There');
+
+
+output:
+HelLo Node
+Hey There
+
+----------------
+
+As we have seen fs has so many functions that can be imported using
+fs.readFile , fs.readFileSync,.....
+
+instead we can import them in one go and use them 
+
+const { readFileSync } = require('fs');
+
+----------
+
+create a file , using writeFile [ this is async operation] 
+
+const fs = require('fs');
+const a = 'This is a node tutorial';
+
+fs.writeFile('./sample1.txt', a, () => {
+  console.log('Written');
+});
+
+console.log('Hey There');
+
+-----
+
+sync 
+
+const fs = require('fs');
+
+const a = 'Iam written using fs module';
+fs.writeFileSync('sample2.txt', a);
+
+console.log('hello');
+
+------------------
+*****************************path module ***********************
+const path = require('path');
+const a = path.extname('/node/index.js'); //returns the extension of file , here .js will be returned
+
+console.log(a);
+
+const b = path.basename(
+  'D:/Learning/NodeJs/Backend-DevNest/Day7-Node-Express/Node'
+);
+console.log(b); //returns the last folder name , here Node
+
+const c = path.dirname(
+  'D:/Learning/NodeJs/Backend-DevNest/Day7-Node-Express/Node'
+);
+console.log(c); //returns the parent directory of current directory
+//here D:/Learning/NodeJs/Backend-DevNest/Day7-Node-Express
+
+const d = '/6pp';
+const e = path.join(
+  'D:/Learning/NodeJs/Backend-DevNest/Day7-Node-Express/Node' + d
+);
+console.log(e); //it combines and gives - D:\Learning\NodeJs\Backend-DevNest\Day7-Node-Express\Node\6pp
+
+*****************************OS module ***********************
+const os = require('os');
+console.log(os.freemem()); //2020470784 - gives freememory in bytes
+
+console.log(os.hostname()); //DESKTOP-5MGC367
+
+console.log(os.userInfo());
+/*
+{
+  uid: -1,
+  gid: -1,
+  username: 'MOULALI',
+  homedir: 'C:\\Users\\MOULALI',
+  shell: null
+}
+*/
+
+console.log(os.totalmem()); //6312697856
+*****************************HTTP module ***********************
+
+const http = require('http');
+
+we make server using this http module
+
+-------------------------------------------
+
+3.Third Party modules
+
+search best third party modules for node ,
+we get express , gulp, loadsh , async , socket.io , mongoose, underscore
+pm2,bower , q, debug , react , mocha etc 
+
+we can install 3rd party modules 
+
+npm i pokemon 
+
+now we can use it 
+
+
+const pokemon = require('pokemon');
+console.log(pokemon.random());
+console.log(pokemon.all());
+
+----------
+
+we have an excellent module , nodemon ,until now we have to run our file on every change
+now can use nodemon to continuolsy look for changes and run it 
+
+npm i nodemon 
+
+//to install globally we can use ---> npm i nodemon -g 
+
+now we can run using
+nodemon .\index.js
+
+================================================================================================
+lets see creating a server:
+
+const http = require('http');
+
+const server = http.createServer((request, response, next) => {
+  // request - i searched google.com on browser , this is request, 1st parameter will be request, name can be anything
+  //response - i get the webpage for google.com, this is response, 2nd parameter will be response, name can be anything
+  //next - is a call back function , will be used in advanced projects
+
+  response.end('Working'); //we will see this message on browser on mentioned port , in server.listen
+});
+
+server.listen(4000, 'localhost', () => {
+  console.log('Server is working on http://localhost:4000');
+});
+
+
+lets not hardcode the port and hostname , lets optimize it
+
+const http = require('http');
+
+const PORT = 4000;
+const hostname = 'localhost';
+const server = http.createServer((request, response) => {
+ 
+  response.end('<h1>Hello World</h1>'); //we will see this message on browser on mentioned port , in server.listen
+});
+
+server.listen(PORT, hostname, () => {
+  console.log(`Server is working on http://${hostname}:${PORT}`);
+});
+
+------------------
+
+By using request.url we can know the path of our url opened in browser
+using this we can pass different outputs 
+
+
+const http = require('http');
+
+const PORT = 4000;
+const hostname = 'localhost';
+const server = http.createServer((request, response, next) => {
+  if (request.url === '/') {
+    response.end('<h1>Home Page</h1>');
+  }
+  if (request.url === '/about') {
+    response.end('<h1>About Page</h1>');
+  }
+  if (request.url === '/contact') {
+    response.end('<h1>Contact Page</h1>');
+  }
+  if (request.url === '/service') {
+    response.end('<h1>Service Page</h1>');
+  } else {
+    response.end('<h1>404 Error Page Not Found</h1>');
+  }
+});
+
+server.listen(PORT, hostname, () => {
+  console.log(`Server is working on http://${hostname}:${PORT}`);
+});
+
+----------------------
+
+lets create index.html file and pass it 
+
+const http = require('http');
+const fs = require('fs');
+
+const PORT = 4000;
+const hostname = 'localhost';
+const home = fs.readFileSync('./index.html', 'utf-8');
+
+const server = http.createServer((request, response, next) => {
+  if (request.url === '/') {
+    return response.end(home);
+  }
+  if (request.url === '/about') {
+    return response.end('<h1>About Page</h1>');
+  }
+  if (request.url === '/contact') {
+    return response.end('<h1>Contact Page</h1>');
+  }
+  if (request.url === '/service') {
+    return response.end('<h1>Service Page</h1>');
+  } else {
+    return response.end('<h1>404 Error Page Not Found</h1>');
+  }
+});
+
+server.listen(PORT, hostname, () => {
+  console.log(`Server is working on http://${hostname}:${PORT}`);
+});
+
+
+================================================================
+
+Lets see deploying a server 
+
+Step1:
+go to package.json - scripts tag 
+
+whenever we want to do something using npm , say like when i say npm start , i want to run index.js files
+
+"scripts":{
+  "start":"node index.js",
+}
+
+now we can run it
+
+npm start 
+
+
+Step2:
+lets deploy on vercel and render 
