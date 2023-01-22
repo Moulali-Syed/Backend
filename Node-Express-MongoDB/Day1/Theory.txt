@@ -1,0 +1,140 @@
+Install Node Js:
+
+on local computer , install node js 
+check version
+
+node -v
+
+----
+if we write node and enter
+we can run js code in terminal 
+-----------------------------------------------------
+What is Node Js?
+Node Js is a javascript runtime built on googles open source v8 javascript engine
+
+we have seen javascript is understood by browser 
+
+can we run outside browser , yes using node js
+it uses v8 engine to run js code 
+
+javascript on the server:
+we can access files , os 
+we can use javascript on the server side of web development
+Build fast, highly scalable network applications(back-end)
+
+Node JS pros:
+Single Threaded , based on event driven , non blocking I/O model 
+Perfect for building fast and scalable data-intensive apps 
+javascript across the entire stack : faster and more efficient development
+NPM: huge library of open source packages available for everyone for free 
+Very active developer community 
+
+Use Node JS:
+API with database behind it(preferably NoSQL)
+Data Streaming(Youtube)
+Real time chat application
+Server-side web applications
+
+Dont Use:
+Applications with heavy server side processing(CPU-intensive)
+like image compression  , file compression , video manipulation
+-----------------------------------------------------
+Running javascript outside the Browser:
+
+click - ctrl+` - to open terminal
+
+write in terminal
+node 
+enter
+
+goes to REPL
+press tab - u will see different modules listed 
+
+we can do calculations in terminal 
+
+ 3*8
+24
+> _+6
+30
+
+from above we can see , _ represents the previous result ---> _+6 = 24+6 = 30 
+
+---
+
+to see String Methods
+String. //and double tab 
+
+this will list all the methods in String 
+
+
+to exit node , in terminal
+either ctrl+D or .exit - is used , works same 
+-------------------------------------------------------------------------
+Using Modules : Core Modules
+
+
+create a index.js file
+
+const hello = 'HEllo World';
+console.log(hello);
+
+
+run in terminal as 
+node index.js 
+
+----------
+file system module:
+
+import fs module as below:
+const fs = require('fs');
+-------------------------------------------------------------------------
+
+Reading and Writing files:
+
+
+read file data: 
+
+const fs = require('fs');
+const textIn = fs.readFileSync('./txt/input.txt','utf-8'); //param1 - path of file , param2 - encoding
+console.log(textIn); 
+
+create a file, add data to it:
+
+const textOut = `This is what we know about avacado : ${textIn} \n created on ${Date.now}`;
+fs.writeFileSync('./txt/output.txt', textOut);//param1 - path for file to be created , param2 - text we want to output
+console.log('File written');
+
+-------------------------------------------------------------------------
+
+Synchronous vs Asynchronous Code (Blocking vs non Blocking):
+
+const fs = require('fs');
+//Blocking code execution
+const textIn = fs.readFileSync('./txt/input.txt','utf-8');
+console.log(textIn);
+
+the above code is Synchronous , every next line is dependent on previous line 
+this turns to be a huge problem , if some operation takes much time all the rest of code should wait 
+
+so the solution for this problem is to use Asynchronous code - Non Blocking code 
+
+const fs = require('fs');
+fs.readFile('input.txt','utf-8',(err,data)=>{
+    console.log(data);
+});
+console.log('Reading File ....');
+
+-------------------------------------------------------------------------
+
+Reading and Writing files Asynchronously:
+
+const fs = require('fs');
+//Non Blocking , synchronous code
+fs.readFile('./txt/input.txt', 'utf-8', (err, data) => {
+    if(err) return console.log('ERROR');
+  console.log(data);
+  fs.writeFile('./txt/final.txt', `${data}`, 'utf-8', (err) => {
+    console.log('Your file has been written');
+  });
+});
+console.log('Will read File');
