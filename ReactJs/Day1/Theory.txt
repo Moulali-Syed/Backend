@@ -1,0 +1,277 @@
+Javascript Refresher:
+
+1.Understanding let and const:
+
+variables that dont change - use const
+that changes use let 
+
+let , const - block scope
+
+var - function scope
+
+we cannot reassign value to const 
+
+=====================================================
+2.arrow functions
+
+function myFunc(){
+
+}
+
+const myFunc = ()=>{
+
+}
+//no more issues with this keyword , using arrow functions
+
+example:
+
+function printMyName = (name)=>{
+    console.log(name);
+}
+
+printMyName('Apple');
+
+const printMyName = (name)=>{
+    console.log(name);
+}
+printMyName('Apple');
+
+-----
+
+if only one parameter to be passed
+
+const printMyName = name => {
+    console.log(name);
+}
+printMyName('Apple');
+
+if no parameters to be passed 
+
+const printMyName = ()=>{
+    console.log('Hi');
+}
+printMyName();
+
+if more than one parameter:
+
+const printMyName = (name,age)=>{
+    console.log(name , age);
+}
+printMyName('Apple',2);
+
+a funtion with return 
+
+const multiply = (num) => {
+    return num*10;
+}
+console.log(multiply(12));
+
+const multiply = (num)=> num*10;
+console.log(multiply(12));
+=====================================================
+Exports and Imports (Modules)
+
+syntax for export: 
+
+person.js 
+
+const person = ()=>{
+    name:"Apple"
+}
+
+export default person;
+
+utility.js 
+
+export const clean = ()={}
+export const baseData = 10;
+
+
+syntax for import: 
+
+import person from './person.js';
+import prs from './person.js';//if it is default import we can use any name while importing
+
+import {baseData} from './utility.js';
+import {clean} from './utility.js';
+
+we can use alias for a named export 
+import {baseData as bData} from './utility.js';
+
+if we have so many named exports, then use *
+import * as bundled from './utility.js';
+
+=====================================================
+
+4.Understanding classes
+
+Classes are blue print for objects 
+
+class can have properties and methods 
+
+properties are variables at class , methods are functions in class 
+
+class Person{
+    name = 'Apple';
+
+    call = ()=>{
+
+    }
+}
+
+
+example: of class and inheritance
+
+class Human extends Person{
+    constructor(){
+        this.gender = 'male';
+    }
+
+    printGender(){
+        console.log(this.gender);
+    }
+}
+
+class Person{
+    constructor(){
+        super();
+        this.name = 'Apple';
+        this.gender = 'female';//works here not usually used 
+    }
+
+    printMyName(){
+        console.log(this.name);
+    }
+}
+
+const person = new Person();
+person.printMyName();
+person.printGender();
+
+=====================================================
+5. classes , properties and methods
+
+properties are like variables attached to classes/objects
+Methods are like functions attached to classes / objects 
+
+//property in ES6
+constructor(){
+    this.myProperty = value;
+}
+
+//property in ES7
+myProperty = 'value'
+----------------------------------
+
+method in ES6 
+
+myMethod(){
+    ....
+}
+
+method in ES7 
+myMethod = ()=>{
+
+}
+
+
+Now we can ignore constructor function and use arrow functions in code
+
+class Human{
+    gender= 'male'
+
+    printGender = ()=>{
+        console.log(this.gender);
+    }
+}
+
+class Person extends Human{
+    name = 'Apple'
+
+    printMyName = ()=>{
+        console.log(this.name);
+    }
+}
+
+const person = new Person();
+person.printMyName();
+person.printGender();
+
+=====================================================
+6.Spread and Rest Operators:
+
+Spread - used to split up array elements OR object properties 
+
+const newArray = [...oldArray,1,2];
+const newObject = {...oldObject,newProp:value};
+
+
+Rest - used to merge a list of function arguments into an array 
+    function sortArgs(...args){
+        return args.sort();
+    }
+
+usage of spread:
+const numbers = [1,2,3];
+const newNums = [...numbers,4,5];//[1,2,3,4,5]
+
+const person = {
+    name:'Apple'
+}
+
+const newPerson = {
+    ...person,
+    age:1
+}
+console.log(newPerson);
+
+
+usgae of spread:
+const filter = (...args) =>{
+    return args.filter(el => el === 1);
+}
+
+console.log(filter(1,2,3));//[1]
+
+=====================================================
+
+Destructuring:
+
+Easily extract array elements or object properties and store them in variables 
+
+Array Destructuring:
+
+[a,b] = ['hello','apple'];
+console.log(a);
+console.log(b);
+
+Object Destructuring:
+
+{name} = {name:'Apple', age:1};
+console.log(name);//'Apple'
+
+
+------
+const numbers = [1,2,3];
+[num1,num2] = numbers;
+console.log(num1,num2);//1 2
+
+[num1,,num3] = numbers;
+console.log(num1, num3);//1 3
+=====================================================
+
+Reference and Primitive Types Refresher 
+
+objects and arrays are Reference types 
+
+=====================================================
+refreshing array functions:
+
+const numbers = [1,2,3];
+
+const doubleNumArray = numbers.map((num)=>{
+    return num*2;
+})
+
+map returns a new array 
+console.log(numbers , doubleNumArray);
