@@ -1,0 +1,347 @@
+Taking Decisions: If/else
+
+check if a person can take driver license
+
+we can use if else statement
+
+if(condition){
+
+}else{
+
+}
+
+-----------------
+
+example
+
+const age = 15;
+const isOldEnough = age >= 18;
+
+if (isOldEnough) {
+  console.log('can take driving license');
+} else {
+  console.log(`${18 - age} years is left to get license `);
+}
+
+
+----
+
+const birthYear = 1991;
+let century;
+if (birthYear <= 2000) {
+  century = 20;
+} else {
+  century = 21;
+}
+
+console.log(century);
+=====================================================================================
+
+challenge2:
+
+BMI calculation:
+with a nice output message using if else 
+
+const markMass = 95;
+const markHeight = 1.88;
+
+const johnMass = 85;
+const johnHeight = 1.76;
+
+const markBMI = markMass / (markHeight * markHeight);
+const johnBMI = johnMass / (johnHeight * johnHeight);
+
+if (markBMI > johnBMI) {
+  console.log(`Mark's BMI (${markBMI}) is higher than John's (${johnBMI})`);
+} else {
+  console.log(`John's BMI (${johnBMI}) is higher than Mark's BMI (${markBMI})`);
+}
+
+
+=====================================================================================
+Type conversion and coercion:
+
+manually converting one type to other - type conversion 
+
+javascript converts type behind the scenes for us - type coercion 
+
+
+//**Type conversion */
+const inputYear = '1991'; //we want to convert this to a number
+console.log(+inputYear + 10); //2001 //one way is to add + before the variable name while using it
+
+console.log(Number(inputYear) + 10); //2001
+console.log(typeof inputYear); //is a string
+
+//convert to a number from string
+console.log(Number('apple')); //NaN - as it cannot convert a string value to number it gives Not a Number - NaN
+
+console.log(typeof NaN); //Number
+
+//================
+console.log(String(23)); //'23'
+
+//we can only convert to Number, String , Boolean
+
+----------------------------
+
+//type coercion
+console.log('Iam ' + 23 + ' years old'); //this works because of type coercion
+
+console.log('23' - '10' - 3); //10 , - operates make them numbers and gives 10
+
+console.log('23' + '10' + 3); //23103
+
+console.log('23' * '2'); //46
+
+let n = '1' + 1; //11
+n = n - 1; //10
+console.log(n); //10
+
+console.log(2 + 3 + 4 + '5'); //'95'
+console.log('10' - '4' - '3' - 2 + '5'); //'15'
+
+
+=====================================================================================
+Truthy and Falsy values:
+
+5 Falsy values:
+ 0 , '' , undefined , null , NaN 
+
+ false -  is already a Falsy value 
+
+
+ everything else will be converted to true 
+
+console.log(Boolean(0)); //false
+console.log(Boolean(undefined)); //false
+console.log(Boolean('')); //false
+console.log(Boolean(null)); //false
+console.log(Boolean(NaN)); //false
+console.log(Boolean('Apple')); //true
+console.log(Boolean([])); //true
+console.log(Boolean({})); //true
+
+const money = 0;
+if (money) {
+  console.log('Dont spend it all');
+} else {
+  console.log('Earn Money');
+}
+
+let height;
+if (height) {
+  console.log('YAY ! Height is defined');
+} else {
+  console.log('Height is undefined');
+}
+
+
+=====================================================================================
+Equality Operator : == vs === 
+
+//=== - is strict equality operator , it is strict because it doesnot do type coercion
+// it only returns true when both values are exactly equal
+
+// == , loose equality  operator , does the type coercion
+console.log('18' == 18); //true
+console.log('18' === 18); //false
+
+//always use strict equality
+
+
+=====================================================================================
+prompt:
+
+//------------to read a value from webpage
+const fav = prompt('Enter your favourite number');
+console.log(fav);
+console.log(typeof fav); //string
+
+if (fav == 23) {
+  console.log('Cool 23 is an amazing number');
+}
+
+// to convert prompt into number
+Number(prompt('Enter your favourite Number'));
+
+=====================================================================================
+
+//*** if else if else */
+
+if (fav == 23) {
+  console.log('Cool 23 is an amazing number');
+} else if (fav == 7) {
+  console.log('7 is also cool number');
+} else {
+  console.log('Number is not 23 or 7');
+}
+
+=====================================================================================
+!== 
+
+const favNum = Number(prompt('Enter your fav number'));
+if(favNum === 23){
+    console.log('23 is Cool')
+}else if(favNum === 7){
+    console.log('7 is also cool');
+}else{
+    console.log('number is not 23 or 7');
+}
+
+if(favNum !== 23) console.log('Why not 23 ?');
+
+=====================================================================================
+Boolean Logic:
+
+AND , OR , NOT operators:
+
+AND:
+
+only true , if both are true 
+
+OR:
+only false when both are false 
+
+NOT:
+negate the given , if true then false, if false then true 
+
+=====================================================================================
+Logical Operators:
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision); //true
+
+console.log(hasDriversLicense || hasGoodVision); //true
+console.log(!hasDriversLicense); //false
+
+const shouldDrive = hasDriversLicense && hasGoodVision;
+if (shouldDrive) {
+  console.log('Sarah is able to driver');
+} else {
+  console.log('Someone else should drive....');
+}
+
+const isTired = true;
+console.log(hasDriversLicense && hasGoodVision && isTired);
+
+=====================================================================================
+coding challenge :
+
+/*
+2 teams compete - 3 times , team with highest avg score wins the trophy
+
+1.calculate avg score for each team , using testdata below
+2.compare teams avg score to determine winner , dont forget that there can be a draw
+
+bonus1: minimum score of 100 , with this a team only wins if it higher than other and 100 as well
+bonus2: minimum scores also applies to draw
+
+Test data:
+dolphins: 96,108,89
+Koalas: 88,91,110
+*/
+
+const dolphinsScoreAvg = (96 + 108 + 89) / 3;
+const koalasScoreAvg = (88 + 91 + 110) / 3;
+const minimumScore = 100;
+
+console.log(dolphinsScoreAvg, koalasScoreAvg);
+if (dolphinsScoreAvg > minimumScore && dolphinsScoreAvg > koalasScoreAvg) {
+  console.log('Dolphin team won');
+} else if (
+  dolphinsScoreAvg === koalasScoreAvg &&
+  dolphinsScoreAvg > minimumScore &&
+  koalasScoreAvg > minimumScore
+) {
+  console.log(`It's a tie`);
+} else if (koalasScoreAvg > minimumScore && koalasScoreAvg > dolphinsScoreAvg) {
+  console.log('Koalas team won');
+} else {
+  console.log('No team won');
+}
+=====================================================================================
+switch statement:
+
+compare one value to multiple different values - we can use switch statement as an alternative to if else
+
+const day = 'monday';
+
+switch (day) {
+  case 'monday':
+    console.log('Monday Blues');
+    break;
+  case 'tuesday':
+    console.log('Tuesday work started');
+    break;
+  case 'wednesday':
+    console.log('No gaps today');
+    break;
+  case 'thursday':
+    console.log('nearing to weekend');
+    break;
+  case 'friday':
+    console.log('Waah ! theres a week end next');
+    break;
+  case 'saturday':
+  case 'sunday':
+    console.log('Enjoy the weekend');
+    break;
+  default:
+    console.log('select a right day');
+}
+
+=====================================================================================
+
+ternary operator:
+
+const age = 23;
+age >= 18
+  ? console.log(' I like to have milk')
+  : console.log('Please take chocolates');
+
+=====================================================================================
+challenge4: tip calculator
+
+const billAmount = 275;
+
+const tip = billAmount >= 50 && billAmount <= 300 ? 0.15 : 0.2;
+
+const finalBillValue = billAmount + tip * billAmount;
+console.log(finalBillValue);
+
+console.log(
+  `The bill was ${billAmount} , the tip was ${tip} and the total value is ${finalBillValue}`
+);
+
+=====================================================================================
+
+javascript releases : ES5, ES6 + and ESNext
+
+in 1995 - netscape , Brendan Erich created very first version of javascript in 10 days
+        named it Mocha , but already had many fundamental features of modern javascript
+
+1996 - Mocha changed to LiveScript then to javascript to attract java developers 
+        however javascript has almost nothing to do with Java 
+
+        in 1996 , Microsoft lanuaches IE , copying javascript from netscape calling it javascript
+
+1997 - With a need to standardize the language , ECMA releases ECMAScript 1 (ES1) the first
+        official standard for javascript (ECMAScript is the standard , javascript is the 
+            langauge in practice)
+
+
+ES1 code 
+1997        < ---- backward compatibale ----- Modern javascript 
+
+old features are never removed
+not really new versions , just incremental updates (releases)
+Websites keep working forever
+
+Dont break the Web 
+
+During production : Use Babel to transpile and polyfill your code (converting back to ES5 
+to ensure browser compatibility for all users )
+
