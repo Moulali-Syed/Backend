@@ -1,0 +1,158 @@
+Creating a Simple Web Server:
+-----------------------------
+
+const http = require('http');
+
+//Server , creation steps
+/*
+1.create Server
+2.Listen to server
+
+*/
+
+const server = http.createServer((req, res) => {
+  //   console.log(req);
+  res.end('Hello from the server');
+});
+
+server.listen(8000, '127.0.0.1', () => {
+  console.log('Listening to requests on port 8000');
+});
+
+====================================================================================
+Routing:
+
+implementing different actions for different urls - is called Routing 
+ 
+
+//Routing
+const http = require('http');
+const url = require('url');
+
+const server = http.createServer((req, res) => {
+  const pathName = req.url;
+  if (pathName === '/' || pathName === '/overview') {
+    res.end('this is overview');
+  } else if (pathName === '/product') {
+    res.end('this is product page');
+  } else {
+    res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+    res.end('<h1>Page not found !</h1>');
+  }
+});
+
+server.listen(8000, '127.0.0.1', () => {
+  console.log('Listening to requests on port 8000');
+});
+
+/*
+we can pass the status code and header ,
+
+res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+    res.end('<h1>Page not found !</h1>');
+
+we can see these in browser -network tab 
+
+click on the name , u will see the header information 
+
+also we can see status code
+*/
+
+
+
+
+====================================================================================
+Building a very simple API:
+
+it is a service from which we can request data - API 
+here we are having simpleWebApi.js and using the json file data.json 
+
+const fs = require('fs');
+const http = require('http');
+const url = require('url');
+
+const server = http.createServer((req, res) => {
+  const pathName = req.url;
+
+  if (pathName === '/' || pathName === '/overview') {
+    res.end('This is overview page');
+  } else if (pathName === '/product') {
+    res.end('This is product page');
+  } else if (pathName === '/api') {
+    fs.readFile(`${__dirname}/data.json`, 'utf-8', (err, data) => {
+      const productData = JSON.parse(data);
+      res.writeHead(200, {
+        'Content-type': 'application/json',
+      });
+      res.end(data);
+    });
+  } else {
+    res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+    res.end('<h1>Page Not Found</h1>');
+  }
+});
+
+server.listen(8000, '127.0.0.1', () => {
+  console.log('listening to port 8000');
+});
+
+
+
+====================================================================================
+But using above is not efficient , because everytime a user hits the end point /api 
+
+we are reading the file again and again , which is not a good practice , as it is time 
+consuming
+
+it is better to read file once at begining and send it everytime when someone hits that route 
+
+using optimisedWebApi.js and data.json 
+
+const fs = require('fs');
+const http = require('http');
+const url = require('url');
+
+const data = fs.readFileSync(`${__dirname}/data.json`, 'utf-8');
+const dataObj = JSON.parse(data);
+
+const server = http.createServer((req, res) => {
+  const pathName = req.url;
+
+  if (pathName === '/' || pathName === '/overview') {
+    res.end('This is over view page');
+  } else if (pathName === '/product') {
+    res.end('This is product page');
+  } else if (pathName === '/api') {
+    res.writeHead(200, {
+      'Content-type': 'application/json',
+    });
+    res.end(data);
+  } else {
+    res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+  }
+});
+
+server.listen(8000, '127.0.0.1', () => {
+  console.log('listening to server on port 8000');
+});
+
+====================================================================================
+
+
+
+
+
+
+====================================================================================
