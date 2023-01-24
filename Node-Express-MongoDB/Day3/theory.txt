@@ -1,0 +1,151 @@
+Parsing Variables from url:
+
+we need url module to be imported
+
+const url = require('url');
+
+http.createServer((req,res)=>{
+    console.log(req.url);//this logs path as /product?id=0
+    console.log(url.parse(req.url,true)); // this gives an object that has all info about url 
+    //and also a query :{id:0} , that tells about the id and its value 
+    //pathname and path and href will also be present
+})
+
+============================================================================
+
+Using modules:
+
+In node js every single javascript file is considered as module 
+
+
+say we have a funtion that needs to be reused in many files , we can create a module for it 
+
+create a file give a name - replaceTemplate.js 
+
+module.exports = (temp,product)=>{
+    //code here 
+}
+
+----
+to import use 
+
+const replaceTemplate = require('./modules/replaceTemplate');
+
+now we can use it 
+
+============================================================================
+
+introduction to npm and the package.json file :
+
+npm - node package manager 
+
+----------
+
+initializing 
+
+npm init 
+package-name : node-farm 
+version: 1.0.0 
+description:Learning node js
+entry point : index.js
+test command:
+git repository: 
+keywords:
+author: me 
+license:'ISC'
+
+yes
+
+this creates a package.json file 
+
+============================================================================
+Types of packages and Installs:
+
+we have 2 types of packages 
+1.simple dependencies - example: express 
+
+syntax:  npm install slugify | npm i slugify 
+
+"dependencies": {
+    "slugify": "^1.6.5"
+  },
+
+2.dev dependencies:
+
+npm install nodemon --save-dev
+
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+
+----
+
+installing globally:[mostly dev dependencies are installed globally]
+npm i nodemon --global 
+
+----------
+
+we can specify commands in the package.json file 
+
+"scripts":{
+    "start":"nodemon index.js"
+}
+
+now we can run this using 
+npm start | npm run start 
+
+============================================================================
+Using modules: 3rd party modules 
+
+const slugify = require('slugify');
+
+console.log(slugify('Fresh Avocados',{lower:true}));
+============================================================================
+package versioning and updating:
+
+nodemon: "^1.18.11" 
+here the number 1.18.11 has a meaning
+ 1- major version , hugh new release that may break previous version 
+ 18 - minor version , introduces new features into package but doesnot create any breaking changes
+ 11 - patch version, means intended to fix bugs 
+
+ ^ - this symbol before version means, that we accept minor and patch version updates 
+~ -  this accept only patch releases, a bit safer 
+* - means all versions 
+----------------
+to check the outdated versions of packages:
+npm outdated 
+
+gives a list of all outdated packages 
+
+--------------
+we can install package of particular version like 
+npm i slugify@1.0.0
+--------------
+
+to update a package 
+
+npm update slugify 
+--------------
+install and uninstall a package 
+
+npm i express 
+
+npm uninstall express 
+--------------
+
+we should never check it out node modules to git repo ,
+
+we can get them simply by 
+npm install 
+
+this is because of pack.json and package-lock.json 
+
+============================================================================
+
+we can use 
+.prettierrc file 
+
+{
+    "singleQuote":true 
+}
