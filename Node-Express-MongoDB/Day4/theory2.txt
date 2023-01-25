@@ -1,0 +1,53 @@
+How Node Js Works , A look behind the scenes 
+
+Node Js architecture behind the scenes:
+node js -->  v8 , libuv[a open source library that helps in accessing file systems
+    and also has event loop and thread pool concepts , libuv - is written in c++ ] , 
+
+    and also has http-parser , c-ares, OpenSSL , zlib 
+
+
+=======================================================================================
+Processes , Threads and ThreadPool
+
+nodejs process - instance of a program in execution on a computer
+
+node runs in single thread (Sequence of instructions)
+node will execute code one by one 
+
+Initialize program  
+        |
+Execute 'top-level' code
+        |
+Require modules
+        |
+Register event callbacks
+        |
+Start Event Loop 
+
+event loop - will also be not able to handle some operations that are more time consuming
+for this we have Thread Pool - Additional 4 Threads (or more),this offload work from event loop 
+handle heavy("expensive") tasks:
+File System APIs
+Cryptography
+Compression
+DNS lookups 
+
+=======================================================================================
+
+Event Loop:
+
+        node js process
+
+            single thread 
+                Event Loop 
+
+when we Start node app - event loop starts simultaneously
+
+we also have callback queue
+    Expired Timer callbacks
+    I/O polling and callbacks 
+    setImmediate callbacks
+    Close callbacks
+
+    

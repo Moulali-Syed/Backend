@@ -1,0 +1,81 @@
+Intro to Backend Developement:
+
+An overview on how the web works:
+
+
+client(browser) ----------Request------------------> Server
+
+client(browser) <---------Response------------------ Server 
+
+https://www.google.com/maps
+
+https - protocol 
+www.google.com  - domain name 
+maps - resource 
+
+www.google.com is not actual domain name , its just an easy name to memorize 
+the conversion of domain name to real address happens by DNS 
+DNS - Domain Name Server , this happens thru the ISP(Internet Service Provider)
+
+the real address looks something as below
+
+https://216.58.211.206:443 
+
+https  - protocol 
+216.58.211.206 - IP address 
+443 - port number 
+
+Then a connection between client and server happens , 
+Client ------TCP/IP socket connection ----- Server
+
+this connection will be for entire time , till all files are transferred from website 
+TCP - Transmission Control Protocol 
+IP - Internet Protocol 
+
+TCP/IP are communication protocols , that describes how the data is transferred over web 
+
+HTTP request :
+client and server communicates with HTTP Request 
+
+we have mostly used GET , POST , PUT 
+
+Then server sends 
+HTTP Response 
+
+
+1.DSN Lookup
+2.TCP/IP socket connection
+3.HTTP Request
+4.HTTP Response
+5.index.html is the first to be loaded ,Scanned for assets : JS,CSS, images - Process is repeated for each file 
+
+===================================================================================
+HTTP in action:
+
+open udemy.com 
+in chrome open dev tools 
+Then In Network tab , disable cache - so that we dont load website from our computer
+now reload , we will see the requests that were made 
+
+click on www.udemy.com , u will see the request headers and response headers 
+
+===================================================================================
+static vs dynamic vs api 
+
+static - contains - html , css , js , no work done on server 
+
+dynamic - they usually has database , fetches data from db ,build  website of html ,css , js 
+if we see twitter website , it will be different each day [Server side rendering]
+[the website getting build at server side - we call them server side rendered]
+
+
+API - database --> get Data ---> only json data is sent 
+    Building API and consuming API on client side 
+    we use some frontend frameworks like React, Angular to show the data 
+    by doing this the build website part moved to the frontend part that is to client 
+[the website getting build at client side are called client side rendered]
+
+
+API can be consumed by any web app , native mobile app , native mobile app 
+    native IOS app , native windows app 
+    thus a huge advantage , we can use same api in different apps 
