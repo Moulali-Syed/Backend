@@ -1,0 +1,72 @@
+Calling a function inside a function:
+
+
+function cutFruitPieces(fruit) {
+  return fruit * 4;
+}
+
+function fruitProcessor(apples, oranges) {
+  const applePieces = cutFruitPieces(apples);
+  const orangePieces = cutFruitPieces(oranges);
+  const juice = `Juice with ${applePieces} pieces of apple and ${orangePieces} pieces of oranges`;
+  return juice;
+}
+
+console.log(fruitProcessor(3, 4));
+
+=====================================================================================================
+Reviewing functions:
+
+
+//arrow function
+const yearsUntilRetirement = (birthYear, firstName) => {
+  const currentAge = 2037 - birthYear;
+  return `${firstName} can still work for ${65 - currentAge} years`;
+};
+console.log(yearsUntilRetirement(1991, 'Apple'));
+
+//function expression
+const yearsUntilRetirement2 = function (birthYear, firstName) {
+  const currentAge = 2037 - birthYear;
+  return `${firstName} can still work for ${65 - currentAge} years`;
+};
+
+console.log(yearsUntilRetirement2(1999, 'Tom'));
+
+//function declaration
+function yearsUntilRetirement3(birthYear, firstName) {
+  const currentAge = 2037 - birthYear;
+  return `${firstName} can still work for ${65 - currentAge} years`;
+}
+console.log(yearsUntilRetirement3(2000, 'Jerry'));
+
+//function calling other function
+const calcAge = function (birthYear) {
+  return 2037 - birthYear;
+};
+
+function yearsUntilRetirement4(birthYear, firstName) {
+  const age = calcAge(birthYear);
+  return `${firstName} can still work for ${age} years`;
+}
+
+=====================================================================================================
+
+function declaration: function that can be used before its declared 
+function expression: essentially a function value stored in a variable
+Arrow function : great for a quick one line functions .Has no this keyword 
+
+function calcAge(birthYear){
+    return 2037-birthYear;
+}
+
+const calcAge = function(birthYear){
+    return 2037-birthYear;
+}
+
+const calcAge = birthYear => 2037 - birthYear;
+
+=====================================================================================================
+
+Coding Challenge:
+
