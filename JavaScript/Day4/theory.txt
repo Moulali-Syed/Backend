@@ -417,10 +417,78 @@ for (let i = person.length - 1; i >= 0; i--) {
   console.log(person[i]);
 }
 
-=====================================================================================================
+const person = [
+  'apple',
+  'shimla',
+  2037 - 1999,
+  'teacher',
+  ['tom', 'jerry'],
+  true,
+];
 
+for (let i = person.length - 1; i >= 0; i--) {
+  console.log(person[i]);
+}
+
+//loops inside loop
+
+for (let excercise = 1; excercise < 4; excercise++) {
+  console.log(`-----starting exercise ${excercise}`);
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`lifting weight repetition ${rep}`);
+  }
+}
 
 =====================================================================================================
+The while loop  - when we dont know number of iterations , it is best use case 
+
+let rep = 1;
+while (rep <= 10) {
+  console.log(`${rep} is repeating`);
+  rep++;
+}
+
+//rolling a dice
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while (dice !== 6) {
+  console.log(`roll the dice, u rolled dice ${dice} value`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if (dice == 6) console.log('loop is about to end');
+}
+
+=====================================================================================================
+coding challenge:
+
+//tip calculator
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+
+const calcTip = (bill) => {
+  if (bill >= 50 && bill <= 300) {
+    return bill * 0.15;
+  }
+  return bill * 0.2;
+};
+
+for (let i = 0; i < bills.length; i++) {
+  tips[i] = calcTip(bills[i]);
+  totals[i] = tips[i] + bills[i];
+}
+
+console.log(tips, totals);
+
+const calcAvg = (arr) => {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum / arr.length;
+};
+
+const avg = calcAvg(tips);
+console.log(avg);
 
 
 =====================================================================================================
