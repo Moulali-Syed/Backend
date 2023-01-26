@@ -1,0 +1,103 @@
+events and event driven architecture:
+
+            Observer Pattern
+Event Emitter ---emits events ---> Event Listener ----calls-----> Attached callback functions
+
+====================================================================================
+Events in practice:
+
+const EventEmitter = require('events');
+
+const myEmitter = new EventEmitter();
+
+myEmitter.on('newSale', () => {
+  console.log('There was a new sale');
+});
+
+myEmitter.on('newSale', () => {
+  console.log('Customer name:Apple');
+});
+
+myEmitter.emit('newSale');
+
+====================================================================================
+
+Streams:
+
+used to process (read and write) data piece by piece (chunks)
+without completing the whole read or write operation and therefore without keeping all data in memory 
+
+
+There are mainly 4 types of streams in NodeJs
+Streams are instance of EventEmitter class
+
+Readable Streams  - streams from which we can read data , example: http requests, fs read streams |
+                    important events : data , end
+                    important functions: pipe() , read() 
+Writable Streams - streams to which we can write data 
+                   example: http responses , fs write streams
+                   important events : drain , finish 
+                   important functions: write() , end()
+Duplex streams - streams that are voth readable and writable 
+                example: net web socket
+Transform Streams -  duplex streams that transform data as it it written or read 
+                     zlib Gzip creation 
+
+====================================================================================
+Streams in practice:
+
+const fs = require('fs');
+const http = require('http');
+
+const server = http.createServer();
+
+server.on('request', (req, res) => {
+  //solution 1
+  /*
+  fs.readFile('test-file.txt', (err, data) => {
+    if (err) console.log(err);
+    res.end(data);
+  });
+*/
+  //solution 2
+  /*
+  const readable = fs.createReadStream('test-file.txt');
+  readable.on('data', (chunk) => {
+    res.write(chunk);
+  });
+  readable.on('end', () => {
+    res.end();
+  });
+
+  readable.on('error', (err) => {
+    console.log(err);
+    res.statusCode(500);
+    res.end('File not found');
+  });
+
+  */
+  //solution 3
+    const readable = fs.createReadStream('test-file.txt');
+    readable.pipe(res);
+    
+});
+
+server.listen(8000, '127.0.0.1', () => {
+  console.log('listening...');
+});
+====================================================================================
+
+How Requiring modules really works:
+
+1.resolving and loading
+    core modules         require('http');
+    developer modules    require('./lib/controller')
+    3rd-party modules    require('express');
+
+2.Wrapping 
+
+3.Execution
+
+4.Returning Exports
+
+5.Caching 
