@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: linear-gradient(to right, green, blue, white);
+}
+.show-modal {
+  padding: 2rem 4rem;
+  border-radius: 10px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.parent {
+  margin-top: 4rem;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  width: 70%;
+  margin: 0 auto;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
