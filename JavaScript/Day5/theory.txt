@@ -1,0 +1,145 @@
+Developer skills and code editor setup:
+============================================
+Setting Up Prettier and vs code:
+
+Prettier - vs code extension , install it 
+
+define Prettier as default formatter
+go to settings --> search default formatter - look for esbenp.Prettier-vscode
+format on save - check mark
+
+----------
+
+Prettier search in google 
+to have custom configuration 
+
+create a file -->  .prettierrc 
+
+{
+    "singleQuote":true
+}
+
+-------
+avoid parenthesis in arrow function
+
+{
+    "singleQuote":true,
+    "arrowParens":"avoid"
+}
+
+------------
+
+we can configure snippets:
+
+File - preferences - Configure User snippets - New Global snippets file 
+
+
+  "Print to console": {
+    "scope": "javascript,typescript",
+    "prefix": "cl",
+    "body": ["console.log();"],
+    "description": "Log output to console"
+  }
+=======================================================================
+installing Node Js and setting up a dev environment:
+
+1.add live server extension 
+
+2.install node js 
+    open terminal - ctrl+` 
+
+    node -v 
+    npm i live-server -g 
+
+write live-server in terminal , it will run our file now 
+
+=======================================================================
+Learning How to code:
+
+How to become a problem solver :
+1.understand the problem 100% 
+2.Divide and Conquer -  break a big problem into smaller sub-problems 
+3.Don't be afraid to do as much research as you have to 
+4.for bigger problems , write pseudo code before writing the actual code 
+
+=======================================================================
+
+const calcTempAmplitude = function (temps) {
+  let max = temps[0];
+  let min = temps[0];
+  for (let i = 1; i < temps.length; i++) {
+    if (typeof temps[i] !== 'number') continue;
+    if (temps[i] > max) {
+      max = temps[i];
+    }
+    if (temps[i] < min) {
+      min = temps[i];
+    }
+  }
+  console.log(max, min);
+  return max - min;
+};
+const amplitude = calcTempAmplitude([3, 7, 4, 12, 9, 3]);
+console.log(amplitude);
+
+//merge two arrays:
+const ar1 = ['a', 'b'];
+const ar2 = ['1', 2];
+const ar3 = ar1.concat(ar2);
+console.log(ar3);
+=======================================================================
+
+Debugging (Fixing Errors):
+
+
+different console statements
+  //   console.log();
+  //   console.warn();
+  //   console.error();
+  //console.table(measurement)
+
+
+  const measureKelvin = function () {
+  const measurement = {
+    type: 'temp',
+    unit: 'celsius',
+    value: Number(prompt('Degree Celsius')),
+  };
+  //   console.log();
+  //   console.warn();
+  //   console.error();
+  //console.table(measurement)
+  const kelvin = measurement.value + 273;
+  return kelvin;
+};
+
+console.log(measureKelvin());
+
+
+----------------------
+
+debugger in chrome console:
+
+goto sources - Page - we will see the js file 
+
+place a breakpoint at any line , then reload Page
+the execution will stop at break point
+now press ->[Step] , this will move the execution to next line 
+
+breakPoint - click at right of line 
+we can have multiple breakPoint , execution stops here
+
+press Step[->] to move to next line of code 
+
+we can press resume , so that code runs 
+----------------------
+we can also get degubber by writing
+
+debugger 
+
+in js code 
+
+====================================================================
+given an array of forecasted maximum temprature the thermometer displays 
+a string with these temperatures
+
