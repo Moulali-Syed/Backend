@@ -1,0 +1,583 @@
+How javascript works behind the scenes:
+
+high level overview of javascript:
+Javascript is a high level , prototype based object oriented multi paradigm 
+interpreted or just-in-time compiled dynamic , single threaded , garbage-collected 
+programming language with first-class functions and a non blocking event loop
+concurrency model 
+
+
+High level - any pgm needs resources like memory , we have languages that needs to manipulate c 
+but in javascript it is automatically managed memory management
+
+It has a garbage collector time to time 
+
+interpreted or just-in-time compiled  -- converting to machine code 
+
+multi-paradigm  -- an approach and mindset of structuring code , which will direct your coding 
+style and technique 
+3 popular paradigms are 
+1.procedural - just writing code 
+2.OOP
+3.Functional programming
+
+we can use any paradigm 
+
+everything in javascript is object except primitives 
+
+Functions are simply treated as variables 
+Passing a function into another function as an argument : First class functions 
+
+Dynamically typed: datatype of variable is automatically changed
+
+concurrency model: how the javascript engine handles multiple tasks happening 
+at the same time 
+javascript runs in single thread, so it can only do one thing at a time 
+sounds like it would block the single thread however we want non blocking behaviour 
+By using event loop takes long running taks , executes them in the background and puts 
+them back in the main thread once they are finished
+
+=====================================================================================
+Javascript engine and run time:
+Js engine: program that executes javascript code 
+example : chrome has v8 engine 
+
+every js engine has 
+    callstack and heap 
+
+callstack - where our code is executed [execution context]
+Heap - where objects are stored 
+
+compilation vs interpretation:
+compilation : entire code is converted into machine code at once and written to a 
+binary file that can be executed by a computer
+
+Source Code ----Step1 compilation-----> PortableFile(machineCode)-----Step2Execution---> Program running
+
+interpretation: interpreter runs thru source code and executes it by line by line 
+
+with modern js , low performance is not acceptable 
+Js - is a JIT - entire code is converted into machine code at once , then executed immediately 
+
+Javascript code --> Parsing[Abstract syntax tree] ---> then AST code is Compilation [JIT compilation]
+---> Execution[happens in call stack] 
+
+parsing , compilation, optimization happens in a special thread that we cannot access from code 
+
+Javascript Runtime:
+------------------
+
+has js engine[heap,call stack] and also web apis [DOM, Timers, Fetch API,..] and callback queue
+
+eventloop takes functions from callback queue and place in js engine if it is free 
+=====================================================================================
+Execution contexts and call stack :
+
+code ---> compilation --> creation of global execution context (for top level code), not inside function 
+
+execution context: in which a piece of javascript code is executed.Stores all the necessary
+information for some code to be executed 
+
+Exactly one global execution context(EC): default context , created for code that is not 
+inside any function(top-level)
+
+Execution of functions and waiting callbacks
+One execution context per function: for each function call , a new execution context is created
+
+-----------
+Whats inside execution context?
+Varibale ennvironment:
+    let, const and var declarations 
+    functions
+    arguments object 
+Scope chain 
+this keyword
+
+arguments object and this keyword will not be present in arrow functions 
+=====================================================================================
+Scope and scope chain:
+
+Scoping: Where can we access a certain variable and where not?
+
+lexical scoping: scoping is controlled by placement of functions and blocks in the code
+
+Scope: space or environment in which a certain variable is declared 
+There is global scope , function scope and block scope 
+
+Scope of variable: Region of our code where a certain Varibale can be accessed 
+
+--------------
+3 types of scope:
+GLOBAL scope  
+    const me = 'Apple';
+    const job = 'healthy';
+    const year = 2023;
+
+    declared outside of any function or block
+    variables declared in global scope are accessible everywhere
+
+Function Scope 
+    function calcAge(birthYear){
+        const now = 2023;
+        const age = now - birthYear;
+        return age;
+    }
+    console.log(now);//reference error
+
+    variables are accessible only inside function , NOT outside 
+
+Block Scope (ES6)
+    example if block ,for loop block 
+    if(year>1991){
+        const food = 'Avocado';
+    }
+
+    variables are accessible only inside block 
+    however this only applies to let and const variables
+    functions are also block scoped only in strict mode 
+
+const myName = 'Apple'; //global scope
+
+function first() {
+  const age = 10;
+  if (age >= 10) {
+    const decade = 1; //block scope
+    var millenial = true; //var is function scoped
+  }
+
+  function second() {
+    console.log(millenial);
+    const job = 'eat';
+    //variable lookup in scope chain
+    //scope has access to variables from all outer scopes
+    console.log(`${myName} is a ${age}-old ${job}`);
+  }
+
+  second();
+}
+// console.log(millenial);//reference error as var is function scoped
+first();
+----------
+let , const - block scope 
+var - function scope 
+every scope always has access to all the variables from all its outer scopes .This is the scope chain 
+When a variable is not in the current scope , the engine looks up in the scope chain until 
+it finds variable it's looking for .This is called variable lookup 
+=====================================================================================
+Scoping in Practice:
+
+example1:
+
+'use strict';
+
+function calcAge(birthYear) {
+  const age = 2023 - birthYear;
+  console.log(firstName);
+  return age;
+}
+
+const firstName = 'Jonas';//this is global scope 
+calcAge(1991);
+
+output: Jonas
+------------------------
+example2:
+'use strict';
+
+function calcAge(birthYear) {
+  const age = 2023 - birthYear;
+  console.log(firstName); //ReferenceError: Cannot access 'firstName' before initialization
+  return age;
+}
+
+calcAge(1991);
+const firstName = 'Jonas';
+------------------------
+'use strict';
+
+function calcAge(birthYear) {
+  const age = 2023 - birthYear;
+  function printAge() {
+    const output = `You are ${age} , born in ${birthYear}`;
+    console.log(output); //You are 23 , born in 2000
+  }
+  printAge();
+  return age;
+}
+
+const firstName = 'Jonas';
+calcAge(2000);
+=====================================================================================
+Hoisting:
+Hoisting makes some types of varibales accessible /usable in code before they are actually declared
+variables lifted to top of their scope 
+
+behind the scenes - before execution, code is scanned for variable declarations and for each 
+variable a new property is created in the variable environment object 
+
+                        Hoisted                 Initial value               Scope 
+function declarations    Yes                     Actual function            Block[in strict mode]
+var variables            Yes                    undefined                   function 
+let and const variables  No                     <uninitialized>,TDZ         Block 
+                        technically yes but not in practice 
+
+function expressions,     Depends if using var or let/const 
+and arrows
+
+----------
+Temporal dead zone , let and const 
+
+const myName = 'Apple';
+if(myName === 'Apple'){
+    console.log(`Apple is a ${job}`);//Temporal dead zone for job variable,
+    // js engine knows it will eventually gets intialized , ReferenceError: cannot access job before initialization
+    const job = 'teacher';
+    console.log(x);//reference error: x is not defined
+}
+
+Why TDZ?
+makes it easier to avoid and catch errors,accessing varibales before declaration is a bad practice 
+and should be avoided 
+to make const variables actually work , we cannot have undefined first and then a value to them 
+
+=====================================================================================
+Hoisting and TDZ in practice:
+
+Hoisting with variables:
+console.log(me); //undefined
+console.log(year);//ReferenceError: Cannot access 'year' before initialization  - because it is in TDZ
+console.log(job); //ReferenceError: Cannot access 'job' before initialization - because it is in TDZ
+var me = 'apple';
+let job = 'teacher';
+const year = 1991;
+
+
+--------
+//functions
+console.log(addDecl(2, 3)); //5
+console.log(addArrow1); //undefined
+console.log(addArrow1(1, 1)); //TypeError: addArrow1 is not a function
+console.log(addArrow(3, 4)); //ReferenceError: Cannot access 'addArrow' before initialization
+console.log(addExpr(4, 4)); //ReferenceError: Cannot access 'addExpr' before initialization
+function addDecl(a, b) {
+  return a + b;
+}
+const addExpr = function (a, b) {
+  return a + b;
+};
+
+const addArrow = (a, b) => a + b;
+
+var addArrow1 = (a, b) => a + b;
+
+------
+hoisting works different for var 
+
+console.log(numProducts);
+if (!numProducts) deleteShoppingCart();
+
+var numProducts = 10;
+function deleteShoppingCart() {
+    console.log('All products deleted');
+}
+
+-------
+variables declared with var , creates a global property on window object 
+which can have some implications 
+
+var x = 1;
+let y = 2;
+const z = 3;
+
+console.log(x === window.x);//true
+console.log(y === window.y);//false
+console.log(z === window.z);//false 
+=====================================================================================
+this keyword:
+
+special variable that is created for every execution context(every function) 
+takes the value of the owner of the function in which the this keyword is used 
+
+this is NOT static .it Depends on how the function is called and its value is only assigned 
+when the function is actually called 
+
+4 different ways of called functions
+
+1.method --- this = <object that is calling the method> 
+    const person = {
+        name:'Apple',
+        year:1999,
+        calcAge:function(){
+            return 2037 - this.year;
+        }
+    };
+    person.calcAge(); //calcAge is a method 
+
+    this here refers to person , 
+
+2.simple function call 
+    this = undefined [In strict mode]
+    else it will point to window object in browser 
+
+3.Arrow functions: 
+    this = <this of surrounding function(lexical this)>
+
+4.Event Listener:
+    this = <DOM element that the handler is attached to>
+
+
+this doesnot point to function itself and also NOT its variable environment 
+
+we can call functions in other ways as well
+ new , call, apply , bind -- will see later 
+
+=====================================================================================
+
+this keyword in practice:
+
+this in global scope - window object
+
+console.log(this);//window object in browser and empty object in node console
+
+-------------
+
+'use strict';
+const calcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this);//undefined in strict mode , window object if not in strict mode 
+};
+
+calcAge(1999);
+ 
+--------------
+'use strict';
+const calcAge = (birthYear) => {
+  console.log(2037 - birthYear);
+  console.log(this); //window - because it uses lexical scope of this , because its parent has global scope
+};
+
+calcAge(1999);
+
+-----------
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+  },
+};
+person.calcAge();
+
+=====================================================================================
+Regular Functions vs Arrow Functions: 
+
+
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+  },
+  greet: () => console.log(`Hey ${this.name}`),
+};
+person.calcAge();
+person.greet(); //Hey undefined- it uses parent's this keyword , because it is in global scope[window]
+
+//when we try to access a property that is not present in object we get undefined
+console.log(person.a); //undefined
+console.log(this.firstName); //undefined
+console.log(window.firstName); //undefined - in browser
+-----------------------
+//variables created with var - creates property on global window object
+
+//never use arrow function inside an object as a method , this prevents the error of which the this 
+//keyword is pointing
+
+var name = 'Apple';
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+  },
+  greet: () => console.log(`Hey ${this.name}`),
+};
+person.calcAge();
+person.greet(); //Hey Apple [because this is window , in the arrow function]
+
+------------
+function expression inside a method 
+
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+
+    const isMilleanial = function () {
+      console.log(this); //undefined
+      console.log(this.year >= 1981 && this.year <= 1996); //TypeError: Cannot read properties of undefined (reading 'year')
+    };
+    isMilleanial();
+  },
+  greet: () => console.log(`Hey ${this.name}`),
+};
+person.calcAge();
+
+--------
+
+the solution to the above problem before , ES6 that is upto ES5 
+
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+
+    //the solution to this is using a variable and setting this value
+    const self = this;
+    const isMilleanial = function () {
+      console.log(self); //person object
+      console.log(self.year >= 1981 && self.year <= 1996); //true
+      // console.log(this.year >= 1981 && this.year <= 1996); //TypeError: Cannot read properties of undefined (reading 'year')
+    };
+    isMilleanial();
+  },
+  greet: () => console.log(`Hey ${this.name}`),
+};
+person.calcAge();
+
+------------
+the other solution is to use arrow function , because it doesnot have its own this keyword 
+and uses it parent this 
+
+const person = {
+  name: 'apple',
+  year: 1991,
+  calcAge: function () {
+    console.log(this); //person object - { name: 'apple', calcAge: [Function: calcAge] }
+    console.log(this.year);
+
+    //soultion 2 - use arrow function
+    const isMilleanial = () => {
+      console.log(this); //person object
+      console.log(this.year >= 1981 && this.year <= 1996); //true
+      // console.log(this.year >= 1981 && this.year <= 1996); //TypeError: Cannot read properties of undefined (reading 'year')
+    };
+    isMilleanial();
+  },
+  greet: () => console.log(`Hey ${this.name}`),
+};
+person.calcAge();
+------------------------------------
+
+arguments keyword only available in function expression and definition 
+
+//useful when we want more aguments to be passed
+const addExpr = function (a, b) {
+  console.log(arguments);
+  return a + b;
+};
+addExpr(2, 3, 4, 5); //[Arguments] { '0': 2, '1': 3, '2': 4, '3': 5 }
+
+var addArrow = (a, b) => {
+  console.log(arguments); //in browser gets Reference error: arguments is not defined
+  return a + b;
+};
+addArrow();
+=====================================================================================
+primitives vs Objects:
+
+//primitive
+let age = 12;
+let oldAge = age;
+age = 13;
+
+console.log(age); //13
+console.log(oldAge); //12
+
+//objects - reference types
+const me = {
+  name: 'Apple',
+  age: 12,
+};
+const friend = me;
+friend.age = 14;
+console.log('Friend:', friend);
+console.log('Me', me);
+// Friend: { name: 'Apple', age: 14 }
+// Me { name: 'Apple', age: 14 }
+
+-------------
+
+//primitive
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+console.log(lastName, oldLastName); //Davis Williams [stored in stack]
+
+//reference types
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
+console.log(jessica);
+console.log(marriedJessica);
+//points to same memory address in heap
+// { firstName: 'Jessica', lastName: 'Davis', age: 27 }
+// { firstName: 'Jessica', lastName: 'Davis', age: 27 }
+
+// marriedJessica = {};//this doesnot work because it is const
+
+//copying objects
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = 'Humphyres';
+console.log(jessica2);
+console.log(jessicaCopy);
+// { firstName: 'Jessica', lastName: 'Williams', age: 27 }
+// { firstName: 'Jessica', lastName: 'Humphyres', age: 27 }
+
+//Object.assign - only creates a shallow copy , that is only upto one level
+const jessica3 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+const jessicaCopy2 = Object.assign({}, jessica3);
+jessicaCopy.lastName = 'Humphyres';
+jessicaCopy2.family.push('Mary');
+jessicaCopy2.family.push('John');
+console.log(jessica3);
+console.log(jessicaCopy2);
+/*
+{
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: [ 'Alice', 'Bob', 'Mary', 'John' ]
+}
+{
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: [ 'Alice', 'Bob', 'Mary', 'John' ]
+}
+*/
+
+//while a deep clone copy everything at all levels - we use loadash external library
+
