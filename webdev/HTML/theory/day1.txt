@@ -1,0 +1,141 @@
+HTML - HyperText Mark up language
+
+language -  set of rules 
+markup - we use tags, annotations to show our content
+hyperText - so many webpages are linked with each other ,one webpage linked to other 
+
+HTML - is a basic building block , skeleton
+
+CSS - is responsible for formatting/apperance
+
+JS - functionality
+================================================================================
+Tags:something which tells browser how to render different elements
+
+we can write anything in a index.html , that will get displayed in the browser
+
+create a basic html template:
+
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>This is a web dev class</h1>
+  </body>
+</html>
+
+tag - h1 is tag 
+<h1> - opening tag 
+</h1> - closing tag 
+and has content in between 
+
+completely is called element 
+
+<!-- --> to add comment in html 
+
+html is case insensitive 
+
+-----------
+HTML doc can be opened in 2 ways 
+text editor and browser 
+
+----------
+
+text elements:
+html has block and inline elements
+we have <p></p>, <h1> to <h6> <article> <section> 
+
+inline:
+em , strong , a 
+
+<p></p>
+<div></div>
+
+    <div id="head">Lorem ipsum dolor sit.</div>
+
+----
+Homework:
+read MDN docs 
+
+-----
+line break - <br/> [empty tag ]
+
+empty tag: <br/> <img/> <input/>
+----
+
+list
+
+<ul>
+  <li></li>
+</ul>
+
+<ol>
+  <li></li>
+</ol>
+
+<dl>
+  <dt></dt>
+  <dd></dd>
+</dl>
+
+  <h1>Grocery List</h1>
+    <ol>
+      <li>Sugar</li>
+      <li>SugarFree</li>
+      <li>Peanut</li>
+    </ol>
+
+    <h2>2nd grocery list</h2>
+    <ul>
+      <li>Maggi</li>
+      <li>Makkhan</li>
+      <li>tofu</li>
+    </ul>
+
+    <img src="./img.jpeg" alt="an image" width="200" height="300" />
+
+
+attributes: means property features
+img has src attribute and a value 
+img has width attribute with 400px value 
+
+img is an inline element
+
+all HTML elements can have attributes 
+attribute provide additional info about the element 
+
+-------
+
+to add css 
+
+<style>
+  #hi{
+    color:red;
+  }
+</style>
+
+<body>
+    <div id="hi">hello there</div>
+</body>
+
+-------
+
+    <a href="./index.html">goToIndexPage</a>
+    <br />
+    <a href="https://www.facebook.com">fb</a>
+
+------
+What happens when we close empty tag?
+html understands the tag where to close and render it properly
+
+
+------
+
+
+<!DOCTYPE html> --- tells your browser that its html 5 doc 
+<html lang="en"> -- tells language is english
+
+meta tag  - tells data about data 
+charset - UTF-8
+
+description - this will be shown in search results of google
+

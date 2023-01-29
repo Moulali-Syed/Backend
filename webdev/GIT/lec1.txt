@@ -1,0 +1,14 @@
+What is version control?
+Make save points that saves your project 
+
+When we are writing in a word doc and press ctrl+z , some content will be removed
+our OS will be maintaining version control 
+
+similarly in development we need version control 
+
+github is a service that hosts git repositories
+GIT is a version control tool  -  is a software that maintains our code changes record
+
+github -  is a service for hosting code repositories 
+
+
