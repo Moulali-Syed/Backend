@@ -1,0 +1,23 @@
+short circuiting:
+
+10 && 6
+
+falsy values:
+undefined , null , false, +0,-0, NaN , ''
+
+apart from these all other all truthy values 
+
+---------
+
+Coercion(Type interconversion)
+
+console.log(10 && 6); //6
+
+short circuting - if first input is true then only it will check 2nd input 
+console.log(10 && 6); //6
+console.log(10 && 0); //0
+console.log(0 && 10); //0
+
+
+In OR gate in first input is true then it will not evaluate 2md input and immediately return 1st input 
+

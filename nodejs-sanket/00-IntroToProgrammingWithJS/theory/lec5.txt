@@ -1,0 +1,9 @@
+null - it actually represents empty value
+
+let char = null;
+
+null , undefined gives us emptyness meaning
+
+let a; //this is undefined
+
+let b = null;//this is a null value

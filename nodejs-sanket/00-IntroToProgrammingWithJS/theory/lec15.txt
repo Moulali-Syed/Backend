@@ -1,0 +1,9 @@
+to check type of a value - use typeof operator
+
+console.log(typeof 1); //number
+console.log(typeof '1'); //string
+console.log(typeof undefined); //undefined
+console.log(typeof true); //boolean
+console.log(typeof null); //object - historical mistake of javascript
+console.log(typeof BigInt(123)); //bigint
+console.log(typeof 123n); //bigint

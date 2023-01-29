@@ -1,0 +1,23 @@
+Basics of JS:
+it is a multi paradigm language 
+
+Any peace of software we built should store some information
+
+Program in running state is called process 
+
+to see all processes running on our machine - look in task manager, on mac activity monitor
+
+ram - is primary storage area 
+
+
+When dealing with programming language , we cannot modify some words
+these are called keywords - reserved words by language for its own purpose
+we cannot change their meaning or repurpose them for a different use case 
+
+
+In JS few keywords are - let , for , const , var , if , else , return ....etc
+
+---------------
+How can we store some values in a program 
+to store values we can use variables
+variable are memory buckets that stores some value and has a name as well

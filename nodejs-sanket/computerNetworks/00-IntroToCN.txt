@@ -1,0 +1,11 @@
+Net/Network: 
+It is a group or system of interconnected people or items 
+Something which is interconnected is called a network
+
+When we have a bunch of computers that are interconnected with each other 
+with either cables or wireless are computer networks
+
+Internet:
+is a network of computer networks , complex web of interconnected computer networks
+
+multiple small network connected form Internet

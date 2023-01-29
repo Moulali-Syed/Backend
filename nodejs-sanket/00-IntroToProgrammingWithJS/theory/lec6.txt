@@ -1,0 +1,10 @@
+special characters:
+
+\n - new line character [escape sequence]
+\t - this will give tab space
+
+console.log('hello \n hi');
+console.log('hi \t nnansf');
+
+//to print \ 
+console.log('\\n'); //\n

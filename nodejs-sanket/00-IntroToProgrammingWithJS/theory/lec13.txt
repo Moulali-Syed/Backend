@@ -1,0 +1,27 @@
+Bitwise operator:
+
+computer internally understands only binary
+
+5 - 101 [binary representation of 5]
+
+bitwise operators perform the corresponding operations bit by bit 
+
+
+& - bitwise AND 
+| - bitwise OR 
+^ - bitwise XOR 
+~ - bitwise NOT 
+
+5&&7 = 7[logical AND]
+---------------
+5 & 7
+101 111  
+
+101 = 5
+----
+
+6 & 9 
+0110
+1001
+
+0000 = 0

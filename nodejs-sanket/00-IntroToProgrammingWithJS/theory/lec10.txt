@@ -1,0 +1,13 @@
+logical operators:
+
+&& , || , !
+
+AND - both true , then only true 
+
+OR  - both false then only false 
+
+NOT - viceversa
+
+console.log(!true);
+console.log(~true); //-2
+console.log(~10);//-11

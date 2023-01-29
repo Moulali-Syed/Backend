@@ -1,0 +1,15 @@
+ 0, -0  , NaN  , Infinity , -Infinity 
+
+ in javascript we have -0 as well 
+
+ NaN - Not a Number 
+ if there is a situation where you re bound to return a number but there is no valid 
+ possible number to return , then we use NaN 
+
+
+ console.log(10 / null); //infinity
+console.log(undefined / null); //NaN
+
+Which is the only primitive that is not equal to itself?
+NaN 
+

@@ -1,0 +1,20 @@
+we can assume functions as black box
+
+functions take input and process and gives an output 
+
+we have inbuilt functions
+
+console.log();
+this function takes some data as input and then displays it in output 
+
+
+console.log('Apple');//Apple
+console.log(10);//10
+
+we can even pass multiple values
+console.log()
+
+
+let a = 10;
+let b = 'apple';
+console.log(a, b);//10 apple

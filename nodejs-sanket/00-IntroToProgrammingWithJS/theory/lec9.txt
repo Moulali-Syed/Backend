@@ -1,0 +1,9 @@
+relational operators:
+
+> , <  , >=  , <=
+
+
+console.log(10 > 12); //false
+console.log(10 < 12); //true;
+console.log(10 >= 12); //false
+console.log(10 <= 12); //true

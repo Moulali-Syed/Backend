@@ -1,0 +1,11 @@
+Comments:
+
+piece of code for documentation purpose
+
+// --- single line comment
+/*
+        multi line comment 
+*/
+
+programming language just avoid comments during execution
+

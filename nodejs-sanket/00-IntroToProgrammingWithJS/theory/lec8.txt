@@ -1,0 +1,29 @@
+Operators:
+
+arithmetic Operators:
++, - , * , / ,%
+
+10+3 ===> 10, 3 operands , + is Operator
+
+let n1 = 10;
+let n2 = 3;
+console.log(n1 * n2);
+console.log(n1 + n2);
+console.log(n1 - n2);
+
+console.log(n1 / n2);
+
+console.log(n1 % n2);
+
+------
+exponent Operator:(a^b)
+console.log(y**2);//9
+
+
+---------
+assignment Operator:
+= , += , -= , /= , %= , *=
+
+let a = 10;
+
+a+=2; // a = a+2;

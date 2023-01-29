@@ -1,0 +1,57 @@
+coding variables in javascript:
+------------------------------
+
+to run js code - go to extensions in vs code 
+search for code runner 
+and install it
+
+this will give us a play button 
+
+------
+
+we have 3 ways to create variables
+
+using var keyword:
+var <variableName> = <value>;
+
+var marks = 90;
+var score = 100;
+
+
+using let keyword:
+let <variableName> = <value>;
+
+let age = 12;
+let flag = 0;
+
+
+using const keyword:
+const <variableName> = <value>;
+const x = 100;
+
+----------------
+to run code - click on run option that we get from code runner 
+
+-------
+semicolon:
+when we write one line of js code , it is equivalent to one instruction given to computer 
+one complete instruction is called statement, at end of each statement we can put semicolon
+but it is optional
+
+
+varialeNaming convention:
+it is recommended to use camelCase 
+variable names can contain small alphabets , capital alphabets , digits 
+underscore(_) , $
+
+we cannot have space or any other special character 
+we should give meaningful names so that reader can identify the names properly 
+variable name cannot start with digit but it can have digits in between or at last 
+we cannot use keywords as variableName
+
+//invalid variable name
+const first name = 'Apple';
+
+const 3address  = 'asf';
+
+const %aefg  = 'fgf';

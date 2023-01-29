@@ -1,0 +1,33 @@
+What all values we can store in js?
+
+undefined, null, string, boolean , number
+
+Number - 10,-3,2.6,3.4
+
+String - "Apple" , 'hi' , `use back ticks`
+
+boolean - true , false 
+
+undefined 
+var status;
+
+
+null 
+
+objects:
+it is a reference datatype 
+it helps in storing key value pairs
+
+const obj = {
+  name: 'apple',
+  company: 'google',
+};
+
+
+keys will be unique
+
+
+primitive -  types which are atomic in nature
+
+non primitive - types dependent on other datatypes, which are composition of other datatypes 
+
