@@ -1,1 +1,13 @@
 check the type of triangle
+
+let a = 7;
+let b = 7;
+let c = 5;
+
+if ((a == b) == c) {
+  console.log('equlateral triangle');
+} else if (a === b || a === c || b === c) {
+  console.log('scalene triangle');
+} else {
+  console.log('isoceles triangle');
+}
