@@ -1,0 +1,7 @@
+loops:
+
+to make a task repetitively we can do using loops
+
+for (let i = 1; i <= 10; i++) {
+  console.log(i);
+}
