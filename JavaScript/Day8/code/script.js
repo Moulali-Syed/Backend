@@ -350,35 +350,171 @@ console.log(e, f, g); //8 9 3
 // console.log(users[0]?.name ?? 'User array empty');
 // console.log(users1[0]?.name ?? 'User array empty');
 
-const openingHours = {
-  mon: {
-    open: 11,
-    close: 12,
-  },
-  tue: 12,
-  wed: 10,
-  thur: 9,
-};
-const properties = Object.keys(openingHours);
-console.log(properties); //[ 'mon', 'tue', 'wed', 'thur' ]
-console.log(properties.length); //4
+// const openingHours = {
+//   mon: {
+//     open: 11,
+//     close: 12,
+//   },
+//   tue: 12,
+//   wed: 10,
+//   thur: 9,
+// };
+// const properties = Object.keys(openingHours);
+// console.log(properties); //[ 'mon', 'tue', 'wed', 'thur' ]
+// console.log(properties.length); //4
 
-for (const day of Object.keys(openingHours)) {
-  console.log(day);
-}
+// for (const day of Object.keys(openingHours)) {
+//   console.log(day);
+// }
 
-//property values:
-const values = Object.values(openingHours);
-console.log(values); //[ 11, 12, 10, 9 ]
+// //property values:
+// const values = Object.values(openingHours);
+// console.log(values); //[ 11, 12, 10, 9 ]
 
-//entire object
-const entries = Object.entries(openingHours);
-console.log(entries); //[ [ 'mon', 11 ], [ 'tue', 12 ], [ 'wed', 10 ], [ 'thur', 9 ] ]
+// //entire object
+// const entries = Object.entries(openingHours);
+// console.log(entries); //[ [ 'mon', 11 ], [ 'tue', 12 ], [ 'wed', 10 ], [ 'thur', 9 ] ]
 
-for (const x of entries) {
-  console.log(x);
-}
+// for (const x of entries) {
+//   console.log(x);
+// }
 
-for (const [key, { open, close }] of entries) {
-  console.log(`On ${key} we open at ${open} and close at ${close}`);
-}
+// for (const [key, { open, close }] of entries) {
+//   console.log(`On ${key} we open at ${open} and close at ${close}`);
+// }
+
+// const orderSet = new Set(['Pasta', 'Pizza', 'Pasta', 'Rissoto']);
+// console.log(orderSet); //{ 'Pasta', 'Pizza', 'Rissoto' }
+// //set doesnot have key value pairs
+// //the order of sets is irrelevant
+
+// console.log(new Set('Apple')); //{ 'A', 'p', 'l', 'e' }
+
+// //get size
+// console.log(orderSet.size); //3
+
+// //to check if an element is present
+// console.log(orderSet.has('Bread')); //false
+
+// //to add element to a set
+// orderSet.add('Garlic Bread');
+
+// console.log(orderSet); //{ 'Pasta', 'Pizza', 'Rissoto', 'Garlic Bread' }
+
+// //to delete an element
+// orderSet.delete('Rissoto');
+// console.log(orderSet); // { 'Pasta', 'Pizza', 'Garlic Bread' }
+
+// //retrieve element in set - is not possible because there is no index
+// //as values are unique and has no order - all we can do is whethere a
+// //value is present or not
+
+// //Set is also iterable
+// for (const order of orderSet) {
+//   console.log(order);
+// }
+
+// //delete all elements from set
+// orderSet.clear();
+
+// //use case - is to remove duplicate values of an array
+// const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// const uniqueStaff = new Set(staff);
+// console.log(uniqueStaff); //{ 'Waiter', 'Chef', 'Manager' }
+
+// //set to array conversion is easy using a spread operator
+// const uniqueStaff1 = [...new Set(staff)];
+// console.log(uniqueStaff1); //[ 'Waiter', 'Chef', 'Manager' ]
+
+// console.log(
+//   new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+// );
+
+// //different letters in a name
+// console.log(new Set('Apple').size); //4
+
+// //creating a Map
+// const rest = new Map();
+
+// rest.set('name', 'Classico Itailiano');
+// rest.set(1, 'Firenze, Italy');
+// rest.set(2, 'Lisbon , Portugal');
+
+// console.log(rest);
+// /*
+//  {
+//   'name' => 'Classico Itailiano',
+//   1 => 'Firenze, Italy',
+//   2 => 'Lisbon , Portugal'
+// }
+// */
+
+// //we can chain values in  a map
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   .set(true, 'We are open :D')
+//   .set(false, 'We are close :(');
+
+// //get values
+
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+
+// console.log(rest);
+
+// const time = 21;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// //check if map contains certain key
+// console.log(rest.has('categories'));
+
+// //to delete
+// rest.delete(2);
+// console.log(rest);
+
+// //to know size
+// console.log(rest.size);
+
+// //remove all elements from map
+// rest.clear();
+
+// rest.set([1, 2], 'Test');
+// console.log(rest.get([1, 2]));//will give undefined - because they are refernec type both are not pointing same location
+
+// const arr = [1, 2];
+// rest.set(arr, 'Test1');
+// console.log(rest.get(arr));//Test1 - this works
+
+// //we can create a map as below as well
+
+// const question = new Map([
+//   ['question', 'What is best pgm language '],
+//   [1, 'C'],
+//   [2, 'java'],
+//   [3, 'javascript'],
+//   ['correct', 3],
+//   [true, 'Correct🎉'],
+//   [false, 'try again'],
+// ]);
+
+// console.log(question);
+
+// //convert object to map
+// const hoursMap = new Map(Object.entries(openingHours));
+
+// //maps are iterable
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// }
+// const answer = Number(prompt('Your answer'));
+// console.log(answer);
+
+// console.log(question.get(question.get('correct') === answer));
+
+// //convert map to array
+// console.log([...question]); //gives array of arrays
+// console.log([...question.keys()]);
+// console.log([...question.values()]);

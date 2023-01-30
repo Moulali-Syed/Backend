@@ -399,11 +399,215 @@ for(const day of Object.keys(openingHours)){
     console.log(day);
 }
 ==================================================================================================
+Sets:
+
+In ES6 : Sets and Maps were introduced 
+
+Sets - collection unique data values 
+cannot have duplicate values
+
+
+const orderSet = new Set(['Pasta', 'Pizza', 'Pasta', 'Rissoto']);
+console.log(orderSet); //{ 'Pasta', 'Pizza', 'Rissoto' }
+//set doesnot have key value pairs
+//the order of sets is irrelevant
+
+console.log(new Set('Apple')); //{ 'A', 'p', 'l', 'e' }
+
+//get size
+console.log(orderSet.size); //3
+
+//to check if an element is present
+console.log(orderSet.has('Bread')); //false
+
+//to add element to a set
+orderSet.add('Garlic Bread');
+
+console.log(orderSet); //{ 'Pasta', 'Pizza', 'Rissoto', 'Garlic Bread' }
+
+//to delete an element
+orderSet.delete('Rissoto');
+console.log(orderSet); // { 'Pasta', 'Pizza', 'Garlic Bread' }
+
+//retrieve element in set - is not possible because there is no index
+//as values are unique and has no order - all we can do is whethere a
+//value is present or not
+
+//Set is also iterable
+for (const order of orderSet) {
+  console.log(order);
+}
+
+//delete all elements from set
+orderSet.clear();
+
+//use case - is to remove duplicate values of an array
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const uniqueStaff = new Set(staff);
+console.log(uniqueStaff); //{ 'Waiter', 'Chef', 'Manager' }
+
+//set to array conversion is easy using a spread operator
+const uniqueStaff1 = [...new Set(staff)];
+console.log(uniqueStaff1); //[ 'Waiter', 'Chef', 'Manager' ]
+
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+
+//different letters in a name
+console.log(new Set('Apple').size); //4
+
+
+
+==================================================================================================
+Maps:
+
+Maps - is a data structure , stored in key value pairs 
+in maps key can be any type , but in objects it can be only string 
+
+//creating a Map
+const rest = new Map();
+
+rest.set('name', 'Classico Itailiano');
+rest.set(1, 'Firenze, Italy');
+rest.set(2, 'Lisbon , Portugal');
+
+console.log(rest);
+/*
+ {
+  'name' => 'Classico Itailiano',
+  1 => 'Firenze, Italy',
+  2 => 'Lisbon , Portugal'
+}
+*/
+
+//we can chain values in  a map
+rest
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open :D')
+  .set(false, 'We are close :(');
+
+//get values
+
+console.log(rest.get('name'));
+console.log(rest.get(true));
+
+console.log(rest);
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+//check if map contains certain key
+console.log(rest.has('categories'));
+
+//to delete
+rest.delete(2);
+console.log(rest);
+
+//to know size
+console.log(rest.size);
+
+//remove all elements from map
+rest.clear();
+
+rest.set([1, 2], 'Test');
+console.log(rest.get([1, 2]));//will give undefined - because they are refernec type both are not pointing same location
+
+const arr = [1, 2];
+rest.set(arr, 'Test1');
+console.log(rest.get(arr));//Test1 - this works 
+
+
+
+==================================================================================================
+Iterating Maps:
+
+//we can create a map as below as well
+
+const question = new Map([
+  ['question', 'What is best pgm language '],
+  [1, 'C'],
+  [2, 'java'],
+  [3, 'javascript'],
+  ['correct', 3],
+  [true, 'Correct🎉'],
+  [false, 'try again'],
+]);
+
+console.log(question);
+
+//convert object to map
+const hoursMap = new Map(Object.entries(openingHours));
+
+//maps are iterable
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+const answer = Number(prompt('Your answer'));
+console.log(answer);
+
+console.log(question.get(question.get('correct') === answer));
+
+//convert map to array
+console.log([...question]); //gives array of arrays
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+==================================================================================================
+Which data structure to use?
+
+
+Source of data?
+from program itself
+from UI 
+from external sources like API 
+
+simple list: array  or set
+
+key, value pairs: Map, Object 
+
+API gives data in form of JSON
+
+
+Arrays and Sets:
+Array:
+Use when u need ordered list of values (might contain duplicate values) 
+Use when u need to manipulate data 
+
+Sets:
+use when u need to work with unique Values
+use when high perfromance is really important
+use to remove duplicates from arrays 
+
+Objects:
+More traditional key/value store 
+Eaiser to write and access values with . and []
+
+Use when u need to include functions(methods)
+Use when working with JSON(can convert to Map)
+
+Maps:
+Better Performance 
+keys can have any data type 
+Easy to iterate 
+Easy to compute size 
+
+Use when you simply need to map key to values
+Use when u need keys that are not strings 
+==================================================================================================
+
+
+
+==================================================================================================
 
 
 
 
 ==================================================================================================
+
 
 
 
