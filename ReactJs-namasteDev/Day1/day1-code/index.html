@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Hello Everyone</h1>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script>
+      const body = document.body;
+      const heading = document.createElement('h1');
+      heading.innerText = 'Hello From javascript';
+      body.append(heading);
+
+      //or we can
+      const heading2 = document.createElement('h1');
+      heading2.innerHTML = 'hey there from javascript';
+      document.getElementById('root').appendChild(heading2);
+    </script>
+
+    <script>
+      const heading3 = React.createElement('h1', {}, 'Morning From React');
+      //createElement takes 3 arguments - elementToBeCreated[Tag] | emptyObject{} | the content in the element
+
+      console.log(heading3); //prints  a javascript object
+      //iam modifying the DOM - where i have to run react code we will tell in createRoot
+      const root = ReactDOM.createRoot(document.getElementById('root1'));
+
+      root.render(heading3);
+    </script>
+  </body>
+</html>

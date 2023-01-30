@@ -1,0 +1,141 @@
+Chapter 01 - Inception:
+======================
+create a index.html file
+
+React js - is a library
+
+when we say framework - it has all routes , and many other things combined in it 
+it takes minimum effort to use a library inside our code 
+
+
+we use chrome , vs code 
+
+extensions:
+Better comments
+Bracket pair colorizer
+react redux
+git lens
+Prettier
+vscode - icons
+
+
+$homework1:
+read about emmet ?
+
+
+------
+
+in index.html 
+
+  <body>
+    <h1>Hello Everyone</h1>
+  </body>
+
+  and open in browser
+
+----
+lets create h1 using javascript and add it to document
+
+ <body>
+    <h1>Hello Everyone</h1>
+    <div id="root"></div>
+
+    <script>
+      const body = document.body;
+      const heading = document.createElement('h1');
+      heading.innerText = 'Hello From javascript';
+      body.append(heading);
+
+      //or we can
+      const heading2 = document.createElement('h1');
+      heading2.innerHTML = 'hey there from javascript';
+      document.getElementById('root').appendChild(heading2);
+    </script>
+  </body>
+
+
+  -------------
+  $homework - what is CDN - content delivery network? what is crossorigin 
+
+  Lets see how we can do this using react
+
+lets add react cdn to our code 
+
+go to react cdn , from google 
+
+and 
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+paste above 2 lines into html code 
+
+-------
+What is shortest program of js ? is an empty js file 
+
+----
+just adding cdn to our html code , is shortest react code 
+
+React is like a global object 
+We also get access to ReactDOM
+
+-----
+Why we have react and react-dom 
+
+as react works on react native ,-mobile version 
+
+react - is core library 
+react-dom - is web version
+
+==================================
+Lets build Hello World pgm using react 
+
+    <div id="root1">Not Rendered</div>
+
+
+    <script>
+      const heading3 = React.createElement('h1', {}, 'Morning From React');
+      //createElement takes 3 arguments - elementToBeCreated[Tag] | emptyObject{} | the content in the element
+
+      console.log(heading3);//prints  a javascript object
+      //iam modifying the DOM - where i have to run react code we will tell in createRoot
+      const root = ReactDOM.createRoot(document.getElementById('root1'));
+
+      root.render(heading3);
+    </script>
+
+React Element is an object
+console.log(heading3);//prints  a javascript object
+
+======================
+We can inject react in any app , just make a root element
+
+---------------
+
+React.createElement('h1',{id:'title'},'Hello');
+in the 2nd parameter, we pass the attribute and value that we want to get displayed for an element 
+
+---------
+React will override everything inside root and display what we want
+
+-----------
+
+create a complex html structure:
+
+<div id='container'>
+    <h1></h1>
+    <h2></h2>
+</div>
+
+lets see how to write the above code in react 
+
+
+const heading1 = React.createElement('h1',{},'Heading1');
+const heading2 = React.createElement('h2',{},'Headin2');
+
+const container = React.createElement('div',{id:"container"},[heading1,heading2]);
+
+//when we have to pass multiple elements inside an element we pass them in array , as above 
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(container);
