@@ -1,0 +1,38 @@
+functions in javascript:
+
+//function declaration:  can be called before function is defined
+function myNewFunc() {
+  console.log('Hello');
+}
+
+function myfunc(a, b, c) {
+  console.log(a, b, c);
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+
+-------
+function expression: only can be called after function is defined
+
+const sub = function (a, b) {
+  return a - b;
+};
+
+
+--------
+
+check even or odd
+
+function isEvenOdd(num) {
+  if (num % 2 === 0) {
+    return 'even';
+  }
+  return 'odd';
+}
+
+const numType = isEvenOdd(23);
+const numType1 = isEvenOdd(24);
+console.log(numType, numType1);//odd even

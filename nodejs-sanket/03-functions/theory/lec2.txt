@@ -1,0 +1,10 @@
+intro to functions:
+
+function is a black box , which takes some input , process it and gives us a output
+
+we need not know its internal working
+
+but as  a programmer , we can create our own functions or can consume other functions which are inbuilt
+
+console.log(Math.sqrt(4));//2
+

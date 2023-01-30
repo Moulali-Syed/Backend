@@ -1,0 +1,4 @@
+if we functions we can store logic inside it and doesnot matter
+
+how many times we want to use it, we will just call the function 
+

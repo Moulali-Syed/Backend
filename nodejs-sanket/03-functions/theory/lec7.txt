@@ -1,0 +1,12 @@
+
+
+//defining function --- parameters
+function add(x,y){
+    return x+y;
+}
+
+
+//calling function --- arguments
+let res = add(a,b);
+
+console.log(res);

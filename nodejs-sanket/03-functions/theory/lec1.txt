@@ -1,0 +1,15 @@
+DRY - dont repeat yourself
+
+if we write a piece of code it should be reusable 
+
+we should be repeating it every time 
+
+say i write logic to check , if the input number is positive or negative
+
+say u have to do same thing multiple times
+
+instead of writing it many times , we can reuse the same every where using functions
+
+#if we make mistake , then we can change at only one place
+#if requirement change, then also change at a single place
+

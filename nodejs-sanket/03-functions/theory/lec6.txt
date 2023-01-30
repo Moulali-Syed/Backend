@@ -1,0 +1,10 @@
+debugging functions:
+
+what is console.log();
+
+it prints value in console , it is also a function 
+
+
+x = console.log();
+console.log(x); //undefined
+
