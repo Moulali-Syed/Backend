@@ -1,0 +1,14 @@
+valid triangle:
+
+given 3 integers - check if we can form a triangle with the sides of triangle having length a, b , c
+
+
+let a = 2;
+let b = 3;
+let c = 4;
+
+if (a + b >= c && a + c >= b && b + c >= a) {
+  console.log('triangle can be formed');
+} else {
+  console.log('triangle cannot be formed');
+}

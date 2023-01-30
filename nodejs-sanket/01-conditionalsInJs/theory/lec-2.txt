@@ -1,0 +1,11 @@
+if else statements:
+
+if(condition){
+
+}else{
+
+}
+
+if condition holds true then the code inside if block executes
+if the condition is false then else block will get executed 
+

@@ -1,0 +1,19 @@
+find minimum of three numbers?
+
+let num1 = 15;
+let num2 = 20;
+let num3 = 20;
+
+if (num1 >= num2) {
+  if (num1 >= num3) {
+    console.log(num1, 'is  big');
+  }
+} else if (num2 >= num3) {
+  console.log(num2, 'is big');
+} else {
+  console.log(num3, 'is big');
+}
+
+if (15 > 17) {
+  console.log('hi');
+}

@@ -1,0 +1,13 @@
+else if and nested conditions:
+
+let subType = 'premium';
+let vipMem = true;
+
+if (subType === 'premium') {
+  console.log('hi');
+} else if (vipMem) {
+  console.log('hello');
+} else {
+  console.log('bye');
+}
+

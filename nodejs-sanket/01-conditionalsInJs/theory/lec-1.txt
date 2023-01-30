@@ -1,0 +1,7 @@
+Conditionals:
+
+Programming langauges can also take decisions
+
+decision making capabilities are by Conditional statements 
+using them we can change the corresponding actions we want to take
+
