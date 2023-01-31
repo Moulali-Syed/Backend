@@ -1,0 +1,150 @@
+Igniting our App:
+==================
+
+React is a javascript library written by facebook developers
+
+We have so many Bundlers - vite , parcel , webpack
+in original create-react-app has webpack bundler 
+
+bundler -minify our code, remove console.log
+
+parcel is a package
+
+to have it in our code , we need package manager
+
+what is npm?
+there is no official name of npm 
+
+--------------
+
+How to use npm in our project?
+
+npm init 
+
+and press enter for all 
+
+this will create a package.json file
+
+--------------
+lets install parcel our bundler
+
+npm install -D parcel 
+
+-D represents that it is dev dependencies, we want this in our developer machine , not in live 
+
+sometimes we might also see 
+
+npm install --save-dev parcel [this is same as using -D] 
+
+dependency means all the files that my project need
+
+then we see package-lock.json gets added 
+and we can see dev dependency : parcel
+
+dev dependencies - we need parcel in development environment 
+
+caret(^) and tilde(~) - this is for minor and major version of dependencies that can be accepted
+
+^ - minor versions upgrade
+~ - major version upgrade 
+if not mentioned anything then it means - only the specified version to be used
+
+what is package-lock.json ?
+it has the correct version number that is used in production environment 
+it doesnot have any caret or tilde symbols - just version number
+package-lock.json maintains exact snap shot of the version of dependency we are using
+---------------
+package-lock.json 
+is very important , we need it in GIT repo 
+it maintains the exact version we are using in production
+
+example 2.3.4 - 2 is major version , 3 is minor version , 4 is patch that is given for bug 
+
+^ - changes minor and patch version upgrades 
+~ - changes only patch updates , that were mainly bug fixes
+=============================================================================================
+Now lets see what parcel can do for us 
+
+adding react cdn - in index.html is not good 
+remove it 
+
+adding react in global environments 
+npm install react 
+
+
+we get it added 
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+
+
+npm i react-dom 
+
+ "react-dom": "^18.2.0"
+=================================================================================================
+Lets ignite our app 
+
+npx - means execute using npm 
+parcel - is our bundler 
+index.html - is starting point of our app 
+
+npx parcel index.html 
+
+we must tell that our js file is a module
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./App.js"></script>
+  </body>
+
+
+now it will work 
+npx parcel index.html 
+
+page gets rendered
+
+==================================================================================
+on saving our file is getting reloaded 
+this is because of HMR - Hot Module Replacement , parcel will update the frontend 
+this is done using file watcher algorithms - we have it in parcel , which is written in C++
+
+dist - folder
+when we write
+npx parcel index.html 
+creates a development build of our project and host it in server 
+
+to create a production build 
+npx parcel build index.html 
+
+this creates a production build and pushes to dist folder
+
+parcel - is bundling , minify our code 
+parcel removes console.log()
+it will HMR as well 
+parcel will manage dev and production build
+
+==================================================================================
+
+what takes so much time to load in our website 
+images - parcel will do image optimization as well 
+parcel also does caching while development 
+it does compression also 
+compatiable with older versions of browsers 
+
+parcel uses - parcel-cache 
+
+we should put parcel-cache in gitignore file , anything which is auto generated can be in .gitignore 
+
+parcel - uses consistent hashing algorithms 
+
+we can say react as Modi , parcel as Amit shah
+
+transitive dependencies - we have package manager which dependencies of our dependencies
+inception of dependencies is transitive dependencies
+==================================================================================
+
+
+
+
+
+==================================================================================
