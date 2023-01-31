@@ -1,0 +1,21 @@
+functions accepting call back Functions
+
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+//HOF
+const transform = function (str, fn) {
+  console.log(`Original String ${str}`);
+  console.log(`transformed string : ${fn(str)}`);
+  console.log(`Transformed by ${fn.name}`);
+};
+transform('js is best', upperFirstWord);
+
+
+//callback helps to create abstraction - hiding some level of details 

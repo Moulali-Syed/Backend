@@ -1,0 +1,363 @@
+closure:
+
+function x() {
+  var a = 7;
+  function y() {
+    console.log(a);
+  }
+  y();
+}
+x();
+
+this above is a closure 
+closure means a function bind together with its lexical environment 
+
+function along with its lexical scope bundeled together is called - closure ***
+
+=================================================================================
+function x() {
+  var a = 7;
+  function y() {
+    console.log(a);
+  }
+  return y;
+}
+var z = x();
+console.log(z); //print funtion
+
+//.....say there hunders of lines of code
+//then we call z
+z(); //still z remembers its lexical scope variables and prints 7
+
+
+=================================================================================
+same as above example
+
+function x() {
+  var a = 7;
+  return function y() {
+    console.log(a);
+  };
+}
+var z = x();
+console.log(z); //print funtion
+
+//.....say there hunders of lines of code
+//then we call z
+z(); //still z remembers its lexical scope variables and prints 7
+
+=================================================================================
+corner cases:
+
+function x() {
+  var a = 7;
+  function y() {
+    console.log(a);
+  }
+  a = 100;
+  return y;
+}
+var z = x();
+console.log(z); //print funtion
+
+//.....say there hunders of lines of code
+//then we call z
+z(); //still z remembers its lexical scope variables and prints 100
+//the value of a doesnot persists , its reference persists 
+
+-------------
+
+//accessing parent and parents, parents scope
+function z() {
+  var b = 900;
+  function x() {
+    var a = 7;
+    function y() {
+      console.log(a, b);
+    }
+    y();
+  }
+  x();
+}
+
+z();
+=================================================================================
+uses of closure:
+
+module design pattern 
+currying
+functions like once
+memoize
+maintaining state in async world
+setTimeouts
+Iterators
+and many more....
+
+
+=================================================================================
+setTimeout + closures
+
+function x() {
+  var i = 1;
+  setTimeout(function () {
+    console.log(i);
+  }, 1000);
+  console.log('Hello there');
+}
+
+x();
+/*
+Hello There
+1
+
+function in setTimeout forms a closure , where ever function goes it takes its lexical scope with it
+once timer expires , puts to call stack and then runs 
+*/
+=================================================================================
+
+
+print 1 after 1 second ,  2 after 2 seconds , 3 after 3 seconds ,....
+
+function x() {
+  for (var i = 1; i <= 5; i++) {
+    setTimeout(function () {
+      console.log(i); //closure remembers reference to i - so it is printing 6
+    }, i * 1000);
+  }
+  console.log('Namaste Javascript');
+}
+x();
+
+Namaste Javascript
+6
+6
+6
+6
+6
+
+------
+
+it works with let - because it is block scoped and everytime it will take a new closure of value i 
+
+function x() {
+  for (let i = 1; i <= 5; i++) {
+    setTimeout(function () {
+      console.log(i); //closure remembers reference to i - so it is printing 6
+    }, i * 1000);
+  }
+  console.log('Namaste Javascript');
+}
+x();
+
+------
+
+if we want to fix it using var then use as below 
+
+we can create a new copy of i , everytime setTimeout is called 
+this is possible because of closure 
+
+function x() {
+  for (var i = 1; i <= 5; i++) {
+    function close(x) {
+      setTimeout(function () {
+        console.log(x);
+      }, x * 1000);
+    }
+    close(i);
+  }
+  console.log('Namaste Javascript');
+}
+x();
+
+=================================================================================
+closure:
+function along with reference to its outer environment together form closure 
+
+closure - function and its lexical scope bundeled together forms a closure
+
+
+means every function in Javascript has access to its parent function  varibales 
+even this function is executed in some other scope , it still remembers its lexical environment
+in which it is orginally present
+ 
+
+ function outer(){
+
+    var a = 10;
+    function inner(){
+        console.log(a);
+    }
+    return inner;
+ }
+
+ outer()();//this still prints 10
+
+ -----
+ ()() - like calling inner function 
+ outer()();
+
+ is same as
+  
+ var close = outer();
+ close();
+
+ ----
+ using let also forms closure
+
+  function outer(){
+
+    function inner(){
+        console.log(a);
+    }
+    var a = 10;
+    return inner;
+ }
+ outer()();
+
+ ----
+
+what if we have a parameter in function definition , will it form closure - Yes
+
+function outer(b){
+    function inner(a){
+        console.log(a,b);
+    }
+    let  a = 10;
+    return inner;
+}
+var close = outer('hello world');
+close();
+
+----------
+
+what if outer function is inside another function , will it still form closure - Yes 
+
+function outest(){
+    var c = 20;
+    function outer(b){
+    function inner(a){
+        console.log(a,b,c);//inner function still forms closure with outest also, so prints c 
+    }
+    let  a = 10;
+    return inner;
+    }
+    return outer;
+}
+
+var close = outest()('helloworld');
+close();
+
+----------
+
+conflicting name in global variable
+
+function outest(){
+    var c = 20;
+    function outer(b){
+    function inner(a){
+        console.log(a,b,c);//inner function still forms closure with outest also, so prints c 
+    }
+    let  a = 10;
+    return inner;
+    }
+    return outer;
+}
+let a  = 100;
+var close = outest()('helloworld');
+close();
+
+will get same output // 10 helloworld 20 
+if we dont have a in the outer function , then it will go deep into hierarcy and then it will print 
+100 helloworld 20 
+
+--------
+advantages of closures:
+used in memoize, once 
+currying 
+data hiding and encapsulation
+
+-----------
+Data privacy using closures:
+
+//we want counter that can be modified only using  a function - we can do using closure
+
+function counter() {
+  var count = 0;
+  return function incrementCounter() {
+    count++;
+    console.log(count);
+  };
+}
+
+var counter1 = counter();
+counter1();
+counter1();
+
+//when we call counter function again it will create a new function again
+var counter2 = counter();
+counter2();
+
+
+-----
+what if we want increment and decrement , is the above code scalable
+lets make it using constructor function which is more scalable
+
+
+//using constructor function
+function Counter() {
+  var count = 0;
+  this.incrementCounter = function () {
+    count++;
+    console.log(count);
+  };
+  this.decrementCounter = function () {
+    count--;
+    console.log(count);
+  };
+}
+
+var counter1 = new Counter();
+counter1.incrementCounter();
+counter1.incrementCounter();
+counter1.decrementCounter();
+
+=================================================================
+if we create a lot of closures thus they accumulate more memory ,
+those will also be not garbage collected 
+if not handled properly can lead to memory leaks
+
+=================================================================
+garbage collector:
+
+frees up unutilized memory 
+
+=================================================================
+
+garbage collector and closures relation:
+
+function a() {
+  var x = 0;
+  return function b() {
+    console.log(x);
+  };
+}
+
+var y = a();
+//we cannot free up , x until it is utilized somewhere - thus closures takes more memory
+
+=================================================================
+
+function a() {
+  var x = 0;
+  var z = 10;
+  return function b() {
+    console.log(x);
+  };
+}
+
+var y = a();
+console.log(x);//but still it is preserved in b function as it is returned with parents lexical scope
+console.log(z); //is not accessible here
+//we cannot free up , x until it is utilized somewhere - thus closures takes more memory
+
+=================================================================

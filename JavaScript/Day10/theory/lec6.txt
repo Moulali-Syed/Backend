@@ -1,0 +1,210 @@
+call, apply , bind methods
+
+call:
+
+function displayName() {
+  console.log('Apple');
+}
+
+displayName(); //invoking function
+
+//we can invoke function using call method
+displayName.call();//Apple
+
+//When we are calling function displayName() behind the scenes it is getting invoked as
+//displayName.call()
+//every function has access to call , to invoke that function
+
+====================================================================
+
+function displayName() {
+  console.log('Apple');
+}
+
+displayName(); //invoking function
+
+//we can invoke function using apply method
+displayName.apply(); //Apple
+
+//apply also works in similar function call
+
+====================================================================
+
+Then  why do we need call and apply methods?
+
+to understand lets see a use case
+
+let participant1 = {
+  name: 'Lily',
+  battery: 70,
+  chargeBattery: function () {
+    this.battery = 100;
+  },
+};
+participant1.chargeBattery();
+console.log(participant1);
+/*
+{
+  name: 'Lily',
+  battery: 100,
+  chargeBattery: [Function: chargeBattery]
+}
+*/
+
+//lets create a 2nd participant
+let participant2 = {
+  name: 'Jhon',
+  battery: 30,
+};
+//participant2 doesnot have chargeBattery function
+//there should be a way we take chargeBattery function from participant1 and use it in participant2
+
+participant1.chargeBattery.call(participant2);
+//above means - i want to call chargeBattery method of participant1 on participant2
+console.log(participant2);
+/*
+{ name: 'Jhon', battery: 100 }
+*/
+
+//this way we can reuse methods of one object , in other object
+
+====================================================================
+We can even pass multiple arguments in call -
+1st argument represent the objects, the remaining arguments will go to respective function 
+
+let participant1 = {
+  name: 'Lily',
+  battery: 70,
+  chargeBattery: function (a, b) {
+    this.battery = this.battery + a + b;
+  },
+};
+participant1.chargeBattery();
+console.log(participant1);
+/*
+{
+  name: 'Lily',
+  battery: 100,
+  chargeBattery: [Function: chargeBattery]
+}
+*/
+
+//lets create a 2nd participant
+let participant2 = {
+  name: 'Jhon',
+  battery: 30,
+};
+//participant2 doesnot have chargeBattery function
+//there should be a way we take chargeBattery function from participant1 and use it in participant2
+
+participant1.chargeBattery.call(participant2, 20, 30);
+//above means - i want to call chargeBattery method of participant1 on participant2
+console.log(participant2);
+/*
+{ name: 'Jhon', battery: 80 }
+*/
+call - takes arguments as comma seperated
+====================================================================
+apply - this takes arguments in an array, as array of arguments 
+we will receive it as comma seperated arguments only
+
+let participant1 = {
+  name: 'Lily',
+  battery: 70,
+  chargeBattery: function (a, b) {
+    this.battery = this.battery + a + b;
+  },
+};
+participant1.chargeBattery();
+console.log(participant1);
+/*
+{
+  name: 'Lily',
+  battery: 100,
+  chargeBattery: [Function: chargeBattery]
+}
+*/
+
+//lets create a 2nd participant
+let participant2 = {
+  name: 'Jhon',
+  battery: 30,
+};
+//participant2 doesnot have chargeBattery function
+//there should be a way we take chargeBattery function from participant1 and use it in participant2
+
+participant1.chargeBattery.apply(participant2, [20, 30]);
+//above means - i want to call chargeBattery method of participant1 on participant2
+console.log(participant2);
+/*
+{ name: 'Jhon', battery: 80 }
+*/
+
+//this way we can reuse methods of one object , in other object
+
+
+
+====================================================================
+the way we use bind is very similar to call method 
+
+in case of call and apply - our function gets called immediately 
+in case of bind - it doesnot get called immediately
+
+infact it just returns another function which can be called later 
+
+let participant1 = {
+  name: 'Lily',
+  battery: 70,
+  chargeBattery: function (a, b) {
+    this.battery = this.battery + a + b;
+  },
+};
+participant1.chargeBattery();
+console.log(participant1);
+/*
+{
+  name: 'Lily',
+  battery: 100,
+  chargeBattery: [Function: chargeBattery]
+}
+*/
+
+//lets create a 2nd participant
+let participant2 = {
+  name: 'Jhon',
+  battery: 30,
+};
+//participant2 doesnot have chargeBattery function
+//there should be a way we take chargeBattery function from participant1 and use it in participant2
+
+let chargeBatteryOfParticipant2 = participant1.chargeBattery.bind(
+  participant2,
+  20,
+  30
+);
+//above means - i want to call chargeBattery method of participant1 on participant2
+
+chargeBatteryOfParticipant2();
+console.log(participant2);
+/*
+{ name: 'Jhon', battery: 80 }
+*/
+
+//this way we can reuse methods of one object , in other object
+
+
+
+
+====================================================================
+
+As summary call , apply , bind is used to pass a different value of this to a function
+
+whatever 1st argument we are passing will be the value of this keyword inside the function we want 
+
+These 3 methods helps us to reuse methods of an object in another object , as we have seen method of 
+participant1 is used in participant2
+
+
+in case of call , apply - function is invoked immediately 
+in case of bind -  function is invoked at a later point of time as it returns a function
+====================================================================

@@ -1,0 +1,9 @@
+Immediately Invoked Function Expression(IIFE)
+
+//IIFE
+//sometimes we need a function that needs to executed only once, and never again
+const runOnce = (function () {
+  console.log('run once and never again');
+})();
+
+(() => console.log('run once never again'))();

@@ -1,0 +1,19 @@
+function returning function:
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet('Hey');
+
+greeterHey('Apple');
+
+//we can also call as below
+greet('Hello')('chocos');
+
+const greet1 = (greeting) => {
+  return (name) => console.log(`${greeting} ${name}`);
+};
+greet1('hi')('tomato');
