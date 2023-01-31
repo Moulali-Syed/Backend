@@ -1,0 +1,37 @@
+console.log('a+very+nice+string'.split('+')); //[ 'a', 'very', 'nice', 'string' ]
+console.log('Apple Shimla'.split(' ')); //[ 'Apple', 'Shimla' ]
+
+const [firstName, lastName] = 'Apple Shimla'.split(' '); //[ 'Apple', 'Shimla' ]
+
+//join
+const newName = ['Mr', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  for (const n of names) {
+    console.log(n[0].toUpperCase() + n.slice(1));
+  }
+};
+
+capitalizeName('apple ann smith davis');
+
+//padding a string - adding characters until it has some desired length
+const message = 'go to gate 23';
+console.log(message.padStart(25, '+')); //25-is desired length , + - is to be added
+console.log(message.padEnd(15, '+'));
+
+//credit card number masking
+const maskCreditCardNumber = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCardNumber(43324538927443));
+
+//repeat
+const message2 = 'Bad Weather .. all departues will be late';
+console.log(message2.repeat(5));
+
+//concat

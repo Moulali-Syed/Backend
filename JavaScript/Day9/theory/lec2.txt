@@ -1,0 +1,60 @@
+//***************************************** */
+
+const airline = 'Air India';
+const plane = 'A320';
+
+console.log(airline.toUpperCase());
+console.log(airline.toLowerCase());
+
+const passenger = 'apple';
+const passengerLower = passenger.toLowerCase();
+const passengerCrct = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCrct);
+
+//comparing emails:
+const email = 'hello@email.io';
+const loginEmail = 'Hello@Jonas.Io \n';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(email === normalizedEmail);
+
+//we also have trimStart() and trimEnd() from ES2019
+
+//replace part of string
+const priceGB = '288,87#';
+const priceUS = priceGB.replace('#', '$').replace(',', '.');
+
+console.log(priceUS);
+
+const announcement = `All passengers come to boarding door 23 . Boarding door 23!`;
+console.log(announcement.replace('door', 'gate'));
+
+console.log(announcement.replaceAll('door', 'gate'));
+
+//using regualr expressions
+console.log(announcement.replace(/door/g, 'gate')); //g stands for global
+
+//methods returning booleans
+const plane1 = 'A320neo';
+console.log(plane1.includes('A320'));
+
+console.log(plane1.startsWith('A'));
+
+console.log(plane1.endsWith('o'));
+
+//practice
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('U r not allowed on board');
+  } else {
+    console.log('Welcome aboard');
+  }
+};
+checkBaggage('I have a laptop and a Knife');
+checkBaggage('Camera');
+checkBaggage('Gun');

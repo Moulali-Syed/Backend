@@ -1,0 +1,50 @@
+const airline = 'Air India';
+const plane = 'A320';
+
+//we access as arrays
+
+console.log(airline[0]);
+
+//we can also directly do on strings
+console.log('A320'[0]);
+
+//length of string
+console.log(airline.length);
+
+//to find an element at a particular index
+console.log(airline.indexOf('r'));
+
+//get last index
+console.log(airline.lastIndexOf('a'));
+
+//we can also search entire string
+console.log(airline.indexOf('Ind'));
+//if not found gives -1
+
+//extract part of string using slice
+console.log(airline.slice(4)); //4 - start index , which gives sub string , it is impossible to mutate string
+
+console.log(airline.slice(4, 7)); // 4-start index , 7 - endIndex and it is excluded , length equal to end-startInd
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2)); //start counting from end , gives last 2 characters
+
+console.log(airline.slice(1, -1)); //cuts of last character
+
+const checkMiddleSeat = function (seat) {
+  //B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('You got middle seat');
+  } else {
+    console.log('you got lucky');
+  }
+};
+
+checkMiddleSeat('11B');
+
+//Whenever we call a method on a string , behind the scenes it converts the string into a javascript object
+//this process is called boxing
+console.log(new String('Apple')); //this conversion is done by js , on a string when we call a method on string
