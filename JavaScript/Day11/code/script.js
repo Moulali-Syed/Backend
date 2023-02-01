@@ -287,13 +287,73 @@ console.log([...arr]); //we can also create using spread operator
 //   .reduce((acc, cur, i) => acc + cur, 0);
 // console.log(totalDepositInUSD); //5522.000000000001
 
-//find method
-//retrieve one element based on a condition
-const firstWithDrawal = movements.find((mov) => mov < 0); //returns first element which satisfy the condition
-console.log(firstWithDrawal);
+// //find method
+// //retrieve one element based on a condition
+// const firstWithDrawal = movements.find((mov) => mov < 0); //returns first element which satisfy the condition
+// console.log(firstWithDrawal);
 
-//find - return only first match as element
-//filter - returns all elements as an array
+// //find - return only first match as element
+// //filter - returns all elements as an array
 
-//search an object from array of objects
-const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+// //search an object from array of objects
+// const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+
+// const owners = ['Jonas', 'Zach', 'Adam'];
+// console.log(owners.sort()); //[ 'Adam', 'Jonas', 'Zach' ]
+// //sort mutates original array
+// console.log(owners); //[ 'Adam', 'Jonas', 'Zach' ]
+
+// //numbers
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// console.log(movements.sort()); //[-130, -400, -650,1300,  200, 3000,450,   70]
+// //sort will think numbers as strings and sort it, so in case of numbers we need to use callback function
+
+// //if we return < 0 , then A, B will be output
+// //if we return > 0 , then B, A will be output
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+// console.log(movements); //[ -650, -400, -130,    70,  200,  450,1300, 3000]
+// //sorts in ascending order
+
+// //to sort in descending order
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+// console.log(movements);
+
+// //to sort in ascending order - short form
+// movements.sort((a, b) => a - b);
+// console.log(movements);
+
+// //to sort in descending order - short form
+// movements.sort((a, b) => b - a);
+// console.log(movements);
+
+// console.log([2, 8, 93, 4, 1, 4, 12].sort((a, b) => a - b)); //ascending order
+// console.log([32, 14, 65, 34, 97, 32, 12, 43, 654].sort((a, b) => b - a)); //descending order
+
+// console.log([1, 2, 3, 4, 5]);
+// console.log(new Array(1, 2, 3, 4, 5));
+
+// //array constructor function
+// const x = new Array(7); //creates an empty array of 7 size
+// console.log(x);
+// x.map(() => 5);
+
+// x.fill(1); //fill with 1
+// console.log(x);
+
+// x.fill(1, 3); //fill with 1 , from index 3
+
+// x.fill(23, 2, 6); //fill 23 from index 2 to index 6
+
+// //Array.from
+// const y = Array.from({ length: 7 }, () => 1);
+// console.log(y);
+
+// const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+
+// //to create arrays from iterables - we have Array.from

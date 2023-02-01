@@ -406,18 +406,217 @@ console.log(firstWithDrawal);
 //search an object from array of objects
 const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
 
+===================================================================================
+login feature:*******  ----> e.preventDefault() very important
+
+let currentAccount;
+btnLogin.addEventListener('click',function(e){
+  e.preventDefault();//prevent form from submitting
+  accounts.find(acc => acc.username === inputLoginUsername.value );
+  console.log(currentAccount);
+
+  if(currentAccount?.pin === Number(inputLoginPin.value)){
+    //Display UI and message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+  }
+
+  //clear input fields
+  inputLoginUsername.value = inputLoginPin.value = '';
+  inputLoginPin.blur();//to remove focus
+
+  //display movements
+  displayMovements(currentAccount.movements);
+
+  //display balance
+  calcDisplayBalance(currentAccount.movements);
+
+  //display summary
+  calcDisplaySummary(currentAccount);
+});
+
+===================================================================================
+Implementing Transfers:
+
+btnTransfer.addEventListener('click',function(e){
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find( acc => acc.username === inputTransferTo.value);
+  console.log(amount, receiverAcc);
+
+  if(amount > 0 && currentAccount.balance >= amount && 
+    receiverAcc?.username !== currentAccount.username){
+      console.log('Transfer valid');
+    }
+});
+
+===================================================================================
+findIndex method:
+
+const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+
+===================================================================================
+some and every method:
 
 
+console.log(movements.includes(-130));//this checks for equality , if present return true 
+
+//if there is any value that satisfy the specified condition then it returns true 
+movements.some(mov=>mov>5000);//here we can specify a condition , if satisfied returns true 
+
+//every 
+//only returns true if every element in the array satisfies the condition then returns true 
+
+movements.every(mov=>mov>0);
+
+===================================================================================
+
+flat and flatMap:
+
+const arr = [[1,2,3],[4,5,6],7,8];
+
+say i want all sub arrays into one big array 
+
+console.log(arr.flat());//from ES2019
+
+const arrDeep = [[[1,2],3],[4,[5,6]],7,8];
+console.log(arrDeep.flat());//still has inner arrays , 
+//flat method goes one level deep , while flattening the array 
+
+we can fix this by passing argument to flat , by default we have flat(1)
+
+console.log(arrDeep.flat(2));//go 2 levels deep 
+
+//example
+const overallBalance = accounts.map(acc=>acc.movements)
+                                .flat().reduce((acc,mov)=>acc+mov,0);
+
+console.log(overallBalance);
+
+//flatMap = combination of flat and map 
+const overallBalance2 = accounts.flatMap(acc=>acc.movements)
+                                .reduce((acc,mov)=>acc+mov,0);
+
+console.log(overallBalance2);
+
+===================================================================================
+
+sorting arrays:
+
+const owners = ['Jonas','Zach','Adam'];
+console.log(owners.sort());
+
+const owners = ['Jonas', 'Zach', 'Adam'];
+console.log(owners.sort()); //[ 'Adam', 'Jonas', 'Zach' ]
+//sort mutates original array
+console.log(owners); //[ 'Adam', 'Jonas', 'Zach' ]
+
+//numbers
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements.sort()); //[-130, -400, -650,1300,  200, 3000,450,   70]
+//sort will think numbers as strings and sort it, so in case of numbers we need to use callback function
+
+//if we return < 0 , then A, B will be output
+//if we return > 0 , then B, A will be output
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+console.log(movements); //[ -650, -400, -130,    70,  200,  450,1300, 3000]
+//sorts in ascending order
+
+//to sort in descending order
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+console.log(movements);
+
+//to sort in ascending order - short form
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+//to sort in descending order - short form
+movements.sort((a, b) => b - a);
+console.log(movements);
+
+console.log([2, 8, 93, 4, 1, 4, 12].sort((a, b) => a - b)); //ascending order
+console.log([32, 14, 65, 34, 97, 32, 12, 43, 654].sort((a, b) => b - a)); //descending order
+
+===================================================================================
+
+More ways of creating and filling arrays:
+
+console.log([1,2,3,4,5]);
+console.log(new Array(1,2,3,4,5));
+
+//array constructor function
+const x = new Array(7);
+
+
+console.log([1, 2, 3, 4, 5]);
+console.log(new Array(1, 2, 3, 4, 5));
+
+//array constructor function
+const x = new Array(7); //creates an empty array of 7 size
+console.log(x);
+x.map(() => 5);
+
+x.fill(1); //fill with 1
+console.log(x);
+
+x.fill(1, 3); //fill with 1 , from index 3
+
+x.fill(23, 2, 6); //fill 23 from index 2 to index 6
+
+//Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+
+//to create arrays from iterables - we have Array.from
 
 ===================================================================================
 
 
 
+Which array method to use?
 
+to mutate original array 
+push , unshift [add to original array]
+pop , shift , splice [remove from original]
 
-===================================================================================
+reverse , sort , fill 
+---------------------------------
+A new Array 
+map (computed from original)
+filter(filtered using condition)
+slice(portion of original)
+concat(adding original to other)
+flat, flatMap(flattening original array)
+--------------------------------
+an array index 
+indexOf , findIndex 
+-----------------------------
+an array element 
+find 
+-----------------------------
 
+know if array includes 
+includes (based on value )
+some , every (based on test condition)
+-----------------------------
 
+A new string 
+join 
+-----------------------------
 
+to transform to value 
+reduce 
+-----------------------------
 
-===================================================================================
+to just loop array 
+
+forEach 
+

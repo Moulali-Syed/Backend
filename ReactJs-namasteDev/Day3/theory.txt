@@ -1,0 +1,79 @@
+Day3:
+command to initialize npm
+
+npm init
+
+
+this creates package.json - which has configuration to manage dependencies
+
+we have dev dependencies and normal dependencies
+
+browserslist - this will help to make our app accessible on different browser versions 
+
+========================================================================
+We need to convert our code in such a way that older browsers can also understand
+
+polyfill - this will convert newer version of our code to older version 
+
+babel - converts our newer code to older versions of code, so that older browsers can also
+understand 
+this can be kept track using the browserslist , present in package.json
+
+we donot write polyfill , babel will do on its own 
+
+babel - is a js code , which can be in node modules 
+newer code converted to older code - this is known as polyfill 
+
+
+parcel - will remove unwanted code this is known as tree shaking
+say our library has 10 or 20 functions, but i want to use few of them
+parcel is very smart it ignores unwanted code 
+
+webpack - is also bundler , has similar functionalities as parcel 
+
+========================================================================
+
+to run our app 
+we are using
+npx parcel index.html  //index.html is entry point of our app
+
+we can write this in package.json - scripts tag 
+
+"scripts": {
+    "start":"parcel index.html",  //<----------------******--------
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+
+now we can run using
+npm run start 
+
+----
+similarly for build command
+npx parcel build index.html 
+
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+we can skip , npx - is for executing
+npm run build 
+------------------
+short cut to run is
+npm start    | this is similar to npm run start 
+
+
+----------
+we have to configure of project , to remove console.log
+
+we have to use babel plugin
+babel-plugin-transform-remove-console , this removes our console.log 
+
+npm install babel-plugin-transform-remove-console --save-dev
+
+to use it , create a .babelrc file
+
+add below code:
+
+37 minutes
