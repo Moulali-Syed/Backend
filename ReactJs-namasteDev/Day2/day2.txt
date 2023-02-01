@@ -142,9 +142,21 @@ we can say react as Modi , parcel as Amit shah
 transitive dependencies - we have package manager which dependencies of our dependencies
 inception of dependencies is transitive dependencies
 ==================================================================================
+how to make our app compatiable with older versions?
 
+we have browserslist -  we have it in node modules 
 
+if we add this below code in package.json , our app can support last 2 versions of all browsers
 
+  "browserslist": [
+    "last 2 versions"
+  ]
 
-
+  only chrome: but it is bad to limit 
+   "browserslist": [
+    "last 2 Chrome versions"
+  ] 
 ==================================================================================
+different script type we can give ?
+
+    <script type="module" src="./App.js"></script>
