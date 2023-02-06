@@ -1,0 +1,44 @@
+To add paragraph
+
+<p></p>
+
+to add heaidngs:
+<h1></h1> to <h6></h6> 
+
+to get line breaks
+<br/>
+
+to add comments:
+ctrl+/
+
+anchor tag for links:
+<a href="https://google.com">Google</a>
+<a href="https://google.com" target="_blank">google</a>
+
+image:
+    <img src="./img.jpeg" alt="nature image" />
+
+<img src="" alt="" height="200px" width="200px"/>
+
+horizontal line:
+<hr/>
+
+<pre></pre>
+
+text formatting:
+<b></b> | <strong></strong>
+<i></i> | <em></em>
+<small></small>
+<mark></mark>
+<del></del>
+<sup></sup>
+<sub></sub>
+
+quotation and citation tags:
+blockquote , q , cite , address ,abbr 
+
+add favicon 
+
+list:
+ul , ol , dl 
+

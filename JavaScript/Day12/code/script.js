@@ -124,36 +124,57 @@
 // const days1 = daysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
 // console.log(days1);
 
-//code execution doesnot stop 3 seconds here, it will register and moveon to next line
-setTimeout(() => console.log('Here is your pizza'), 3000);
-console.log('Waitin.....');
-// Waitin.....
-// Here is your pizza
+// //code execution doesnot stop 3 seconds here, it will register and moveon to next line
+// setTimeout(() => console.log('Here is your pizza'), 3000);
+// console.log('Waitin.....');
+// // Waitin.....
+// // Here is your pizza
 
-//we can also pass arguments in setTimeout
-setTimeout(
-  (ing1, ing2) => console.log(`here is your pizza with ${ing1} and ${ing2}`),
-  3000,
-  'onion',
-  'spinach'
-);
+// //we can also pass arguments in setTimeout
+// setTimeout(
+//   (ing1, ing2) => console.log(`here is your pizza with ${ing1} and ${ing2}`),
+//   3000,
+//   'onion',
+//   'spinach'
+// );
 
-//we can cancel timer before the specified time
+// //we can cancel timer before the specified time
 
-const ingredients = ['olives', 'spinach'];
-const timer = setTimeout(
-  (ing1, ing2) => console.log(`Here is ur pizza with ${ing1} and ${ing2}`),
-  3000,
-  [...ingredients]
-);
-if (ingredients.includes('spinach')) {
-  clearTimeout(timer);
-}
+// const ingredients = ['olives', 'spinach'];
+// const timer = setTimeout(
+//   (ing1, ing2) => console.log(`Here is ur pizza with ${ing1} and ${ing2}`),
+//   3000,
+//   [...ingredients]
+// );
+// if (ingredients.includes('spinach')) {
+//   clearTimeout(timer);
+// }
 
-//setInterval
-//to call continuosly in a specified interval of time
-const time = setInterval(() => {
-  const now = new Date();
-  console.log(now);
-}, 1000);
-clearInterval(time);
+// //setInterval
+// //to call continuosly in a specified interval of time
+// const time = setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
+// clearInterval(time);
+
+// //Tabbed component
+// const tabs = document.querySelectorAll('.operations__tab');
+// const tabsContainer = document.querySelector('operations__tab-container');
+// const tabsContent = document.querySelectorAll('.operations__content');
+
+// tabsContainer.addEventListener('click', function (e) {
+//   const clicked = e.target.closest('.operatins__tab');
+//   console.log(clicked);
+
+//   if (!clicked) return;
+
+//   tabs.forEach((t) => t.classList.remove('operations__tab--active'));
+//   tabsContent.forEach((c) => c.classList.remove('operations__content--active'));
+//   clicked.classList.add('operations__tab--active');
+
+//   //Activate content area
+//   document
+//     .querySelector(`.operations__content--${clicked.dataset.tab}`)
+//     .classList.add('operations__content--active');
+// });
