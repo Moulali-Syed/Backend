@@ -1,0 +1,9 @@
+unary + 
+it tries to convert variable into a number if it is not a number
+it doesnot change original variable
+
+
+let y = '22';
+console.log(typeof y);//string
+console.log(typeof +y);//number
+console.log(typeof y);//string

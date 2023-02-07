@@ -1,0 +1,23 @@
+string comparision:
+
+console.log('abc' === 'abc'); //true
+let x = 'abc'; //string literal
+let y = 'abc';
+console.log(x == y); //true
+
+let z = new String('abc'); //string object
+let a = String('abc'); //string
+console.log(z);
+
+console.log(a == z);
+console.log(a == x);
+console.log(z == x);
+console.log('abc' == new String('abc'));
+
+console.log(typeof z); //object
+console.log(typeof a); //string
+console.log(typeof x); //string
+console.log(a === z); //false
+console.log(a === x); //true
+console.log(z === x); //false
+console.log('abc' === new String('abc')); //false

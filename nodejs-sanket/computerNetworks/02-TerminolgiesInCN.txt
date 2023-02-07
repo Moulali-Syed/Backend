@@ -1,0 +1,70 @@
+Protocols:
+there should be certain set of rules while sharing information , that gave birth to Protocols
+it is a set of rules 
+
+in computer terms - protocols are a set of rules and regulations setup to communicate 
+and share information over a network    
+Example:
+HTTP, UDP , TCP , SMTP(to send and receive mails )..etc
+
+
+--------------
+Packets:
+In order to share data we cannot send big chunk of data over the network 
+say a pipe can have only some inflow thru it , similarly we cannot send big amount of data 
+at a time , we need to divide this data into smaller chunks , these small chunks are called
+packets 
+
+--------------
+Address:
+Sending Messages over the network requires the destination details 
+This detail uniquely identifies the end system is called address 
+in modern times we have ip address which can give accurate address 
+
+--------------
+Ports:
+When we send parcel to friend , then we have to refer a particular person in whole family member
+in our computer system as well , we must identify who has to recieve , which process should 
+receive the data is mentioned by Ports
+
+Any machine could be running many network aplications, in order to distinguish these apps 
+for receiving messages we use ports .it is also called as port number 
+
+port helps u get the packets to specific process on the host 
+
+Every process has a 16 bit port number
+it range from 0 to 2^16 = 65535 [range of port numbers]
+
+
+0-1023 ---> well known ports, these ports are reserved for particular applications
+example: port 80 for http , port 443 -https
+
+1024 - 49152 ----> registered ports 
+we can register our node apps,... 
+they are used by specific ,potentially properitary apps or process that are known but are 
+not system define 
+
+27017 - mongodb server connected to this port 
+
+49153 - 65535 ----> dynamic ports , reserved for future purpose     
+
+--------------
+
+combination of ----> IP Address + Port = Socket 
+--------------
+
+
+
+--------------
+
+
+
+
+--------------
+
+
+--------------
+
+
+
+--------------

@@ -1,0 +1,19 @@
+unary - 
+
+it also converts the oprand to a number but always make the result negative 
+
+
+let z = '22';
+let p = -z;
+console.log(p); //-22
+console.log(typeof p); //number
+
+
+
+-----------
+
+typeof is also a unary operator 
+
+---------
+
+if unary + or unary - , is not able to convert the given operand to a number then gives NaN 

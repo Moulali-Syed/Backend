@@ -1,0 +1,4 @@
+normal while loop - is entry controlled
+
+
+do while loop - is exit controlled loop

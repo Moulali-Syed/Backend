@@ -1,0 +1,17 @@
+let name = 'Apple';
+switch (name) {
+  case 'App':
+    console.log('App dev');
+    break;
+  case 'Tom':
+    console.log('Jerry');
+    break;
+  case 'Apple':
+    console.log('Red');
+    break;
+  default:
+    console.log('hi');
+}
+
+//default is not mandatory , if none of case mathces if default not specified then we see no output
+//we can use number and condition as well in switch case

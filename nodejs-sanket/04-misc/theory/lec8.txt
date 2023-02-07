@@ -1,0 +1,9 @@
+find roots of a quadratic equation
+
+function findRoots(a, b, c) {
+  const sqrt = Math.sqrt(b * b - 4 * a * c);
+  const root1 = (-b + sqrt) / (2 * a);
+  const root2 = (-b - sqrt) / (2 * a);
+  console.log(root1, root2);
+}
+findRoots(2, 5, 3);

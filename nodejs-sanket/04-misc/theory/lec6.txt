@@ -1,0 +1,9 @@
+ternary operator:
+let y = 10;
+let ans = y % 2 != 0 ? 'Odd' : 'Even';
+console.log(ans);
+
+
+if a single condition - then use ternary operator
+
+if many conditions then go with a if else if else 
