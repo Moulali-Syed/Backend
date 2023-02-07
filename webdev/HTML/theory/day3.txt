@@ -1,0 +1,16 @@
+to make data bold in table use th tag
+
+
+we can style coulmns in a table using colgroup as below
+
+default value of span is 1 -- span="1"
+<colgroup>
+    <col span="3" style="background-color:aqua">
+</colgroup>
+
+
+--
+
+to hide a coulmn
+
+visibiltiy:hidden; or visibility:collapse

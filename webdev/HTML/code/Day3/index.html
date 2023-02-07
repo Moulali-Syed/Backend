@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      td,
+      th {
+        border: 2px solid black;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: red;
+        color: white;
+        font-size: bold;
+        text-align: center;
+      }
+
+      tbody:nth-child(odd) {
+        background-color: blue;
+        color: green;
+      }
+      tbody:nth-child(even) {
+        background-color: green;
+      }
+      tfoot {
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Marks</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Apple</th>
+          <td>1</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <th>Apple</th>
+          <td>1</td>
+          <td>100</td>
+        </tr>
+        <tr>
+          <th>Apple</th>
+          <td>1</td>
+          <td>100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr />
+    <table>
+      <tr>
+        <td colspan="2">data</td>
+        <td>data</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>data</td>
+        <td>data</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>data</td>
+        <td>data</td>
+      </tr>
+      <tr>
+        <td>data</td>
+        <td>data</td>
+        <td>data</td>
+      </tr>
+    </table>
+
+    <hr />
+    <table>
+      <tr>
+        <td rowspan="3">Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+    </table>
+    <hr />
+    <table>
+      <tr>
+        <td colspan="4">Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td rowspan="2" colspan="2">Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+    </table>
+    <hr />
+
+    <table>
+      <tr>
+        <td rowspan="2">Data</td>
+        <td colspan="2">Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+        <td>Data</td>
+      </tr>
+    </table>
+
+    <hr />
+    <table>
+      <colgroup>
+        <col span="1" />
+        <col span="3" style="background-color: aqua" />
+      </colgroup>
+      <tr>
+        <th colspan="6">Time table</th>
+      </tr>
+      <tr>
+        <th rowspan="6">Hours</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thur</th>
+        <th>Fri</th>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>Maths</td>
+        <td>Science</td>
+        <td>Maths</td>
+        <td>Arts</td>
+      </tr>
+      <tr>
+        <td>Social</td>
+        <td>History</td>
+        <td>English</td>
+        <td>Social</td>
+        <td>Sports</td>
+      </tr>
+      <tr>
+        <th colspan="5">Lunch</th>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>Maths</td>
+        <td>Science</td>
+        <td>Maths</td>
+        <td rowspan="2">Project</td>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>Maths</td>
+        <td>Science</td>
+        <td>Maths</td>
+      </tr>
+    </table>
+
+    <hr />
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Month</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>monday</td>
+          <td>28th</td>
+          <td>April</td>
+        </tr>
+        <tr>
+          <td>tuesday</td>
+          <td>29th</td>
+          <td>April</td>
+        </tr>
+        <tr>
+          <td>wednesday</td>
+          <td>30th</td>
+          <td>April</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Day</td>
+          <td>Date</td>
+          <td>Year</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
