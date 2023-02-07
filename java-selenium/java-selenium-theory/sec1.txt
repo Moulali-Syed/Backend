@@ -1,0 +1,29 @@
+Selenium Features:
+------------------
+Selenium is open source Automation testing tool
+It is exclusively for Web based applications
+Selenium supports multiple browsers - chrome, safari , IE, firefox,edge
+Selenium works with multiple platforms - windows, linux , mac OS
+Selenium can be coded on multiple languages - Java , C# , python, javascript , php , ruby
+
+
+Difference between Selenium and WebDriver?
+Selenium is a suite of tools - WebDriver and IDE are tools 
+IDE - is record and playback tool 
+WebDriver - helps creating robuts, browser-based regression automation suites , webdriver is successor of selenium remote control
+
+Selenium RC -  is deprecated
+
+
+Selenium WebDriver Architecture :
+--------------------------------
+we write code in an IDE say eclipse ---> after i trigger my test ---> all the code will be converted to JSON
+this JSON will be sent to server which is nothing but a browser driver over an http protocol
+every browser has its own browser driver , this browser driver will communicate with actual browser and executes
+commands by interpreting json which it received on browser
+browser driver receives responses back from browser and it sends json response back to client
+
+code---> converted to json on trigger --> transferred over http protocol to browser driver --> browser driver will communicate with actual browser
+--> and executes actions ---> and then response will be sent back as json to our code editor
+
+selenium Client Library ------JSON(http)----------> browserDrivers --------> browsers
