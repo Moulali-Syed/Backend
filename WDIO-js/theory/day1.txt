@@ -1,0 +1,46 @@
+What is WebDriverIO? WDIO 
+
+It is a full test framework with numerous additional features and utilities
+Browser and mobile automation (+API can be extended) test framework for Node js
+
+Better implementation of WebDriver bindings with predefined 50+ actions
+WebDriver:
+Official W3C standard protocol for browser automation
+WebDriver is a remote control interface that enables intospection and control of user agents
+
+--------------------------------
+capabilities and commonly asked questions?
+We can do - browser automation, mobile automation , API(can be done using 3rd party lib node-fetch,supertest)
+
+We can not do - desktop/thick client automation , security testing, performance testing , OCR, PDF< image , mainframe
+
+We can use for E2E tests 
+supports mocha, cucumber, jasmine,jest 
+typescript support
+powerful test runner
+
+
+Sync mode deprecation [supported until Apr 2023]
+--------------------------------
+install node and check node --version
+install vs code
+--------------------------------
+first node project
+
+go to the folder required
+npm init 
+
+package.json gets added 
+
+
+now create a js file and write 
+console.log("Hello World");
+--------------------------------
+Install webdriverIO 
+
+npm init wdio .
+
+--------------------------------
+
+
+--------------------------------
