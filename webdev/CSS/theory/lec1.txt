@@ -1,0 +1,165 @@
+CSS - Cascading style sheets
+It has properties and values to make website more appealing
+
+
+selector:
+using which we can select an element
+
+a{
+    color:red;
+}
+a - selector
+color - property
+red - value 
+
+----------------------------------------
+Selectors in CSS:
+1.element Selector :
+can be called type or tag selector
+
+say i have a p element we can change its color using 
+p{
+    color:red;
+}
+
+     p {
+        color: red;
+        background-color: aqua;
+      }
+
+      table,
+      td {
+        border: 10px solid black;
+        border-collapse: collapse;
+      }
+
+
+2.class selector:
+
+to style a group of elements
+      .para1 {
+        color: green;
+      }
+      .para2 {
+        color: blue;
+      }
+
+3.id selector:
+to select elements individually 
+#btn{
+     color:red;
+}
+
+
+4.pseudo class selector:
+to select a particular state of an element 
+it is a keyword 
+
+a:hover{
+    color:green;
+}
+
+5.multiple/grouping selectors 
+table,td{
+    border:2px solid black;
+    border-collapse:collapse;
+}
+
+6.universal selector:
+*{
+
+}
+7.nested selector:
+div p{
+
+}//this styles all paragraphs inside div 
+
+div+p{
+
+}//selects adjacent sibling
+
+div ~ p{
+
+}//general sibling 
+
+div > p{
+
+}//only selects direct child 
+
+8.attribute selector
+a[target="_blank"] {
+  background-color: yellow;
+}
+
+--------------------------------------------------------------------------
+Add styling to HTML:
+Inline CSS:
+    <p style="color: red; font-style: italic">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
+      repellendus!
+    </p> 
+Internal CSS:
+<style>
+    p{
+        text-shadow: 2px 2px 2px pink;
+    }
+</style>
+External CSS:
+creating a style.css file and link it 
+    <link rel="stylesheet" href="style.css" />
+
+--------------------------------------------------------------------------
+
+Specificity:
+!!important > inline > id > class > tag 
+
+--------------------------------------------------------------------------
+
+Box Model:
+Content - The content of the box, where text and images appear
+Padding - Clears an area around the content. The padding is transparent
+Border - A border that goes around the padding and content
+Margin - Clears an area outside the border. The margin is transparent
+
+box-sizing:border-box;
+
+default is content-box;
+--------------------------------------------------------------------------
+
+colors:
+hexadecimal colors: #ffffff
+
+rgb(0,0,255);
+
+rgba(0,255,0,0.1);
+
+predefined / cross browser color names: we have 140 colors 
+
+--------------------------------------------------------------------------
+
+        font-family: sans-serif;
+        font-weight: bold;
+        font-style: italic;
+         border-radius: 6px;
+
+--------------------------------------------------------------------------
+
+units:
+Absolute unit:
+mm , cm , in , px 
+
+percentage unit:
+width:10%;
+% will consider relative to parent width 
+
+relative unit to font size:
+em - relative to parent element font-size 
+rem - relative to root html element 
+
+relative unit to viewport:
+vw
+vh 
+
+width:50vw;
+height:50vh;
+
