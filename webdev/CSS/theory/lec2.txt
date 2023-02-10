@@ -1,0 +1,112 @@
+parallax effect
+grid view
+
+-----------
+CSS Gradients:
+linear , radial , conic Gradients
+background-image: linear-gradient(direction,color-stop1 , color-stop2,..);
+
+.box {
+        border: 1px solid black;
+        height: 200px;
+        width: 200px;
+        background-image: linear-gradient(red, blue); /*top down by default*/
+        background-image: linear-gradient(to right, red, blue);
+        background-image: linear-gradient(to left, red, blue);
+        background-image: linear-gradient(to bottom, red, blue);
+        background-image: linear-gradient(to top, red, blue);
+
+        background-image: radial-gradient(red, blue, orange);
+        background-image: radial-gradient(
+          circle,
+          red,
+          blue,
+          orange
+        ); /* we can define shape */
+        background-image: radial-gradient(yellow 5%, orange 10%, red 50%);
+
+        
+      }
+
+=========================================================================
+Shadow effects:
+text-shadow 
+box-shadow 
+
+text-shadow:
+this applies shadow to text 
+we can add horizontal/vertical shadows
+color can be added , blur can be added 
+multiple shadows on 1 text can be added 
+how can we add borders using shadows
+
+  p {
+        /* horizontal vertical blur color */
+        text-shadow: 3px 3px 3px red;
+        /* we can add multiple shadows */
+        text-shadow: 3px 3px 3px red, 5px 5px 6px green;
+      }
+
+
+box-shadow:
+     .box {
+        background-color: aqua;
+        width: 200px;
+        height: 200px;
+        /* horizontal , vertical blur color*/
+        box-shadow: 10px 10px 10px green;
+        /* multiple shadows */
+        box-shadow: 10px 10px 10px green, 10px 10px 10px brown;
+        /* we can give negative x and y values  */
+      }
+
+      /* offset-x | offset-y | blur-radius | spread-radius | color */
+box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+
+
+=========================================================================
+CSS Dimension properties: 
+width 
+height
+min-height
+max-height
+min-width
+max-width
+
+max-height, max-width - is specified then only to specified heigth and width it will can be in the box
+we can set --> overflow: scroll;
+.box{
+    max-height:100px;
+    border:1px solid black;
+    overflow: scroll;
+}
+
+
+min-height and min-width:
+div{
+    min-height:100px;
+}
+
+this means according to content the size will get increased
+
+
+=========================================================================
+overflow property:
+
+overflow: visible;
+overflow:hidden;
+overflow:scroll;
+overflow:auto;
+
+we also have overflow-x and overflow-y
+=========================================================================
+css position property:
+
+static - default
+relative - relative to normal position - based on top, left,right , bottom
+fixed
+absolute
+sticky 
+
+=========================================================================

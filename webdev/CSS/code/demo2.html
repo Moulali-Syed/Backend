@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      p {
+        /* horizontal vertical blur color */
+        text-shadow: 3px 3px 3px red;
+        /* we can add multiple shadows */
+        text-shadow: 3px 3px 3px red, 5px 5px 6px green;
+      }
+
+      .box {
+        background-color: aqua;
+        width: 200px;
+        height: 200px;
+        /* horizontal , vertical blur color*/
+        box-shadow: 10px 10px 10px green;
+        /* multiple shadows */
+        box-shadow: 10px 10px 10px green, 10px 10px 10px brown;
+        /* we can give negative x and y values  */
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque,
+      tempore.
+    </p>
+
+    <div class="box"></div>
+  </body>
+</html>
