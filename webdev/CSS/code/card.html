@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+      #img {
+        width: 300px;
+        border-radius: 2.5rem 0 0 2.5rem;
+      }
+      .container {
+        display: flex;
+        /* width: 100vw; */
+        column-gap: 2rem;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3rem;
+        background-color: #999;
+      }
+      #item {
+        border-radius: 0 2.5rem 2.5rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="https://plus.unsplash.com/premium_photo-1674406102318-c9d362ad510b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29mZmVlJTIwbXVnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=2000&q=60"
+        alt="coffe mug"
+        id="img"
+      />
+      <div id="item">
+        <h3>COFFEE MUG</h3>
+        <h2>White Coffee Mug</h2>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae
+          reiciendis modi eius?
+        </p>
+        <p>
+          <span>$149</span>&nbsp;&nbsp; <span><del>$230</del></span>
+        </p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+  </body>
+</html>
