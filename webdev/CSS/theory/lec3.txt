@@ -1,0 +1,83 @@
+Flexbox:
+we can create 1d layout - which helps in alignment and space distribution
+
+flex container properties:
+    .container {
+        border: 2px solid green;
+        height: 400px;
+        display: flex;
+        /* flex-direction: row-reverse; */
+        /* flex-direction: row; */
+        /* flex-direction: column; */
+        /* flex-direction: column-reverse;
+         */
+        flex-wrap: wrap;
+        /* flex-wrap: wrap-reverse; */
+        /* flex-wrap: nowrap; */
+
+        flex-flow: row wrap;
+        /* 
+        justify-content: flex-start;
+        justify-content: flex-end;
+        justify-content: center;
+        justify-content: space-around;
+        justify-content: space-between;
+        justify-content: space-evenly; */
+
+        /* align-items: flex-end;
+        align-items: flex-start;
+        align-items: center;
+        align-items: stretch;
+        align-items: baseline; */
+
+        gap: 10px;
+        row-gap: 10px;
+        column-gap: 10px;
+
+        align-content: flex-start;
+        align-content: flex-end;
+        align-content: center;
+        align-content: space-between;
+        align-content: space-around;
+        align-content: space-evenly;
+      }
+
+
+
+--------------
+flex item properties:
+order
+flex-grow
+flex-shrink
+flex-basis
+flex
+align-self
+
+
+.box {
+        border: 1px solid black;
+        /* flex-grow: 1; */
+        flex-basis: 100px;
+      }
+
+      .box1 {
+        order: 1;
+        /* flex-grow: 1; */
+        align-self: flex-start
+        ;
+      }
+      .box3 {
+        order: 8;
+      }
+      .box2 {
+        order: 3;
+        flex-shrink: 4;
+      }
+      .box4 {
+        flex: 3 4 120px;
+      }
+=======================================================================================
+Parallax website:
+this is created by using two images
+like background image and foreground image , there is a difference in movement of their speed
+one moving faster other slower 
