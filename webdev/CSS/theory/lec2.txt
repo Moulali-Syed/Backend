@@ -110,3 +110,71 @@ absolute
 sticky 
 
 =========================================================================
+Excercise:
+1.position text in all corners && center of an image - demo3.html
+=========================================================================
+
+Transforms: demo4.html
+
+transform: translate(100px,200px);
+transform:tarnslateX(100px);
+transform:translateY(200px);
+transform:rotate(45deg);
+transform:scale(1.1,1);
+transform:scaleX(2);
+transform:scaleY(1);
+transform:skew(20deg);
+=========================================================================
+
+css position property:demo5.html
+
+static - the same way we write in html will be present in the document (default )
+position: static;
+
+
+relative:
+
+position:relative;
+top:10px;
+bootom:200px;
+left:130px;
+right:200px; 
+
+when we say relative - it is relative to its normal position 
+
+
+fixed:
+position:fixed ; 
+an element with position fixed is relative to the viewport , which means it always
+stays in the same place even if page is scrolled ,the top, right , bottom , left 
+properties are used to position the element 
+
+
+absolute:
+position:absolute;
+an element with position absolute is positioned relative to nearest positioned ancestor 
+instead of positioned relative to viewport , like fixed
+
+however if an absolute positioned element has no positioned ancestors it uses the document 
+body and moves along with page scrolling 
+Note: Absolute positioned elements are removed from normal flow and can overlap elements 
+
+
+sticky:
+this toggles between relative and fixed 
+an element with position:sticky is positioned based on the users scroll position
+A sticky element toggles between relative and fixed , depending on scroll position 
+it is positioned relative until a given offset position is met in the viewport 
+then it sticks in place(position:fixed)
+
+=========================================================================
+3D Transforms:
+
+transform: perspective(15px) translateZ(-10px);//we need perspective on
+
+transform: perspective(350px) scaleZ(6) rotateX(45deg);
+
+transform: rotateZ(-10px);
+=========================================================================
+
+

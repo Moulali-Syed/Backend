@@ -1,0 +1,17 @@
+Access Networks:
+These are media using which end systems connect to the internet [end system in our laptop, tab, mobile]
+we can say wifi as a access network
+
+
+NIC - Network Interface Adaptper
+It enables a computer to attach to a network as there are different type of networks it acts as a 
+single suite to connect to any network
+
+
+DSL:
+Digital Subscriber Line
+DSL uses the existing telephone ground work lines for internet connection Generally DSL is provided by
+same company which supplies service
+From DSL we get the term ISP
+Internet Service Provider
+It is just a company that provides end users internet example: AT&T  
