@@ -1,0 +1,130 @@
+Authentication:
+
+It has SignUp and SignIn
+
+allow user to register to website -SignUp
+
+allow user to access website once -SignIn
+
+SignUP flow:
+user enters name, email, password -- this data goes to backend and save over there 
+
+SignIn flow:
+user enters email , password -- this data goes to backend , then backend authenticate if
+this data is present in the database  - if correct backend redirects to some page 
+
+-----------
+Then the developer should implement as per above requirement
+
+Create API
+name the API/signup 
+accept name, email, password
+redirect to some page 
+
+Now we divide and conquer each step
+
+step1: is to create an API 
+to create an API , foremost thing i need to do is create a server 
+Then create some HTML where user enters the email,name, password 
+
+To create a server we need Express , in  a single laptop we can have multiple servers
+we can differentiate using port , since this is POST request we can have body to accept something in body
+
+1.Create a Express app
+2.Create a port
+3.Accept the body
+4.create HTML
+
+
+
+Step2: name api as signup
+in backend we have 3 things - handle performance , Security , handle edge cases 
+
+
+5.name the API as /api/v1/signup 
+
+Step3:accept name, email, password
+{name:"", email:"", password:""};
+convert name, email, password to string 
+
+have validations - validations on name , email ,password - we can use a library like bcrypt to add validations
+ , save it , encrypt the password 
+
+ 6.check if user already exists
+ 7.validations
+ 8.encrypt password using bcrypt library
+ 9.if there is an error send alert 
+ 10.Redirect 
+
+ --------------------------------------------------------------
+encrypting the password:
+
+it is like hiding the password or changing password 
+
+say i have password - abc ---- and i convert it into ajfsfdj#21345nb2344k something 
+like this , it is hard to decode by hacker 
+
+ --------------------------------------------------------------
+Create an Express app:
+
+npm init 
+npm i express
+npm i bcrypt 
+
+
+or
+
+we can go to replit website - create a node app 
+add the express package, bcrypt package  and code over there 
+
+
+package.json is meta data for our application , this tells node about our app 
+
+to get all packages from a shared repo, do npm install 
+ --------------------------------------------------------------
+Create an Express server 
+
+to create express application we have 2 simple steps
+
+const express = require('express');
+const app = express();
+
+then we create a PORT , any 4 digit numeric will work over here
+
+const PORT = 1337;
+
+Now we can tell our express app to listen to the port and to know our server is listening to it
+we pass a call back function 
+
+app.listen(PORT,()=>{
+    console.log(`App is running at port ${PORT}`);
+})
+
+
+To accept something, we have middleware 
+middleware are functions basically which gets called before our function written in api is called
+
+//accept json
+app.use(express.json());
+
+//accept body
+app.use(express.urlencoded({ extended: true }));
+
+middleware are functions that gets called before the api gets called 
+
+
+ --------------------------------------------------------------
+Have some HTML:
+
+create index.html , signUp.html , signIn.html files 
+
+
+
+ --------------------------------------------------------------
+
+
+
+ --------------------------------------------------------------
+
+
+ --------------------------------------------------------------
