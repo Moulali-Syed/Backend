@@ -1,0 +1,117 @@
+Introduction to APIs:
+
+backend: it is inaccessible to users, it has 2 parts servers - computer without screen
+and database - a place where data resides 
+all this happening over internet using APIs 
+
+
+Data is transferred over APIs 
+Data is the new fuel 
+
+In browser i open amazon.com
+and search for product smartphone
+this will connect to server , when browser sending request then it request
+when server sending data back is response  - API call happens 
+
+In Node JS we have REST APIs 
+REST is an architecture , structure , standard of API 
+
+When we see amazon.com the products we see is different , but overall structure of websites
+remain seem 
+thus it makes sense to create seperate html for each user , then how they are different products to 
+each user
+
+say i search socks - we need data like company, size , color ,...
+if i send it in form of string doesit make sense 
+or as an image 
+this data is not appealing to us 
+
+we need key value pair data structure , in js we have Object
+key    value
+
+we need Javascript Object Notation (JSON)
+REST uses JSON to transfer data between client and servers , also between servers 
+
+3 basic features of REST API 
+1.simple
+2.Documentation should be good
+3.good error messages
+
+REST API is accepted by all programming langauges
+the standard way of writing apis over internet is REST API 
+
+principles of REST API:
+1.stateless  - it doesnot need to know the state
+2.client server - client and server must be different 
+3. uniform interface - apis we get must not change ofter 
+4. Cacheable - it should store for sometime in browsers
+5. Layered - we can have function over a function over a function
+6. Code on Demand  - we should get code 
+
+--------------------------------------------------------------------------------
+REST - Representational State Transfer 
+
+if iam searching product1 - then i must have only data related to product1 
+if iam searching for multiple products - then i must get all data of the products
+
+We are transferring the overall state that is required in API 
+
+To standardise all the APIs
+Differentiate between different API 
+Standard for each 
+variable data 
+
+
+The APIs we make are only of 4 types
+CRUD    - Create , Read , Update , Delete 
+
+C - POST , R - GET , U - PUT/PATCH , D - DELETE 
+
+
+--------------------------------------------------------------------------------
+GET API:
+
+get represents read , 
+
+does security matters when somebody just reading the data , does we need to make it too secure 
+
+we need not make it too secure , but sometimes we need to secure data like our personal details,password
+
+when data needs to be secured we deal it in some other way , mostly 80% of time we can make it more
+accessible 
+
+amazon.com/adidas-socks --- we are trying to read , get data 
+
+GET API is made via URL 
+
+whenever we hit URL , we are making a GET API call 
+
+in the url we have domain/product?variableParam=value&variableParam2=value 
+
+In general GET Api calls are not secure, to make them secure we must do some extra work  
+
+
+?variableParam=value&variableParam2=value - these are called query params 
+--------------------------------------------------------------------------------
+POST , PUT, DELETE have the same thing , they receive data in the body 
+
+this body is hidden to make it secure   
+
+
+
+--------------------------------------------------------------------------------
+curl is software built internally in all systems , it will helps to make api calls 
+
+--------------------------------------------------------------------------------
+meta data/headers:
+
+it is data about data ,if we want to describe the data we are sending can tell in headers 
+
+like UTF-8 formatting , used language english , JSON format 
+
+--------------------------------------------------------------------------------
+
+
+
+
+--------------------------------------------------------------------------------

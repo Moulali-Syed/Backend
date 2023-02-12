@@ -12,7 +12,7 @@ and also databases
 
 
 Servers:
-server is something which servers
+server is something which serves
 in simple terms , they are computers without screen
 can our laptop become server ? 
 Yes it can become server , only condition is it should be serving
@@ -58,7 +58,7 @@ these are all viable solutions
 in javascript we have event loop
 what js done is 
 it created a queue and divided that stream into small queue and serve according to need 
-js is single thread ,but using event loop it is able to server 1 million users 
+js is single thread ,but using event loop it is able to serve 1 million users 
 
 js in backend is Node Js 
 
