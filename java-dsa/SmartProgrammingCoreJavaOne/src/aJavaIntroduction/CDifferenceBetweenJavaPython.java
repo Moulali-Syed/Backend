@@ -88,7 +88,24 @@ java supports many OOP features
 	Java is more secure language , say we dont have pointers which has the address referecne
 	as java doesnot hav pointers so secure
 	java has byte code verifier - to check if code is correct according to java syntac
-	java has security manager //53 minutes
+	java has security manager 
+	
+6.Robost
+	it is powerful because  , java provides lot of classes and interfaces to handle
+	exception
+	Automatic memory management
+	
+7.MultiThreading
+	Java supports multi threading 
+	
+8.High Performance
+	Java has high performance
+		Robust , multithreaded , portable
+		
+9.Distributed Applications 	
+	java can be used for distributed applications (enterprise applications)
+	
+10.Java is Compiled and Interpreted language 
 --------------------------------------------------------------
 
 How java is platform independent?
