@@ -318,19 +318,113 @@ nav.addEventListener('mouseout',function(e){
 })
 =================================================================================
 Revealing elements on scroll:
+
+const allSections  = document.querySelectorAll('.section');
 const revealSection = function(entries,observer){
+    const [entry] = entries;
+    if(!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+};
+const sectionObserver = new IntersectionObserver(revealSection,{root:null,threshold:0.15});
+allSections.forEach(function(section){
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+})
 
+=================================================================================
+Lazy loading images: using observer API
+
+<img src="img/digital-lazy.jpg" data-src="img/digital.jpg" alt="Computer" 
+    class="feature__img lazy-img"/>
+
+data-src="img/digital.jpg" - is a special data attribute 
+
+we maintain a low resolution image and then once we reach the section then replace
+it with original image from the data-src path 
+
+
+css:
+.lazy-img{
+    filter: blur(20px);
 }
-const sectionObserver = new IntersectionObserver(reve);
 
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const loading = function (entries,observer){
+    const [entry] = entries;
+    console.log(entry);
+
+    if(!entry.isIntersecting) return;
+    //replace src with data-src
+    entry.target.src = entry.target.dataset.src;
+    //removing blur filter - class , after image is loaded 
+    entry.target.addEventListener('load',function(){
+        entry.target.classList.remove('lazy-img');
+    })
+
+    observer.unobserve(entry.target);
+};
+
+//step1 - create observer
+const imgObserver = new IntersectionObserver(loading,{
+    root:null,
+    threshold:0,
+    rootMargin:'200px',
+});
+//rootMargin:'200px', - this will load our image before we reach it 200px far 
+//step2 - attach imgObserver to imgTargets
+imgTargets.forEach(img=>imgObserver.observe(img))
 =================================================================================
 
+Building a Slider component:
+
 
 
 =================================================================================
+Lifecycle DOM events:
+DOMContentLoaded - this is triggered immediatley once html and js file is loaded
+doesnot wait for images , however not necessary to use this event , as we add script tag near 
+to end of body tag 
 
 
+document.addEventListener('DOMContentLoaded',function(e){
+    console.log('HTML parsed and DOM tree built',e)
+})
+
+//load - will be called once all files, html,css,js, images are fully loaded
+window.addEventListener('load',function(e){
+    console.log('Page fully loaded ',e);
+});
+
+//beforeunload - created when user is about to leave a page - never use this unnecessarily
+window.addEventListener('beforeunload',function(e){
+    //we can use this to ask user if they really want to leave the page
+    //some browsers need preventDefault to be called
+    e.preventDefault();
+    console.log(e);
+    e.returnValue = '';
+})
+=================================================================================
+efficient script loading 
+
+regular
+<script src="srcript.js"> - 
+
+  if placed in head  tag        parseHTML then waiting to fetch script and execute
+                            and then finish parsing HTMl -this is not ideal we dont want 
+                            browser sitting idle 
+    if placed in body tag -  parseHTMl - fetch script - execute [better]
 
 
+<script async src="srcript.js">   -  
 
+if placed in head - script downloads with html but executes in a synchronous way 
+in body - in practical difference
+
+<script defer src="srcript.js">  - preferred 
+if placed in head - parsing html and fetch script happens simutaneously and then executes 
+in body - no practical difference 
+
+using defer guarantees the order of execution in which it is written , using async doesnot 
 =================================================================================
