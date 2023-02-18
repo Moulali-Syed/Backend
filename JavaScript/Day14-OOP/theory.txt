@@ -1,0 +1,191 @@
+OOP - is a programming paradigm based on concept of objects
+we use objects to describe real world or abstract features
+objects may contain data(properties) and code(methods) 
+by using objects we pack data and corresponding behaviour into one block
+
+const user = {
+    user:'apple',
+    password:'lksa23',
+
+    login(password){
+        //login logic
+    }
+
+    sendMessage(str){
+        //sending logic 
+    }
+}
+
+In OOP objects are self contained pieces/blocks of code
+Objects are building blocks of applications and interact with one another
+
+Interactions happen through a public interface :methods that code 
+outside of object can access and use to communicate with object 
+
+OOP was developed with the goal of organizing code , to make it more flexible
+and easier to maintain
+----------------------------------------------------------------------------------------
+Class - is like a blue print which we can create new objects 
+
+Instance - new object created from class - has real world existence
+
+----------------------------------------------------------------------------------------
+how can we create classes?
+
+we have 4 guiding principles
+
+Abstraction - hide details that donot really matter[Implementation details hiding]
+
+
+Encapsulation - keeping properties and methods private inside class,so they are     
+                not accessible from outside class , some methods can be exposed
+                as public interface api 
+
+                this prevents external code from accidentally manipulating
+                internal properties/state
+
+                allows to change internal Implementation without risk of breaking 
+                external code 
+
+Inheritance - this helps in avoiding duplicate code 
+                if two classes needs same properties and methods , one can inherit from other
+                thus helps in reusing the logic 
+
+Polymorphism - A child class can overwrite a method it inherited from a parent class 
+                
+----------------------------------------------------------------------------------------
+OOP In javascript:PROTOTYPES
+
+in javascript we have prototype 
+
+objects are linked to a prototype object 
+
+Prototypal Inheritance: the prototype contains methods (behaviour) that are 
+accessible to all objects linked to that prototype 
+
+behaviour is delegated to linked prototype object (In contrast in classical OOP methods get copied
+from class to all instances )
+
+-------
+example:
+Array.prototype is the prototype of all array objects we create in javascript
+therefore all arrays have access to the map method 
+----------------------------------------------------------------------------------------
+3 ways of implementing prototypal inheritance in javascript
+
+1.Constructor Function
+        technique to create objects from a Function 
+        this is how built-in objects like arrays , maps or sets are actually implemented
+2.ES6 classes
+        Modern alternative to constructor Function syntax
+        syntactic sugar behind the scenes , es6 classes work exactly like constructor functions
+        ES6 classes donot behave like classes in classical OOP 
+3.Object.create()
+        the most easiest and most straight forward way of linking an object to a prototype object 
+
+----------------------------------------------------------------------------------------
+Constructor Functions and new operator:
+
+Constructor functions are used from the begining to create objects 
+
+
+'use strict';
+
+//convention to start with capital letter , and arrow function will not work as
+//construtor function
+const Person = function (firstName, birthYear) {
+  console.log(this);
+};
+
+//the only difference between a constructor function and normal funnction
+//is we use new keyword
+new Person('Apple', 1880);
+
+//1.a new empty object is create
+//2.function is called , this will point to the new object created , because of new
+//3.link to prototype
+//4.function automatically returns empty object {}
+
+const Human = function (fName, lName) {
+  this.fName = fName;
+  this.lName = lName;
+};
+
+const apple = new Human('Apple', 'Shimla');
+console.log(apple);
+/*
+Human {fName: 'Apple', lName: 'Shimla'}
+fName
+: 
+"Apple"
+lName
+: 
+"Shimla"
+[[Prototype]]
+: 
+Object
+*/
+
+//we can now use constructor function to create as many objects we want
+//this is like analogy - constructor function is blue print
+
+const banana = new Human('Banana', 'AP');
+console.log(banana);
+/*
+Human {fName: 'Banana', lName: 'AP'}
+fName
+: 
+"Banana"
+lName
+: 
+"AP"
+[[Prototype]]
+: 
+Object
+*/
+const grapes = new Human('Grapes', 'TS');
+console.log(grapes);
+/*
+Human {fName: 'Grapes', lName: 'TS'}
+fName
+: 
+"Grapes"
+lName
+: 
+"TS"
+[[Prototype]]
+: 
+Object
+*/
+
+//we can also check if an object is instanceof constructor function
+console.log(apple instanceof Human); //true
+
+const Student = function (fName, birthYear) {
+  this.fName = fName;
+  this.birthYear = birthYear;
+
+  //never create a method inside constructor function
+  //this is a bad practice
+  //each object that is created will create a method inside it
+  //this create a multiple copies
+  //to solve this we use prototypal inheritance
+  this.calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
+};
+
+const stud1 = new Student('Tom', 2020);
+console.log(stud1);
+console.log(stud1.calcAge()); //17
+
+
+
+----------------------------------------------------------------------------------------
+Prototypes
+
+----------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------
