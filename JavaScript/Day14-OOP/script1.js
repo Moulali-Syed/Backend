@@ -29,9 +29,16 @@ matilda.calcAge(); //39
 const jack = new Person('Jack', 2000);
 jack.calcAge(); //37
 
-//we can prototype
+//we can check prototype
 console.log(matilda.__proto__);
 
 console.log(jack.__proto__ === Person.prototype); //true
 
 console.log(Person.prototype.isPrototypeOf(matilda)); //true
+
+//we can add properties in prototype as below
+Person.prototype.species = 'Homo Sapiens';
+console.log(jack.species, matilda.species);
+
+console.log(jack.hasOwnProperty('firstName')); //true
+console.log(jack.hasOwnProperty('species')); //false
