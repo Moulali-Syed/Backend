@@ -1,0 +1,220 @@
+Asynchronous Javascript:
+
+synch - means line by line code execution
+alert('');//is best example for illustrating sync code, until we click ok our code execution
+will not move further
+
+Asynchronous code is executed after a task that runs in the background finishes
+Asynchronous code is non blocking
+Execution doesnot stop for an Asynchronous task to finish its work 
+call back functions alone will not make code Asynchronous 
+event listeners alone will not automatically make code Asynchronous 
+
+say we have a huge image , we want to have load event and listen it once fully loaded 
+instead of blocking execution here , we make it Asynchronous
+
+---------------------------------------------------------------------------------------
+AJAX - Asynchronous Javascript And XML : allows us to communicate with remote 
+web servers in an asynchronous way .with AJAX calls we can request data from web servers 
+dynamically 
+
+say i need data , our browser(client) make a request to the server , then the server
+send the response , all this happens asynchronously in the background
+this may be get/post - different request 
+
+API - Application Programming Interface : Piece of software that can be used by 
+another piece of software , in order to allow applications to talk to each other 
+there are many types of API in web development - DOM API , GeoLocation API ,
+
+using AJAX we are interested in online running API 
+Online API - application running on a server that receives requests for data 
+            and send data back as response 
+
+we can build our own APIs this require backend development with node js , or use 3rd-party api 
+
+
+---------------------------------------------------------------------------------------
+Our First Ajax call: XMLHttpRequest
+
+'use strict';
+const div = document.querySelector('div');
+//xmlhttp request
+//step1
+const request = new XMLHttpRequest();
+//step2 - open - specify the method as 1st param, 2nd param as path of url
+
+// https://restcountries.com/v2
+request.open('GET', 'https://restcountries.com/v2/name/portugal');
+
+//step3
+request.send();
+
+//step4
+request.addEventListener('load', function () {
+  //   console.log(this.responseText);
+  //we get json - convert it to js object
+  const data = JSON.parse(this.responseText);
+  console.log(data[0]);
+
+  const html = `<img class="country__img" src="${data[0].flag}"/>
+                    <div class="country__data">
+                        <h3 class="country__name">${data[0].name}</h3>`;
+
+  div.insertAdjacentHTML('beforeend', html);
+  console.log(data.name);
+});
+
+
+
+
+---------------------------------------------------------------------------------------
+call back hell  - look some other source
+
+
+---------------------------------------------------------------------------------------
+Promises and the Fetch API:
+
+const request = fetch('https://restcountries.com/v2/name/portugal');
+console.log(request); //fetch function returns a promise
+
+//What are Promises?
+// An object that is used as  a placeholder for the future result of an asynchronous operation
+//A promise is a container for an asynchronously delivered value
+//A container for a future value example:Response from AJAX call
+
+//we no longer need to rely on events and callbacks passed into
+//asynchronous functions to handle asynchronous results
+
+//Insteading of nesting callbacks we can chain promises for a sequence of asynchronous
+// operations : escaping callback hell
+
+/*
+Promise life cycle:
+
+    pending (before future value is available)
+       |
+    Settled (asynchronous task has finished)
+    /     \
+Fulfilled Rejected 
+
+
+Fulfilled means the success - the value is now available
+
+Rejected means an error happened
+
+thus we are able to handle these different states in our code 
+
+
+Most of the time we consume promises , and very less time we create promises
+
+*/
+
+
+
+---------------------------------------------------------------------------------------
+
+Consuming Promises:
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then(function (response) {
+      console.log(response);
+      //json method is available on all response coming from fetch api
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data[0]);
+    });
+};
+
+getCountryData('portugal');
+
+
+---------------------------------------------------------------------------------------
+Chaining Promises:
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v2/name/${country}`)
+    .then((response) =>
+      //json method is available on all response coming from fetch api
+      response.json()
+    )
+    .then((data) => {
+      console.log(data[0]);
+      const neighbour = data[0].borders[0];
+
+      if (!neighbour) return;
+      //country2
+      return fetch(`https://restcountries.com/v2/name/${neighbour}`);
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+};
+
+getCountryData('portugal');
+
+
+
+---------------------------------------------------------------------------------------
+Handling rejected promises:
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------
+
