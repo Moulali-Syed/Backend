@@ -1,0 +1,5 @@
+/*
+variables which are of no use will be garbage collected and removed
+
+on a certain interval it helps to clean up memory 
+*/
