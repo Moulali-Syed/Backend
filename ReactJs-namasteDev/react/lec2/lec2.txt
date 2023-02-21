@@ -1,0 +1,298 @@
+Igniting our App:
+
+lets blow our app 
+
+lets build our own create-react-app 
+
+React.createElement('div',{id:"container", hello:"world"},"Hi there");
+<div id="container" hello="world">
+Hi there
+</div>
+
+the attributes we pass in the 2nd argument are called props(properties)
+these props can be anything 
+
+-----------------------------
+we dont want all the unneeded code 
+
+minify
+clean
+compile
+bundle
+caching 
+
+all these needs to be done
+
+React is library , we can use different other libraries
+
+to get all these functionalities we use bundlers 
+
+we heard of webpack , it is one of bundler 
+others are vite , parcel are also bundlers 
+
+lets use a bundler - parcel  
+parcel is package of javascript code 
+to get this we need package manager - npm or we can use yarn as well 
+
+-------------------
+
+let initialize npm 
+
+npm init 
+
+this creates - package.json 
+
+npm - we need many packages , that can be taken from npm (all helper packages are here)
+
+-------------------
+parcel - 
+
+lets add it to our app 
+
+npm i -D parcel   [-D   = represents that add as dev dependencies]
+[-D  ===  --save-dev]//both are equal
+
+dependency - is all packages that my packge need
+
+we need a bundler , so installing parcel 
+
+we see - dev dependencies added in package.json and a new package-lock.json gets added
+and node modules folder gets added 
+
+package-lock.json - is an important file 
+
+-------------------
+caret ^  and tilde ~ in package-lock.json
+
+we generally have version as 3.2.1 ===> 3 here means major version , 2 is minor version , 1 is patch for bug fixes
+
+if we have ^2.0.1 ---> then this can upgrade to next minor version automatically
+if we have ~2.0.1 ----> this will only upgrade to newer patch updates 
+if we have 2.0.1 ---> then it means i dont want any update to these packages 
+
+What is package-lock.json?
+this will tell what exact version of the library we are using 
+
+we have mostly hard that , it is working on my local and not in production *
+this happens , we resolve this by checking version 
+package-lock will locks the version
+
+never put package-lock to gitignore 
+
+node_modules is like database for our npm 
+
+package-lock.json and package.json can regenerate all my node modules 
+
+-----------------------------------------------------------------------------------------------
+we used react cdn , to get react into our app 
+this is not a good way to do that 
+
+because - say react version got upgraded now it is 18 , became 19 then i have to
+change the cdn links - script tags which is not a good thing
+and also if we are using cdn , the node_modules will be on some other server
+
+if we use node_modules then the files we require are on our server which is a good thing 
+
+-----------------------------------------------------------------------------------------------
+lets add react and react-dom to our node_modules
+
+npm i react [we want react to be in global environment]
+
+npm i react-dom
+
+we get our dependencies added 
+
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+
+-----------------------------------------------------------------------------------------------
+
+lets ignite our app with parcel :
+
+npx parcel index.html 
+
+npx means execute 
+
+now our app will be running on localhost:1234
+
+
+-----------------------------------------------------------------------------------------------
+  <body>
+    <div id="root">Not Rendered</div>
+    <script type="module" src="./App.js"></script>
+  </body>
+
+  //we must specify type="module" attribute in script tag , else our normal
+  //javascript engine doesnot understand the import export keywords ,if we specify then it understands
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';//always import from react-dom/client else
+//gives a warning 
+
+const heading1 = React.createElement('h1', {}, 'Namaste React');
+const heading2 = React.createElement(
+  'h2',
+  {},
+  'Hello Welcome to Frontend framework'
+);
+const container = React.createElement('div', {}, [heading1, heading2]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(container);
+
+-----------------------------------------------------------------------------------------------
+lets see what all parcel is doing for us 
+
+
+HMR - Hot Module Reloading [whenever i make changes in App.js this will automatically
+rendered in our browser , parcel keeps track of all changes ]
+
+File Watcher algorithms 
+how come parcel is knowing i made changes in some files 
+because there is something known as file watcher algorithms , this is written in C++ 
+
+we see parcel-cache folder with many files, as parcel is performing 
+so many tasks as HMR , file watch, minification all this stuff 
+it needs some space , so we gave it space to do all that 
+
+
+dist folder
+this will keep our files in minified version 
+whenever i write npx parcel build index.html ---- this builds a production
+build and hosts it on a server 
+
+make production build using parcel 
+npx parcel build index.html  
+
+parcel will build all this production files inside dist folder  
+
+when we are using parcel , no need to specify 
+ "main": "index.js"  --- in package.json 
+
+we are specifying the entry point while we are giving the command
+npx parcel build index.html
+
+parcel minified everything and creates a production build we can see in the dist folder 
+it cleans our code, minifies our code, removes console.log
+
+
+parcel does image optimization also 
+
+parcel does caching while development also 
+we can observe this by removing the parcel-cache , and run 
+npx parcel index.html 
+
+now it will take more time 
+try running same command again 
+npx parcel index.html 
+
+now it takes less time because it is cached in parcel-cache folder  
+
+
+parcel also compress our code
+-----------------------------------------------------------------------------------------------
+thus our parcel helps us in doing  all this stuff 
+
+Created a Server 
+
+HMR - hot module Reloading, Hot Module Replacement 
+
+File Watchers 
+
+Bundling
+
+minifying 
+
+cleaning our code 
+
+dev and production build 
+
+super fast build algorithms  
+
+
+Image optimization
+
+compress our code 
+
+compatiable with older browser versions
+
+it add polfills 
+
+HTTPS on dev 
+
+manages port number
+
+parcel uses consistent Hashing algorithm 
+
+parcel is zero config bundler 
+-----------------------------------------------------------------------------------------------
+some things only work on https ,
+
+we can do that using parcel 
+
+npx parcel index.html --https
+
+-----------------------------------------------------------------------------------------------
+should we push parcel-cache in gitignore ?
+
+
+we must put parcel-cache in gitignore , as it can be autogenerated
+
+-----------------------------------------------------------------------------------------------
+react is just a small part of big app , we have parcel bundler that does many things for us 
+
+react alone cannot make performant apps , it needs parcel and so many other as well 
+
+we can think as Narendra Modi is react , Amit shah as parcel , also we have so 
+many ministers are node_modules of which some are more important (yogi) and some or not
+
+
+parcel in itself is not doing what all we mentioned it is doing , it has 
+so many supportive files
+
+as Amit Shah will not be directly asking for votes , he has so many sub ordinates 
+
+
+Transitive dependencies:
+we have our package manager that takes care of Transitive dependencies of our code 
+it is dependencies of dependencies
+
+
+React and parcel alone not making performant app 
+internally parcel depends on so many other dependencies these in turn depend on dependencies
+this is dependency tree 
+-----------------------------------------------------------------------------------------------
+
+how do i make my app compatiable with older versions 
+
+it is by using browserlists 
+and parcel already it for us 
+
+in package.json after dependencies tag write the browserslist
+
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+
+
+  if we mention last 2 versions - then my app gonna work in all last 2 versions of browsers 
+  we can write 
+  last 2 Chrome versions  - this will work in last 2 versions of chrome 
+
+//we can see all this writing in browserslist.dev website 
+
+-----------------------------------------------------------------------------------------------
+
+how many types of script attributes we can give like type="module"
+
+
+should we keep parcel cache in gitignore - yes
+
+everything that can be regenerate keep in gitignore , donot push to git 
