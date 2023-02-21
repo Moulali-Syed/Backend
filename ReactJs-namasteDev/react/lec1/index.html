@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Namaste React</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- <h1>Namaste Everyone</h1> -->
+
+    <!-- <script>
+      const h1 = document.createElement('h1');
+      h1.textContent = 'Namaste Everyone';
+      document.getElementById('root').append(h1);
+    </script> -->
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <!-- <script>
+      // the React.createElement comes from React , this will be there even in react native
+      const heading = React.createElement(
+        'h1',
+        {
+          id: 'title',
+          className: 'main-title',
+          style: { backgroundColor: 'red', color: 'green' },
+        },
+        'Namaste React'
+      );
+      console.log(heading); //reactelement is object
+      //how we render elements to DOM comes from ReactDOM , this changes for web and mobile
+      //everything we display will be inside root element, we specify it as below
+      //root is the place where our react code executes
+      //if we have a big project , we can have react only to specific section like header as well
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+
+      //render elements into the root
+      root.render(heading);
+
+      //most of the times how big the app though we have one root and one render
+    </script> -->
+
+    <script src="./App.js"></script>
+  </body>
+</html>

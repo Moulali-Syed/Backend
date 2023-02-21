@@ -1,0 +1,166 @@
+create index.html file
+
+React is a library or framework?
+React is library 
+
+framework means it has routing and many more things 
+
+we have seen image carousel , it is js library 
+
+it takes minimum effort to use a library 
+
+---------
+tools:
+chrome -browser
+vs code - editor
+
+extensions:
+better comments
+bracket pair colorizer 
+react redux snippets
+
+git lens - makes git usage easy
+prettier - code formatter 
+
+vscode-icons , make folder icons colorful
+
+emmet 
+--------
+What is emmet ? read about emmet - this creates a boiler plate code 
+
+--------------
+now lets go to index.html 
+
+1. i want to display content using html 
+  <body>
+    <h1>Namaste Everyone</h1>
+  </body>
+
+2.now i want to display content using plain javascript
+
+  <body>
+    <div id="root"></div>
+    <script>
+      const h1 = document.createElement('h1');
+      h1.textContent = 'Namaste Everyone';
+      document.getElementById('root').append(h1);
+    </script>
+  </body>
+
+3.now lets see , how to do with React
+
+read about react cdn ?
+
+search react cdn in google and copy the cdn links
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+read about crossorigin ?
+
+As we know shortest program of javascript is empty js file 
+similarly adding cdn to our html file is shortest program of react
+
+now open browser console and write - React - u will get   object with all properties
+also ReactDOM is present 
+
+we have added 2 cdn links - one is for React , the other is web version of react - ReactDOM
+
+ <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+
+    <script>
+      // the React.createElement comes from React , this will be there even in react native
+      const heading = React.createElement('h1', {}, 'Namaste React');
+      console.log(heading); //reactelement is object
+      //how we render elements to DOM comes from ReactDOM , this changes for web and mobile
+      //everything we display will be inside root element, we specify it as below
+      //root is the place where our react code executes
+      //if we have a big project , we can have react only to specific section like header as well
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+
+      //render elements into the root
+      root.render(heading);
+
+      //most of the times how big the app though we have one root and one render
+    </script>
+  </body>
+
+---------------------------------------------------------------------------------
+
+now lets understand what is the second argument in the React.createElement - {}
+
+React.createElement('h1', {}, 'Namaste React');
+
+say in html we have attributes and value like
+<h1 id="title"></h1>
+
+we can mention these attributes and values inside the object {} , 2nd argument 
+
+React.createElement('h1', {id:'title'}, 'Namaste React');
+
+the above line will display as below 
+<h1 id="title">Namaste React</h1>
+
+---------------------------------------------------------------------------------
+say we want to add styles :
+
+React.createElement('h1',{style:{backgroundColor:'red',color:'green'}},"Namaste React");
+
+
+
+---------------------------------------------------------------------------------
+say we want to add element inside an element 
+
+<div id="root"></div>
+<div id="container">
+  <h1>hello</h1>
+  <h2>hi</h2>
+</div>
+
+
+const heading1 = React.createElement('h1',{style:{color:'yellow'}},'hello');
+const heading2 = React.createElement('h2',{style:{color:'pink'}},'hi');
+//to display heading1 and heading2 inside container div , we pass 3rd argument as array with elements
+//as the elements heading1 , heading2
+const container = React.createElement('div',{id:'container'},[heading1,heading2])
+
+using the below react code we generate the code 
+
+<script>
+      const heading1 = React.createElement(
+        'h1',
+        { style: { color: 'red' } },
+        'hello'
+      );
+      const heading2 = React.createElement(
+        'h2',
+        { style: { color: 'pink' } },
+        'hi there'
+      );
+      const container = React.createElement('div', { id: 'container' }, [
+        heading1,
+        heading2,
+      ]);
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+
+      root.render(container);
+    </script>
+---------------------------------------------------------------------------------
+React.createElement way of creating the elements is pain as it needs more code 
+to be written 
+
+so then came the JSX 
+---------------------------------------------------------------------------------
+we split the code , what ever code we wrote in script , take it to a js file 
+and link it
+
+similarly we can add css file , link it to html file
