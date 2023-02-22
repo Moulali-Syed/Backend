@@ -1,0 +1,5 @@
+// with options
+//disable this while development
+{
+  //   "plugins": [["transform-remove-console", { "exclude": ["error", "warn"] }]]
+}

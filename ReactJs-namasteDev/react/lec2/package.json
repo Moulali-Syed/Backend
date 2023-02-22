@@ -2,13 +2,16 @@
   "name": "lec2",
   "version": "1.0.0",
   "description": "namaste react",
-  "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "author": "Moulali Syed",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "parcel": "^2.8.3",
     "process": "^0.11.10"
   },

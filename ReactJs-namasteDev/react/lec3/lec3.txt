@@ -1,0 +1,629 @@
+Laying the Foundation:
+
+JSX
+Babel
+---------------------------------------------------------------------------------
+Previous session revision:
+
+what is the command we use to initialize npm ?
+npm init
+
+this creates package.json , this configuration is used for managing packages 
+
+we have dev dependencies and dependencies
+---------
+
+to make our app compatibale with different browser versions we have 
+browserslist 
+
+
+---------------------------------------------------------------------------------
+As browsers upgrade , they will have new capabilities , some older browsers will not understand ES6
+We need to convert our code to  support older version of browsers
+
+
+polyfill - it is a code which is replacement for newer version of code 
+
+
+say we have the 
+Array.map() function 
+
+but browser cannot understand this 
+
+then we write a polyfill which behaves exactly same the map function 
+
+function myMap(){
+
+}
+
+
+who converts our newer code to older code  - BABEL does this conversion for us automatically
+
+BABEL is just a node package - it reads our code and gives a compatibale code 
+---------------------------------------------------------------------------------
+super power of Parcel 
+
+Hot Module Replacement - HMR 
+Minifying
+Compression
+File Watchers
+Code Spitting
+Image Optimization
+Js code Optimization  
+
+Tree shaking - means removing unwanted code 
+say i downloaded a library and it has many functions in it , not all are used in our 
+application , we use only few of them , parcel will just ignore those unwanted
+
+WebPack - is also a bundler , an alternative , it also has same capabilities 
+the create-react-app , we create uses WebPack along with babel 
+
+we also vite - bundler 
+
+all these bundlers will do the same things 
+
+we are using parcel because it is easy to do setup 
+
+console.log - is not directly removed when using parcel and babel 
+we have to configure our project to remove console log
+
+there is a package which can help us to remove console.log , babel-plugin-transform-remove-console 
+
+we can install the npm packge to remove console.log 
+
+npm install babel-plugin-transform-remove-console --save-dev 
+
+this gets added into our package.json under dev dependencies
+
+we can see as below 
+
+  "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "parcel": "^2.8.3",
+    "process": "^0.11.10"
+  },
+---------------------------------------------------------------------------------
+command we use to run the project 
+
+npx parcel index.html
+
+telling the entry point each time we run our app is hectic 
+
+so to run our app in an easy way 
+we specify scripts tag in package.json file 
+
+say i want to run ---->  npx parcel index.html 
+
+then i will write in the scripts tag as "start":"parcel index.html"
+
+  "scripts": {
+    "start":"parcel index.html",
+    "test": "jest"
+  },
+
+
+now our command become easier to start our app 
+
+npm run start  
+
+this will internally calls -->> npx parcel index.html 
+
+--------
+
+similarly we have seen the build command for our apps production build 
+
+npx parcel build index.html
+
+we can simplify it as well 
+
+add it in the package.json scripts tag 
+
+  "scripts": {
+    "start": "parcel index.html",
+    "build":"parcel build index.html",
+    "test": "jest"
+  },
+
+we to build -- we can write 
+npm run build 
+
+------------
+npm run start  this is same  as  npm start  
+---------------------------------------------------------------------------------
+To remove console.log , we have installed a plugin as a dev dependency 
+
+just installing it , is not over 
+
+we have to configure it as well 
+
+we can use it by creating a configuration file of babel
+
+create a configuration file - .babelrc 
+
+we can also specify the options, which console statement types to be removed 
+
+// with options
+{
+  "plugins": [ ["transform-remove-console", { "exclude": [ "error", "warn"] }] ]
+}
+
+now run build command , remove dist folder , as it will be creating new files everytime we create a build 
+
+npm run build 
+
+creates a production build of our app 
+
+now we have removed - all the console.log 
+---------------------------------------------------------------------------------
+Now lets start coding (understand key attribute that is passed in children )
+
+open the app - ---->  npm start 
+
+
+say we have below code 
+
+<div>
+    <h1>Hello World</h1>
+    <h2>Hello 2</h2>
+</div>
+
+we always have to give the keys for child elements here h1 and h2 , else we get error in 
+console saying to mention keys 
+
+i always have to give keys to children 
+
+key - we pass in the second argument as an attribute 
+key can be anything that uniquely identifies it 
+
+
+import ReactDOM from 'react-dom/client';
+
+const heading1 = React.createElement(
+  'h1',
+  { key: 'h1' },                       -------------(here we are passing key to make it uniquly identfiable)
+  'Namaste React from parcel'
+);
+const heading2 = React.createElement(
+  'h2',
+  { key: 'h2' },                       -------------(here we are passing key to make it uniquly identfiable)
+  'Hello Welcome to Frontend framework'
+);
+const container = React.createElement('div', {}, [heading1, heading2]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(container);
+
+
+why are we mentioning key to child elements?
+
+we can see this in react documentation - react key reconciliation (search in google read from react docs)
+
+read about diffing algorithm 
+
+if we have multiple children , then i included one more html element inside the existing children
+
+say i have 2 element as child 
+<ul>
+    <li>Apple</li>
+    <li>Mango</li>
+</ul>
+then i added one more child at the top , this makes react to re render everything 
+it means react will have to change the whole DOM Tree again 
+</ul>
+    <li>Grapes</li>
+    <li>Apple</li>
+    <li>Mango</li>
+</ul>
+
+if i mention key for every child then react has to do very less work 
+<ul>
+    <li key="2015">Apple</li>
+    <li key="2016">Mango</li>
+</ul>
+
+<ul>
+    <li key="2014">Grapes</li>
+    <li key="2015">Apple</li>
+    <li key="2016">Mango</li>
+</ul>
+now react doesnot have to modify everything in DOM , it just injects it 
+we must always use keys when we have multiple children , this makes our react app render faster 
+
+how are we adding keys?
+passing them as props 
+
+React.createElement('h1',{key="h1"},"Hello World");
+
+react tracks key as unique and it must be unique , no 2 elements should have same key 
+---------------------------------------------------------------------------------
+Lets understand React.createElement , how it is creating our element    
+
+In React.createElement , React is coming from node modules which we have imported in 1st step 
+
+
+at the end of the day a React.createElement() gives us an object 
+
+const heading = React.createElement('h1',{},"Hi");
+console.log(heading);
+
+
+what happens with - it is converted into html code and put upon the HTML DOM
+
+---------------------------------------------------------------------------------
+Say i have a requirement to create the header section with so many elements in it 
+
+<div class="header">
+    <h1>Namaste React</h1>
+    <ul>
+        <li>About Us</li>
+        <li>support</li>
+        <li>Help</li>
+    </ul>
+</div>
+
+now lets see how we can create this using react 
+
+const h1 = React.createElement('h1', {}, 'Namaste React');
+const li1 = React.createElement('li', {}, 'About Us');
+const li2 = React.createElement('li', {}, 'Support');
+const li3 = React.createElement('li', {}, 'Help');
+const ul = React.createElement('ul', {}, [li1, li2, li3]);
+const heading = React.createElement('div', { className: 'header' }, [h1, ul]);
+
+to get rid of this pain , of creating the elements 
+we got JSX 
+---------------------------------------------------------------------------------
+lets study about - JSX 
+
+javascript XML 
+
+the main aim of bringing react by facebook is we want to update our html in a better way 
+
+so at start they thought of using React.craeteElement and this will create html elements 
+and do the work 
+but later realized it is creating a messy code 
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+
+const h1 = React.createElement('h1', {}, 'Namaste React');
+const li1 = React.createElement('li', {}, 'About Us');
+const li2 = React.createElement('li', {}, 'Support');
+const li3 = React.createElement('li', {}, 'Help');
+const ul = React.createElement('ul', {}, [li1, li2, li3]);
+const heading = React.createElement('div', { className: 'header' }, [h1, ul]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// root.render(container);
+root.render(heading);
+
+------
+now later it start importing craeteElement and using it 
+
+so it says lets import createElement and use it directly as below  
+
+import {createElement} from 'react';
+import ReactDOM from 'react-dom/client';
+
+
+const h1 = createElement('h1', {}, 'Namaste React');
+const li1 = createElement('li', {}, 'About Us');
+const li2 = createElement('li', {}, 'Support');
+const li3 = createElement('li', {}, 'Help');
+const ul = createElement('ul', {}, [li1, li2, li3]);
+const heading = createElement('div', { className: 'header' }, [h1, ul]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// root.render(container);
+root.render(heading);
+
+did it make anything easy for us , no still looks messy 
+
+-----------
+so some people told lets call our createElement as ce while importing it 
+
+
+import {createElement as ce} from 'react';
+import ReactDOM from 'react-dom/client';
+
+
+const h1 = ce('h1', {}, 'Namaste React');
+const li1 = ce('li', {}, 'About Us');
+const li2 = ce('li', {}, 'Support');
+const li3 = ce('li', {}, 'Help');
+const ul = ce('ul', {}, [li1, li2, li3]);
+const heading = ce('div', { className: 'header' }, [h1, ul]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// root.render(container);
+root.render(heading);
+
+does this looks better , no still ugly 
+
+----------
+
+There comes JSX to our rescue
+---------------------------------------------------------------------------------
+lets see a basic example for React.createElement and how we write same with JSX 
+
+const heading = React.createElement("h1",{id:"title",key:"h1"},"Namaste React");
+
+---
+the JSX for above is 
+
+const heading2 = (<h1 id="title" key="h1">Namaste React</h1>);
+
+is JSX , HTML inside javascript ?
+<h1 id="title" key="h1">Namaste React</h1> this not html , this is html like syntax
+which jsx helps to do that 
+---------------------------------------------------------------------------------
+lets understand how React.createElement 
+
+React.createElement - gives us an object , this is getting rendered in as HTML DOM using 
+the ReactDOM
+
+the JSX we are writing is html like syntax , not the html 
+
+
+---------------------------------------------------------------------------------
+Understand the difference between JSX and HTML 
+
+in html we call class - in JSX we call className 
+
+say there is an attribute in html as tab-index="1" , we write it in JSX as tabIndex="1"
+
+how to add multiple attributes in JSX 
+how to add image element in JSX 
+
+
+---------------------------------------------------------------------------------
+If we write the below code in browser console 
+
+const heading = (<h1 id="title" key="h2">Namaste React</h1>);
+ 
+it will give us an error , donot know what < , this angular bracket is 
+
+
+then how our code in js file is understandin it , 
+this is because of BABEL 
+
+Babel exactly knows what this < , angular bracket is 
+
+babel reads my code - think it as a black box , takes in some code and gives me the new code 
+
+
+JSX uses React.createElement behind the scenes ==> then it creates Object ==> then render in HTML(DOM)
+babel understands our JSX and converts it to the syntax of React.createElement =>Object=> HTML(DOM)
+
+we can see this conversion happening in the babel website
+---------------------------------------------------------------------------------
+
+Advantages of JSX:
+
+Readability
+Less code
+Good developer experience
+Syntactical sugar 
+maintainability
+
+---------------------------------------------------------------------------------
+The code we are writing is for humans , it should be human understandable 
+
+---------------------------------------------------------------------------------
+Babel comes along with parcel , when we install parcel it is with it
+
+
+how many package.json files we have - 1
+how many packgae-lock.json files we have - 2 [1 in top level folder , 1 inside node_modules]
+packgae-lock.json , inside node modules maintains the versions for all the packages inside node modules folder
+
+---------------------------------------------------------------------------------
+We will never use React.createElement 
+
+
+now our App.js looks like below 
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const heading = (<h1 id="title" key="h2">Namaste React</h1>);
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(heading);
+
+---------------------------------------------------------------------------------
+Now lets see what are Components?
+
+
+we have heard that - everything is component in react 
+
+we have 2 types of components in react 
+
+1.Functional component - new way of writing 
+2.Class based component - old way of writing 
+
+Functional component is nothing but a javascript function , that returns JSX, some part of component
+const HeaderComponent = ()=>{
+    return <h1>Namaste React Functional Component</h1> ;
+}
+
+//it is a good practice in React , to name our Functional component start with capital letter 
+
+--------
+our code returns a compilcated html structure , then we must wrap code in parenthesis -()
+const HeaderComponent = ()=>{
+    return (
+        <div>
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+}
+
+as we are using arrow functions we can skip using return keyword and the curly braces 
+
+const HeaderComponent = ()=>
+    (
+        <div>
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+
+
+---------------------------------------------------------------------------------
+lets see how we render a functional component 
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const heading = (<h1 id="title" key="h2">Namaste React</h1>);
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(heading);//this way we are rendering a react element 
+
+---------
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const heading = (<h1 id="title" key="h2">Namaste React</h1>);
+
+//functional component 
+const HeaderComponent = ()=>
+    (
+        <div>
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<HeaderComponent/>);//we render the functional component this way , we use
+//angular brackets 
+---------------------------------------------------------------------------------
+lets see how to use ReactElement inside Functional component :
+
+we can use curly braces 
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const heading = (<h1 id="title" key="h2">Namaste React</h1>);
+
+//functional component 
+const HeaderComponent = ()=>
+    (
+        <div>
+            {heading} //we are rendering the reactElement inside functional component
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<HeaderComponent/>);
+
+
+---------------------------------------------------------------------------------
+functional component inside another functional component :
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const Title = ()=>{
+    (<h1 id="title" key="h2">Namaste React</h1>);
+}
+
+//functional component 
+const HeaderComponent = ()=>
+    (
+        <div>
+            <Title/> //we are rendering functional component inside functional component
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<HeaderComponent/>);
+
+---------------------------------------------------------------------------------
+other way to use functional component inside another functional component 
+- is just call the function inside {}
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+//this is react element 
+const Title = ()=>{
+    (<h1 id="title" key="h2">Namaste React</h1>);
+}
+
+//functional component 
+const HeaderComponent = ()=>
+    (
+        <div>
+            {Title()} //we are rendering functional component inside functional component
+            <h1>Namaste react functional component</h1>
+            <h2>This is a h2 element </h2>
+        </div>
+    );
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<HeaderComponent/>);
+
+
+---------------------------------------------------------------------------------
+we can write any piece of javascript code inside - {}
+
+{2+3}
+{console.log('hi')}
+
+---------------------------------------------------------------------------------
+say iam getting data from an api and some hacker sent malicious code from that 
+
+now he we will be able to execute that javascript code in my browser 
+using which he can get my location , cookies ,...
+
+this is cross site scripting attack 
+
+const data = api.getData();
+
+const HeaderComponent = ()=>{
+    return (
+        {data}
+    )
+}
+
+the JSX is very secure , it will escape this type of attack, it does sanitization
+
+Read about sanitization in JSX 
+---------------------------------------------------------------------------------
+Component Composition:/Composing Components
+
+It is just having a component inside another component 
+as we have seen above a functional component inside another functional component
+
+---------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------------
