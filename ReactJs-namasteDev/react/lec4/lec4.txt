@@ -1,0 +1,566 @@
+Talk is cheap show me the code:
+
+Lets start building our project:
+
+lets build food ordering app - with this knowledge we can build any type of app
+
+lets build Food Villa
+
+-----------------------------------------------------------------------------------------------
+lets first revise:
+
+what is the command to start our app 
+
+npm start |  npm run start 
+this we are able to do because we have edited the package.json -  scripts tag will keys -start and build for build command 
+
+What does JSX use behind scenes?
+React.createElement
+
+Babel will act as transpiler to convert this jsx to React.createElement
+
+What is functional component?
+it is a normal function that returns JSX 
+
+
+Does we require the round brackets , parenthesis in functional component 
+Yes if more than one statement is returned, not needed if only one line 
+
+What is react element behind scenes?
+It is an Object
+
+
+Can i use react element inside functional component , if so how ?
+we can use it , use {} and pass the name in between the curly braces 
+
+How do u call a functional component inside another component?
+<ComponentName/>  or {componentName()} or <ComponentName></ComponentName>
+
+we can use any piece of javascript code inside {}
+
+we can also write code inside {}, we can do single line and multi line comments 
+
+Is JSX mandatory?
+no , we can do using React.createElement
+
+even typescript, ES6 is not mandatory
+
+it doesnot force us to use ts , ES6 
+
+u can use react in just footer of our app , our whole app runs in the root element 
+-----------------------------------------------------------------------------------------------
+lets start building our header section 
+
+we always have to do planning for our app - Food villa 
+ - Create a rough sketch , what all we are gonna include in app 
+        Header - with logo and navigation links
+        Main Section - with food displaying , with search bar 
+        Footer - with some nav links 
+The first thing to be done , is build layout , lets start building it 
+
+
+    /*
+      Header
+        logo
+        NavItems(RightSide)
+        Cart
+      Body
+        Search Bar
+        Restuarant list
+          restaurant card
+            image
+            name
+            rating
+            cusines
+
+      Footer
+        links
+     */
+
+
+
+-----------------------------------------------------------------------------------------------
+Lets build the header component 
+with logo  and navlinks 
+
+const Title = () => (
+  <img
+    className="logo"
+    src="https://yt3.googleusercontent.com/ytc/AL5GRJXudT76175T4x4n7eslWM1YkgNLHDSSqfXGoadl=s900-c-k-c0x00ffffff-no-rj"
+    alt="Food Villa"
+  />
+);
+//header component
+const HeaderComponent = () => {
+  return (
+    <div className="header">
+      <Title />
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+
+style the header :
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  border: 1px solid black;
+}
+.nav-items > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-items li {
+  padding: 1rem;
+}
+
+.logo {
+  width: 7rem;
+}
+
+-----------------------------------------------------------------------------------------------
+Any piece of JSX expression/component we write there can only be one parent 
+
+we can use React.Fragment - it is a component exported by React
+
+JSX can have only parent , either use div , if we dont want div,
+use React.Fragment component , it is like an empty tag 
+
+<></>  is same as <React.Fragment></React.Fragment>
+
+
+
+-----------------------------------------------------------------------------------------------
+lets see adding inline style :
+
+in html we do as
+<h1 style="background-color:red;">Hello</h1>
+
+in react we can add inline style as below 
+
+const styleObj = {
+    backgroundColor:'red'
+}
+
+const jsx = ()=>{
+    (<div style={styleObj}>
+        <h1>JSX</h1>
+        <h1>Second</h1>
+    </div>);
+}
+
+or we can directly write css as below 
+const jsx = ()=>{
+    (
+        <div style={{backgroundColor:"red"}}>
+            <h1>JSX</h1>
+            <h1>Second</h1>
+        </div>
+    )
+}
+
+-----------------------------------------------------------------------------------------------
+Body Component:
+
+Whenever i need data to be rendered on my app , iam considered about from where this data is
+being loaded 
+
+First use some hard coded data , later integrate with API 
+
+/*
+      Body
+        Search Bar
+        Restuarant list
+          restaurant card
+            image
+            name
+            rating
+            cusines
+*/
+
+lets first build our restaurant card - a hard coded one 
+
+const RestuarantCard = () => {
+  return (
+    <div className="card">
+      <img
+        src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs"
+        alt="Biryani"
+      />
+      <h2>Biryani House</h2>
+      <h3>Biryani , Indian</h3>
+      <h4>⭐ 4.2</h4>
+    </div>
+  );
+};
+
+and apply style to it 
+
+/* style restuarant card */
+.card {
+  width: 13rem;
+  border: 1px solid #000;
+  padding: 10px;
+}
+.card > img {
+  width: 100%;
+}
+---------------------
+
+Now lets see how we can make our card dynamic
+
+we can store our data into an object and display it 
+
+const biryaniHouse = {
+  name: 'Biryani House',
+  image:
+    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+  cusines: ['Biryani', 'Indian'],
+  rating: 4.2,
+};
+const RestuarantCard = () => {
+  return (
+    <div className="card">
+      <img src={biryaniHouse.image} alt="Biryani" />
+      <h2>{biryaniHouse.name}</h2>
+      <h3>{biryaniHouse.cusines.join(', ')}</h3>
+      <h4>⭐ {biryaniHouse.rating}</h4>
+    </div>
+  );
+};
+
+-----------------
+But in real world we have so much of data to be displayed 
+
+now lets make all our app dynamic 
+
+in real world data comes as an array of objects 
+
+
+const biryaniHouse = [{
+  name: 'Biryani House',
+  image:
+    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+  cusines: ['Biryani', 'Indian'],
+  rating: 4.2,
+},
+{
+  name: 'Biryani House',
+  image:
+    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+  cusines: ['Biryani', 'Indian'],
+  rating: 4.2,
+},{
+  name: 'Biryani House',
+  image:
+    'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+  cusines: ['Biryani', 'Indian'],
+  rating: 4.2,
+}];
+
+-----------------------------------------------------------------------------------------------
+*** 
+lets sneek into api of website , we can see it for any website
+
+open dev tools  - go to network - Fetch/XHR 
+now in Name - tab select which is having something like v? [we can click on this and open in new tab]
+now in Preview tab - open data 
+
+use a plugin - JSON Viewer , to beutify json we view in browser
+
+CONFIG DRIVEN UI:
+Say we are in cities like Hyderabad , Bangalore, Mumbai - all these cities has 
+different offers , then we follow this config driven ui 
+
+based on location we display the content and the offers available 
+if no offers then we donot show that component 
+
+We control our frontend using a config - the data we send from backend is based on 
+the location we are currently living in     
+
+
+Then how are handling this config 
+
+const config = [
+    {
+        type:"carousel",
+        cards:[{
+            offerName:"50% off"
+        },{
+            offerName:"No Delivery Charges "
+        }]
+    },
+    {
+        type:"restaurants",
+        cards:[
+            {
+                  name: 'Biryani House',
+                  image:
+                        'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+                  cusines: ['Biryani', 'Indian'],
+                  rating: 4.2,
+            },
+            {
+                  name: 'KFC',
+                  image:
+                        'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+                  cusines: ['Biryani', 'Indian'],
+                  rating: 4.2,
+            }
+        ]
+    }
+]
+
+now based on location , my backend will change the data in the carousel to be displayed 
+if there are no offers , then backend wont send this carousel data 
+
+this is very important in System Design - Config Driven UI 
+-----------------------------------------------------------------------------------------------
+now lets take live data from swiggy and use it in our code 
+
+** always use optional chaining  - ?. 
+when reading data from an api , this will help in not throwing error if certain property
+is not present , if it find undefined for any thing , it will not move further and read data from it
+
+
+
+say we have data coming from api -mocking as of now and it is in 
+array of objects 
+then we can display as below
+
+const biryaniHouse = [
+  {
+    name: 'Biryani House',
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/cr8i1m6va7w7czqnp2hs',
+    cusines: ['Biryani', 'Indian'],
+    rating: 4.2,
+  },
+  {
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/pjqabgzxuqln6dvjqmz8',
+    cusines: ['Biryani', 'Indian'],
+    rating: 4.2,
+  },
+  {
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/ghq1hlkffwxbaylarzgp',
+    cusines: ['Biryani', 'Indian'],
+    rating: 4.2,
+    name: 'Biryani House',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/ixbge2at5ln0l00xovxh',
+    cusines: ['Biryani', 'Indian'],
+    rating: 4.2,
+    name: 'Biryani House',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/byruentuyby9zzyjdniw',
+    cusines: ['Biryani', 'Indian'],
+    rating: 4.2,
+    name: 'Biryani House',
+  },
+  {
+    image:
+      'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/lmjf4h5nvkldwghxhdri',
+    rating: 4.2,
+    cusines: ['Biryani', 'Indian'],
+    name: 'Biryani House',
+  },
+];
+
+const RestuarantCard = () => {
+  return (
+    <div className="card">
+      <img src={biryaniHouse[1]?.image} alt="Biryani" />
+      <h2>{biryaniHouse[1]?.name}</h2>
+      <h3>{biryaniHouse[1]?.cusines?.join(', ')}</h3>
+      <h4>⭐ {biryaniHouse[1]?.rating}</h4>
+    </div>
+  );
+};
+
+--------------
+i want the dynamic data to be displayed , then i can send props 
+
+props is nothing but properties
+it is similar to passing arguments , while making function call 
+
+When i want to send data from parent component to child component , then we use props 
+to send that data 
+
+Can we pass , multiple props?
+Yes we can pass
+-----------------------------------------------------------------------------------------------
+Sending props from parent 
+
+const Body = () => {
+  return (
+    <>
+      <div className="restaurant-list">
+        <RestuarantCard biryani={biryaniHouse[0]} />
+        <RestuarantCard biryani={biryaniHouse[1]} />
+        <RestuarantCard biryani={biryaniHouse[2]} />
+        <RestuarantCard biryani={biryaniHouse[3]} />
+        <RestuarantCard biryani={biryaniHouse[4]} />
+        <RestuarantCard biryani={biryaniHouse[5]} />
+      </div>
+    </>
+  );
+};
+
+--> this is the prop we are sending =  biryani={biryaniHouse[5]
+
+We receive props as below:
+
+const RestuarantCard = (props) => {
+  return (
+    <div className="card">
+      <img src={props.biryani?.image} alt="Biryani" />
+      <h2>{props.biryani?.name}</h2>
+      <h3>{props.biryani?.cusines?.join(', ')}</h3>
+      <h4>⭐ {props.biryani?.rating}</h4>
+    </div>
+  );
+};
+
+we call props in child component  as   -  props.propName  = props.biryani
+-----------------------------------------------------------------------------------------------
+We can destructure the props and use it directly:
+
+const RestuarantCard = ({biryani}) => {
+  return (
+    <div className="card">
+      <img src={biryani?.image} alt="Biryani" />
+      <h2>{biryani?.name}</h2>
+      <h3>{biryani?.cusines?.join(', ')}</h3>
+      <h4>⭐ {biryani?.rating}</h4>
+    </div>
+  );
+};
+
+-----------------------------------------------------------------------------------------------
+we can further destructure our prop received 
+
+const RestuarantCard = ({biryani}) => {
+  const {image,name,cusines,rating} = biryani;
+  return (
+    <div className="card">
+      <img src={image} alt="Biryani" />
+      <h2>{name}</h2>
+      <h3>{cusines?.join(', ')}</h3>
+      <h4>⭐ {rating}</h4>
+    </div>
+  );
+};
+
+-----------------------------------------------------------------------------------------------
+We can also pass props in the spread parameter and directly read it 
+
+
+const Body = () => {
+  return (
+    <body>
+      <div className="restaurant-list">
+        <RestuarantCard biryani={...biryaniHouse[0]} />
+        <RestuarantCard biryani={...biryaniHouse[1]} />
+        <RestuarantCard biryani={...biryaniHouse[2]} />
+        <RestuarantCard biryani={...biryaniHouse[3]} />
+        <RestuarantCard biryani={...biryaniHouse[4]} />
+        <RestuarantCard biryani={...biryaniHouse[5]} />
+      </div>
+    </>
+  );
+};
+
+
+now we can call them using destructure 
+
+const RestuarantCard = ({image,name,cusines,rating}) => {
+  
+  return (
+    <div className="card">
+      <img src={image} alt="Biryani" />
+      <h2>{name}</h2>
+      <h3>{cusines?.join(', ')}</h3>
+      <h4>⭐ {rating}</h4>
+    </div>
+  );
+};
+-----------------------------------------------------------------------------------------------
+use map : and render multiple elements based on api data 
+
+const Body = () => {
+  return (
+    {
+      biryani.map(bir=>{
+        <RestuarantCard biryani={...bir} key={id}/>
+      })
+    }
+  );
+};
+
+
+if two children has same key then react will complain - that 2 children has same key
+-----------------------------------------------------------------------------------------------
+Virtual DOM: 
+
+We have the DOM 
+with 
+  head 
+    <body>
+      restaurant data 1
+      restaurant data 2
+
+    </body>
+    <footer/>
+  
+We keep representation of this actual DOM in our code 
+
+A representation of DOM with us is known as Virtual DOM 
+
+
+Why do we need virtual DOM?
+we need for reconciliation - 
+Reconciliation is an algorithm which react uses to findout difference between
+one tree from another (i.e difference between actual DOM and virtual DOM )and it determines
+what needs to updated and it just updates that portion instead of re rendering the whole app 
+
+this diff algorithm which react uses - this process is known as reconciliation
+
+---------
+say inside a parent element we have 
+4 div elements child 
+
+now we added a new div inside the parent 
+then react doesnot know where this div got added and renders the whole parent 
+but if i use key - which is unique , then react will only re render what it doesnot know 
+
+-----------------------------------------------------------------------------
+React Fibre:
+In react 16 - the diff algorithm changed a little and React Fibre is introduced 
+React Fibre is new reconciliation engine
+
+this new reconciliation engine is responsible for diff 
+
+-------------
+read about - React Fibre 
+
+Why don't we use index as key  , as we get in the map?
+Never use index as key 
+
+use unique key , if no option use index as key , no key is not acceptable
