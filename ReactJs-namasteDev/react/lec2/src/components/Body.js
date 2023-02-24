@@ -1,10 +1,12 @@
 import { biryaniHouse } from '../config';
 import RestuarantCard from './RestuarantCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Shimmer from './Shimmer';
 
 const filterData = (searchText, biryanis) => {
   const filterDatab = biryanis.filter((bir) => {
-    return bir.name.includes(searchText);
+    // console.log(bir.data.name);
+    return bir?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase());
   });
 
   return filterDatab;
@@ -13,8 +15,38 @@ const Body = () => {
   // let searchTxt = 'KFC';
   //searchText is local state variable
   const [searchText, setSearchText] = useState('');
-  const [biryanis, setBiryanis] = useState(biryaniHouse);
-  return (
+  const [allbiryanis, setAllBiryanis] = useState([]);
+  const [filteredbiryanis, setFilteredBiryanis] = useState([]);
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING'
+    );
+    const json = await data.json();
+    console.log(data);
+    //always use optional chaining
+    setAllBiryanis(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredBiryanis(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  //Conditional Rendering
+  //if restuarant is empty=> show shimmer ui
+  //if restaurant has data =>show actual data UI
+
+  //if i dont have anything in allbiryanis - dont return anything
+  //this is also called early return
+  if (!allbiryanis) return null;
+
+  //if there is no such product , we must display something
+  if (filteredbiryanis?.length === 0)
+    return <h1>No Restaurant Match to your filter</h1>;
+
+  return allbiryanis.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="search-container">
         <input
@@ -31,7 +63,7 @@ const Body = () => {
             // console.log(searchText);
             // console.log(typeof searchText);
 
-            const data = filterData(searchText, biryanis); //have to filter based on search text
+            const data = filterData(searchText, allbiryanis); //have to filter based on search text
             //entered in the search box, so 1st argument it is passed
             //and we have to filter from the state variable - biryanis
             //so 2nd argument it is called
@@ -41,14 +73,14 @@ const Body = () => {
             //so create a state variable , using useState
 
             //then update the state - biryanis
-            setBiryanis(data);
+            setFilteredBiryanis(data);
           }}
         >
           Search
         </button>
       </div>
       <div className="restaurant-list">
-        {biryanis.map((bir, index) => {
+        {filteredbiryanis.map((bir, index) => {
           return <RestuarantCard biryani={bir} key={index} />;
         })}
       </div>

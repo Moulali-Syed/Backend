@@ -19,7 +19,7 @@
 
 /* style restuarant card */
 .card {
-  width: 13rem;
+  width: 15rem;
   border: 1px solid #000;
   padding: 10px;
 }
@@ -30,4 +30,5 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 2rem;
 }
