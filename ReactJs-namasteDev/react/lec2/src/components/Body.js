@@ -2,7 +2,7 @@ import { biryaniHouse } from '../config';
 import RestuarantCard from './RestuarantCard';
 import { useState, useEffect } from 'react';
 import Shimmer from './Shimmer';
-
+import { Link } from 'react-router-dom';
 const filterData = (searchText, biryanis) => {
   const filterDatab = biryanis.filter((bir) => {
     // console.log(bir.data.name);
@@ -41,8 +41,8 @@ const Body = () => {
   if (!allbiryanis) return null;
 
   //if there is no such product , we must display something
-  if (filteredbiryanis?.length === 0)
-    return <h1>No Restaurant Match to your filter</h1>;
+  // if (filteredbiryanis?.length === 0)
+  //   return <h1>No Restaurant Match to your filter</h1>;
 
   return allbiryanis.length === 0 ? (
     <Shimmer />
@@ -81,7 +81,11 @@ const Body = () => {
       </div>
       <div className="restaurant-list">
         {filteredbiryanis.map((bir, index) => {
-          return <RestuarantCard biryani={bir} key={index} />;
+          return (
+            <Link to={'/restaurant/' + bir.data.id} key={index}>
+              <RestuarantCard biryani={bir} />;
+            </Link>
+          );
         })}
       </div>
     </>
