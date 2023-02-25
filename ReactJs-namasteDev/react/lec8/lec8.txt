@@ -1,0 +1,753 @@
+Lets Get Classy:
+------------------
+Class Based Components
+
+React started with class based components - hooks started coming newly
+
+and functional components became new standard
+
+With class based components - code seems to be very messy , it has more code 
+
+
+class based components are no more used - they are like deprecated 
+
+we can write anything use the functional based components 
+
+
+
+------------------------------------------------------------------------------------------
+revison
+
+Link to="" -- is from react router dom - at the end it will be anchor tag
+
+url parameters are read by useParams
+
+
+------------------------------------------------------------------------------------------
+how can we make nested routes - like profile page inside about page 
+
+we can do using children of children 
+
+
+when we use / - this means from the localhost:port/
+
+
+children are always displayed inside Outlet 
+
+we need to create an Outlet inside About component 
+
+
+---
+
+const Profile = () => {
+  return (
+    <div>
+      <h2>Profile Page</h2>
+    </div>
+  );
+};
+
+export default Profile;
+
+-----
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Header from './components/Header';
+import Body from './components/Body';
+import Footer from './components/Footer';
+import About from './components/About';
+import Error from './components/Error';
+import Contact from './components/Contact';
+import RestuarantMenu from './components/RestuarantMenu';
+import Profile from './components/Profile';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+
+//header component
+
+const AppLayout = () => {
+  return (
+    <React.Fragment>
+      <Header />
+      <Outlet />
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Body />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+        children: [
+          {
+            path: 'profile', //******donot specify slash here , then only it will work****
+            element: <Profile />,
+          },
+        ],
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      },
+
+      {
+        path: 'restaurant/:id',
+        element: <RestuarantMenu />,
+      },
+    ],
+  },
+]);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<RouterProvider router={appRouter} />);
+
+-----------
+
+import { Outlet } from 'react-router-dom';
+
+const About = () => {
+  return (
+    <div>
+      <h1>About Us Page </h1>
+      <p>This a react router dom session</p>
+      <Outlet />     {/*u can must specify the Outlet */}
+    </div>
+  );
+};
+export default About;
+
+
+------------------------------------------------------------------------------------------
+Lets start building a class component
+
+
+The most important part *** of a class based component is 
+
+render() method , u cannot create a class based component without render method , the only 
+mandatory method in class based component 
+
+
+this render method returns some jsx , whatever u return will be injected in to DOM 
+
+import React from 'react';
+class ProfileClass extends React.Component{
+    render(){
+        return <h1>Profile Class Component</h1>;
+    }
+}
+
+export default ProfileClass;
+
+
+------------------------------------------------------------------------------------------
+lets see how props get passed 
+
+in functional component:
+
+const Profile = (props) => {
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <h3>Name: {props.name}</h3>
+    </div>
+  );
+};
+
+export default Profile;
+
+      <ProfileFunctionComponent name={'Apple'} />
+
+----------
+
+in class based component , we use this.props to get the props value fetched 
+
+import React from 'react';
+
+class Profile extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <h2>Name: {this.props.name}</h2>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+ <ProfileClassComponent name={'Apple'} />
+
+
+------------------------------------------------------------------------------------------
+lets see how we do state and maintain state change in class and functional component 
+
+in functional component:
+
+import { useState } from 'react';
+
+const Profile = (props) => {
+  let [state, setState] = useState(0);
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <h3>Name: {props.name}</h3>
+      <button onClick={() => setState(state++)}>Count - {state}</button>
+    </div>
+  );
+};
+
+export default Profile;
+
+----------
+in class based component 
+
+in class based components we have to use constructor function
+
+whenever a class is loaded , constructor is the first thing that gets executed
+so we maintain the state variables inside constructor
+
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+  render() {
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <h2>Name: {this.props.name}</h2>
+        <button>{this.state.count}</button>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+------------------------------------------------------------------------------------------
+if we have multiple state varibales 
+
+then in functional component we create them one by one 
+using useState 
+
+but in class based we have all them inside the this.state object inside the constructor
+
+------
+import { useState } from 'react';
+
+const Profile = (props) => {
+    const [state, setState] = useState(0);
+    const [count2, setCount2] = useState(0);
+  return (
+    <div>
+      <h2>Profile Page</h2>
+      <h3>Name: {props.name}</h3>
+      <button onClick={() => setState(state+1)}>Count - {state}</button>
+    </div>
+  );
+};
+
+export default Profile;
+
+
+-----
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      count2: 0,
+    };
+  }
+  render() {
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <h2>Name: {this.props.name}</h2>
+        <button>{this.state.count}</button>
+        <button>{this.state.count2}</button>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+------------------------------------------------------------------------------------------
+
+updating state in class based component
+
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+  }
+  render() {
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <h2>Name: {this.props.name}</h2>
+        <h3>{this.state.count}</h3>
+        <button
+          onClick={() => {
+            this.setState({ count: 1 });
+          }}
+        >
+          Click
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+its very important we call it inside the callback function 
+        <button
+          onClick={() => {
+            this.setState({ count: 1 });
+          }}
+        >
+          Click
+        </button>
+------------------------------------------------------------------------------------------
+always remember 
+
+first constructor will be called then the render will be called 
+
+
+------------------------------------------------------------------------------------------
+in functional component we use 
+useEffect to make api call
+
+
+we first display whatever we can and later we update the state 
+
+from the api data that get loaded from the useEffect 
+
+
+first render then useEffect 
+
+lets see how we can do in class based component
+
+we have componentDidMount -- this will be called after my render 
+
+first constructor is called then render method is called and then componentDidMount is called 
+
+---
+so the best place to make an api call , is componentDidMount
+
+
+
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    };
+    console.log('inside constructor');
+  }
+
+  componentDidMount() {
+    //API call will be made here
+    console.log('Component Did Mount');
+  }
+  render() {
+    console.log('render ');
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <h2>Name: {this.props.name}</h2>
+        <h3>{this.state.count}</h3>
+        <button
+          onClick={() => {
+            this.setState({ count: 1 });
+          }}
+        >
+          Click
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+------------------------------------------------------------------------------------------
+very important for interviews:
+
+when we have a class based component inside a class based component
+
+the sequence will be 
+
+parent class constructor
+parent class render
+child class constructor
+child class render 
+child class componentDidMount
+parent class componentDidMount 
+
+-----
+
+when we have 2 class based components inside a class based component 
+
+the sequence will be
+
+parent class constructor
+parent class render 
+    child 1 constructor
+    child 1 render
+    child 2 constructor
+    child 2 render 
+    child 1 componentDidMount
+    child 2 componentDidMount
+parent componentDidMount
+
+
+-----------
+Mounting happens in 2 phases
+
+render phase 
+commit phase 
+
+render phase includes - constructor call + render method call 
+
+commit phase - is where react is actually modifying your DOM ,componentDidMount is called after 
+                initial render , after my component is on browser , that is why we see Shimmer Effect 
+
+render phase is fast 
+commit phase takes time because it is hard to update DOM 
+
+react will completes the render phase first and then comes to commit phase 
+
+this is why we have seen the child constructor then child render , then moved to second child 
+constructor and second child render - then only comes the componentDidMount
+
+
+------------------------------------------------------------------------------------------
+lets fetch an api inside , componentDidMount
+
+
+we can make componentDidMount as async , but we cannot mark useEffect callback function as async 
+read about this 
+
+
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {
+        name: 'Dummy Name',
+        location: 'Dummy Location',
+      },
+    };
+    console.log('inside constructor');
+  }
+
+  async componentDidMount() {
+    //API call will be made here
+    console.log('Component Did Mount');
+    const data = await fetch('https://api.github.com/users/akshaymarch7');
+    const json = await data.json();
+
+    this.setState(() => {
+      return { userInfo: json };
+    });
+  }
+  render() {
+    console.log('render ');
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <img src={this.state.userInfo.avatar_url} alt="image" />
+        <h2>Name: {this.state.userInfo.name}</h2>
+        <h2>Location: {this.state.userInfo.location}</h2>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+
+
+------------------------------------------------------------------------------------------
+We have seen Mounting phase
+
+when our component is re rendering , then it is called Updating phase 
+
+Mounting Phase 
+        constructor is called
+        render is called
+        componentDidMount - is called after first render (here we make api calls)
+
+        thus we do setState()
+        there starts the updating Phase
+
+Updating Phase 
+        setState() , is called 
+        render method will be called
+        DOM will get updated 
+        Then componentDidUpdate will be called 
+
+componentDidMount is called after first render 
+componentDidUpdate  after every next render
+
+UnMounting Phase 
+        When the component is about to destroy , this is called 
+        ComponentWillUnmount() -- when i moved to some other component this will get called  
+------------------------------------------------------------------------------------------
+// it normally a javascript class
+
+import React from 'react';
+
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInfo: {
+        name: 'Dummy Name',
+        location: 'Dummy Location',
+      },
+    };
+    console.log('inside constructor');
+  }
+
+  async componentDidMount() {
+    //API call will be made here
+    console.log('Component Did Mount');
+    const data = await fetch('https://api.github.com/users/akshaymarch7');
+    const json = await data.json();
+
+    this.setState(() => {
+      return { userInfo: json };
+    });
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+  render() {
+    console.log('render ');
+    return (
+      <div>
+        <h1>Profile Class Component</h1>
+        <img src={this.state.userInfo.avatar_url} alt="image" />
+        <h2>Name: {this.state.userInfo.name}</h2>
+        <h2>Location: {this.state.userInfo.location}</h2>
+      </div>
+    );
+  }
+}
+
+export default Profile;
+
+
+
+------------------------------------------------------------------------------------------
+never compare lifecycle methods of class based components to a functional based components 
+
+
+------------------------------------------------------------------------------------------
+When we have to unmount some component in class based , we have to do it in
+componentWillUnmount
+
+componentDidUpdate(){
+    this.timer = setInterval(()=>{
+        console.log("hello")
+    },1000);
+}
+
+//we must clear this , unless we clear it will keep on running  
+componentWillUnmount(){
+    clearInterval(this.timer);
+}
+
+---------
+
+when we have to clear something from our useEffect , we use a return inside it
+
+useEffect(()=>{
+    const timer = setInterval(()=>{
+        console.log('Namaste React OP');
+    },1000);
+
+    return ()=>{
+        clearInterval(timer);
+    }
+},[])
+
+-----
+
+useEffect(()=>{
+    console.log('useEffect');
+
+    return ()=>{
+        console.log('useEffect return');
+    }
+});
+console.log('render');
+
+
+output:
+render 
+useEffect
+useEffect return //this will be called once i leave that component and go to other component 
+this return inside useEffect , is kind of UnMounting phase  
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------

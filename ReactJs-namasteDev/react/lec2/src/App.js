@@ -7,6 +7,7 @@ import About from './components/About';
 import Error from './components/Error';
 import Contact from './components/Contact';
 import RestuarantMenu from './components/RestuarantMenu';
+import Profile from './components/Profile';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 /*
       Header
@@ -58,6 +59,12 @@ const appRouter = createBrowserRouter([
       {
         path: '/about',
         element: <About />,
+        children: [
+          {
+            path: 'profile', //donot specify slash here , then only it will work
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: '/contact',
