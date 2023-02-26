@@ -1,0 +1,477 @@
+Optimizing our App:
+------------------
+componentDidMount - called after initial render - 1time 
+componentDidUpdate - each time when there is some state change, DOM update in the page
+
+2phases of react life cycle - render phase and commit phase 
+
+
+if there are no props , no state change componentDidUpdate will not be called  
+
+then after componentDidMount goes componentWillUnMount
+
+componentWillUnMount is used for clean up 
+
+------------------------------------------------------------------------------------------
+Lets build a custom hook 
+
+
+when , how and why to build hook 
+
+
+why to build hook ?
+reusability 
+readability 
+separation of concerns 
+modularity 
+
+
+There should be a common place where we keep our utility functions and import from there 
+say we have filter function, we can reuse it in multiple components , so place it inside 
+utilities 
+
+make a utils folder inside src , u can name common , helper 
+
+place the filterData function , inside helper.js and export it 
+now import it where u need 
+
+this makes our code - readable , reusable and also makes our code more testable 
+thus we can test individually 
+it is more maintainable 
+
+hooks are also used for the same purpose 
+
+
+modularity - means we have broken down our code into meaningful pieces 
+
+export const filterData = (searchText, biryanis) => {
+  const filterDatab = biryanis.filter((bir) => {
+    // console.log(bir.data.name);
+    return bir?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase());
+  });
+
+  return filterDatab;
+};
+
+
+import { filterData } from '../utils/helper';
+
+
+------------------------------------------------------------------------------------------
+lets build a custom hook 
+
+our RestaurantMenu component is reading the url params , fetching api details and displaying it 
+
+we can extract some logic out of it and re use , create a custom hook 
+
+Always create a hook with starting use ***
+
+
+below is a custom hook 
+import { useState, useEffect } from 'react';
+import { FETCH_MENU_URL } from '../config';
+
+const useRestaurant = (id) => {
+  const [restaurant, setRestaurant] = useState(null);
+
+  useEffect(() => {
+    getRestaurantData();
+  }, []);
+
+  async function getRestaurantData() {
+    const data = await fetch(FETCH_MENU_URL + id);
+    const json = await data.json();
+    console.log(json);
+    setRestaurant(json.data);
+  }
+
+  return restaurant;
+};
+
+export default useRestaurant;
+
+
+-----
+we can use that custom hook  
+
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Shimmer from './Shimmer';
+import useRestaurant from '../utils/useRestaurant';
+
+const RestuarantMenu = () => {
+  //using this useParams hook , we read dynamic url params
+  const params = useParams();
+  //   console.log(params);
+  const { id } = params;
+
+  // const [restaurant, setRestaurant] = useState(null);
+
+  const restaurant = useRestaurant(id);
+
+  return !restaurant ? (
+    <Shimmer />
+  ) : (
+    <>
+      <div>
+        <h1>Restaurant id:{id}</h1>
+        <h2>{restaurant.name}</h2>
+        <img
+          src={
+            'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/' +
+            restaurant.cloudinaryImageId
+          }
+          alt="food"
+        />
+        <h3>{restaurant.area}</h3>
+        <h3>{restaurant.city}</h3>
+        <h3>{restaurant.avgRating} ⭐ stars</h3>
+        <h3>{restaurant.costForTwoMsg}</h3>
+      </div>
+      <div>
+        <h1>Menu</h1>
+        <ul>
+          {/* {console.log(restaurant)} */}
+          {Object.values(restaurant?.menu?.items).map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+};
+
+export default RestuarantMenu;
+
+------------------------------------------------------------------------------------------
+Looks like u are offline page 
+
+
+lets create a custom hook that tells me whether iam online or offline
+
+
+import { useState, useEffect } from 'react';
+
+const useOnline = () => {
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener('online', () => {
+      setIsOnline(true);
+    });
+    window.addEventListener('offline', () => {
+      setIsOnline(false);
+    });
+  }, []);
+  return isOnline; //true or false
+};
+
+export default useOnline;
+
+
+------
+lets use that hook 
+
+to display based on internet connectivity 
+
+
+import { biryaniHouse } from '../config';
+import RestuarantCard from './RestuarantCard';
+import { useState, useEffect } from 'react';
+import Shimmer from './Shimmer';
+import { Link } from 'react-router-dom';
+import { filterData } from '../utils/helper';
+import useOnline from '../utils/useOnline';
+
+const Body = () => {
+  // let searchTxt = 'KFC';
+  //searchText is local state variable
+  const [searchText, setSearchText] = useState('');
+  const [allbiryanis, setAllBiryanis] = useState([]);
+  const [filteredbiryanis, setFilteredBiryanis] = useState([]);
+  useEffect(() => {
+    getRestaurants();
+  }, []);
+
+  async function getRestaurants() {
+    const data = await fetch(
+      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING'
+    );
+    const json = await data.json();
+    console.log(data);
+    //always use optional chaining
+    setAllBiryanis(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredBiryanis(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  const isOnline = useOnline();  //<-------------------------------------------------
+
+  if (!isOnline) {   //<-------------------------------------------------
+    return <h1>⛔ Offline Please check your internet connection </h1>;
+  }
+
+  //Conditional Rendering
+  //if restuarant is empty=> show shimmer ui
+  //if restaurant has data =>show actual data UI
+
+  //if i dont have anything in allbiryanis - dont return anything
+  //this is also called early return
+  if (!allbiryanis) return null;
+
+  //if there is no such product , we must display something
+  // if (filteredbiryanis?.length === 0)
+  //   return <h1>No Restaurant Match to your filter</h1>;
+
+  return allbiryanis.length === 0 ? (
+    <Shimmer />
+  ) : (
+    <>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button
+          className="search-btn"
+          onClick={() => {
+            //need to filter the data
+            // console.log(searchText);
+            // console.log(typeof searchText);
+
+            const data = filterData(searchText, allbiryanis); //have to filter based on search text
+            //entered in the search box, so 1st argument it is passed
+            //and we have to filter from the state variable - biryanis
+            //so 2nd argument it is called
+
+            //then we have to update the biryaniHouse (array of objects)
+            //we cannot do it directly , we have to maintain state of this variable
+            //so create a state variable , using useState
+
+            //then update the state - biryanis
+            setFilteredBiryanis(data);
+          }}
+        >
+          Search
+        </button>
+      </div>
+      <div className="restaurant-list">
+        {filteredbiryanis.map((bir, index) => {
+          return (
+            <Link to={'/restaurant/' + bir.data.id} key={index}>
+              <RestuarantCard biryani={bir} />
+            </Link>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default Body;
+
+we can see this - by going to network tab - set from noThrottling to Offline 
+------------------------------------------------------------------------------------------
+everytime we add a eventListener , we need to clean it up as well 
+
+
+import { useState, useEffect } from 'react';
+
+const useOnline = () => {
+  const [isOnline, setIsOnline] = useState(true);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+    };
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+  return isOnline;
+};
+
+export default useOnline;
+
+
+
+
+------------------------------------------------------------------------------------------
+Parcel is a bundler , it creates one js file for all our code
+
+
+it doesnot make sense to have all the js code into one file , this will be so huge 
+
+
+so we have to do 
+chunking , other names -code splitting , dynamic bundling , lazy loading , on Demand Loading , Dynamic import
+all are same 
+
+is bundling good or bad?
+it is only upto a limit , this should be logical bundling
+
+
+lets see an example of make my trip 
+who ever visits this site most likely to be booking flights 
+
+if we are bundling everything related to flights , hotels, cabs, trains, buses 
+this will be huge , why do we need all to be bundled in a single js file 
+
+we build different chunks based on the use cases 
+
+When we write code for make my trip, we do logical bundling 
+
+i load only js related to flights on home page is loaded 
+similarly i only load the js related to trains when user clicks on the trains link icon
+------------------------------------------------------------------------------------------
+Lets say we have a component , with 100s of components inside it 
+
+lets see the lazy loading inside it 
+
+
+const Instamart = () => {
+  return (
+    <div>
+      <h1>InstaMart</h1>
+      <h2>100 s of components inside it </h2>
+    </div>
+  );
+};
+
+export default Instamart;
+
+
+now create a route and a link to that 
+
+inside Header.js 
+          <Link to="/instamart">
+            <li>Instamart</li>
+          </Link>
+
+create a route inside App.js 
+
+      {
+        path: '/instamart',
+        element: <Instamart />,
+      },
+
+now we are importing the Instamart inside app.js , we can lazy load this file 
+using lazy we get from , react
+
+we do as below 
+
+const Instamart = lazy(() => import('./components/Instamart'));
+
+this is lazy load , this is on Demand loading, this is code spliting , it is bundle chunking
+
+upon doing this on Demand loading , we get error for this first time load 
+because the file takes some time to load but of react will try to render it before this 
+and it cannot find it 
+
+
+to overcome this we use Suspense ,
+import {Suspense} from react 
+and wrap the component that needs to be lazy loaded inside <Suspense><Component/></Suspense>
+
+and till the time the component get loaded , we can show Shimmer like component , using the
+fallback prop in Suspense
+------------------------------------------------------------------------------------------
+Suppose we are building large applications
+
+we can keep different js bundles based on different products 
+
+when our app size is high , we need lazy loading
+
+import React, { lazy, Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import Header from './components/Header';
+import Body from './components/Body';
+import Footer from './components/Footer';
+import About from './components/About';
+import Error from './components/Error';
+import Contact from './components/Contact';
+import RestuarantMenu from './components/RestuarantMenu';
+import Profile from './components/Profile';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import Shimmer from './components/Shimmer';
+
+//header component
+const Instamart = lazy(() => import('./components/Instamart'));  //<==========
+
+const AppLayout = () => {
+  return (
+    <React.Fragment>
+      <Header />
+      {
+        /* <About /> // if path is /about
+      <Body /> // if path is /
+      <Contact /> // if path is /contact */
+        // this is the outlet to fill in different pages
+        //react-router-dom gives us Outlet - this is filled by the children configuration we need
+      }
+      <Outlet />
+      <Footer />
+    </React.Fragment>
+  );
+};
+
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: '/',
+        element: <Body />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+        children: [
+          {
+            path: 'profile', //donot specify slash here , then only it will work
+            element: <Profile />,
+          },
+        ],
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      },
+
+      {
+        path: 'restaurant/:id',
+        element: <RestuarantMenu />,
+      },
+
+      {
+        path: '/instamart',
+        element: (
+          <Suspense fallback={<Shimmer />}>   //<==========
+            <Instamart />
+          </Suspense>                         //<==========
+        ),
+      },
+    ],
+  },
+]);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<RouterProvider router={appRouter} />);
+
+
+
+------------------------------------------------------------------------------------------
+Never dynamically load inside another component 
+
+

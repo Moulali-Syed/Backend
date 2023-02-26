@@ -3,14 +3,9 @@ import RestuarantCard from './RestuarantCard';
 import { useState, useEffect } from 'react';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
-const filterData = (searchText, biryanis) => {
-  const filterDatab = biryanis.filter((bir) => {
-    // console.log(bir.data.name);
-    return bir?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase());
-  });
+import { filterData } from '../utils/helper';
+import useOnline from '../utils/useOnline';
 
-  return filterDatab;
-};
 const Body = () => {
   // let searchTxt = 'KFC';
   //searchText is local state variable
@@ -30,6 +25,12 @@ const Body = () => {
     //always use optional chaining
     setAllBiryanis(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredBiryanis(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>⛔ Offline Please check your internet connection </h1>;
   }
 
   //Conditional Rendering
@@ -83,7 +84,7 @@ const Body = () => {
         {filteredbiryanis.map((bir, index) => {
           return (
             <Link to={'/restaurant/' + bir.data.id} key={index}>
-              <RestuarantCard biryani={bir} />;
+              <RestuarantCard biryani={bir} />
             </Link>
           );
         })}
