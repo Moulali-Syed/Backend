@@ -1,0 +1,46 @@
+Jo Diktha hai vo bikta hai:
+--------------------------
+For faster development we use css frameworks
+
+we have seen native way 
+index.html has index.css file in it attached
+
+
+instead of css we have scss/SASS way of writing - nesting, variables , mixins 
+end of day scss will be converted to CSS 
+
+other way is to use inline css 
+style={{backgroundColor:'red'}}
+but it is not good because their is no reusability 
+
+we can libraries like material ui , bootstrap , ANT Design , chakraui , styled components
+all these libraries have their own pros and cons 
+these libraries are just packages, we can use multiple packages together 
+but we should not use these multiple frameworks at a time 
+
+------------------------------------------------------------------------------
+Lets see how to use Tailwind CSS 
+
+54 minutes
+
+
+
+------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------
+
+
+
+
+------------------------------------------------------------------------------
+
