@@ -1,0 +1,79 @@
+we can see what different companies are using their tech stacks 
+we can look from a website- stackshare.io 
+
+
+we can observe - every company is not depending on one tech stack , every company 
+                 has got their backend and frontend in different tech stacks 
+
+tech stack doesnot matter - it depends on use case 
+
+Business cares profit 
+
+
+Backend engineer --> play with data , databases , implement backend API for different functionalities
+
+    as a user we can interact with any frontend ui in webapp/ios/android
+    as business logic is from backend , the code should be good 
+
+    Node JS is good for high input output 
+    Machine learning - python
+    banking application - java
+    microservices- c#
+
+================================================================================================
+Why javascript?
+
+we can build frontend , cross platform apps , server side logic , and a lot of ML libraries - tensorflow.js 
+
+web3 - 
+
+small scale companies can work with same javascript resource 
+electron.js - for desktop applications
+
+All this is possible after 2009 only 
+================================================================================================
+we will see Rest API , grpc 
+
+Monolith , microservices architecture
+================================================================================================
+What happens when i write 
+    www.google.com --- inside browser
+
+    as a user i write a url in client , client doesnot have business logic
+    they try to reach server 
+
+    browser will do a DNS query(Domain name server) and gets corresponding ip address
+    we also have a local cache of the DNS , if it is not in local then it will contact
+    with ISP - Internet service provider and gets corresponding ip address 
+
+    DNS is a key value pair ,key is the search we want to do and the value is ip address 
+
+    we can see our local DNS , we have seperate tools to check them 
+
+    we can check in cmd - ipconfig /all , the DNS 
+
+
+    once we get ip address - we hit the load balancer and route our request to a healthy server
+    which can serve to us 
+
+    load balancer - this will be configured by cloud providers like aws 
+    a lot of things like cache , db servers will be there involved to show the website we hit in our browser
+
+
+As a backend engineer it is not just serving the webpage in front end 
+
+say i go to bookmyshow - there we can see same experience on both mobile and desktop 
+all this because of backend 
+
+================================================================================================
+
+history of javascript:
+
+javascript is no where related to java 
+
+original name of javascript is ECMAScript
+
+
+we can store data , make decisions, repeat tasks - all features in other languages
+we have them in javascript
+
