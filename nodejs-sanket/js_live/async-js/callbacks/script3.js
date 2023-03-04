@@ -1,0 +1,83 @@
+// console.log('Hello world');
+// setTimeout(() => {
+//   console.log('Timer done');
+// }, 0);
+// console.log('End');
+// /*
+// Hello world
+// End
+// Timer done
+// */
+
+// console.log('Hello world');
+// setTimeout(() => {
+//   console.log('Timer done');
+// }, 0);
+// for (let i = 0; i < 10000000; i++) {
+//   //some task
+// }
+// console.log('End');
+// /*
+// Hello world
+// End
+// Timer done
+// */
+/*
+console.log('hello world');
+
+for (let i = 0; i < 3; i++) {
+  console.log(`inside for loop ${i}`);
+  setTimeout(() => {
+    console.log('hi there ', i);
+  }, 3000);
+
+  console.log(`inside for loop ${i} at end`);
+}
+/*
+hello world
+inside for loop 0
+inside for loop 0 at end
+inside for loop 1
+inside for loop 1 at end
+inside for loop 2
+inside for loop 2 at end
+hi there  0
+hi there  1
+hi there  2
+*/
+/*
+console.log('lets see 2 settimeout example');
+
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log('hi there from time out 1', i);
+
+    setTimeout(() => {
+      console.log('from inner timeout', i);
+    }, 1000);
+  }, 2000);
+}
+
+console.log('lets start but iam at end');
+*/
+/*
+lets see 2 settimeout example
+lets start but iam at end
+hi there from time out 1 0
+hi there from time out 1 1
+hi there from time out 1 2
+from inner timeout 0
+from inner timeout 1
+from inner timeout 2
+*/
+
+// let timerId = setInterval(() => {
+//   console.log('hi there ');
+// }, 3000);
+// let i;
+// for (i = 0; i < 1000000000; i++) {
+//   //some task
+// }
+
+// console.log('hi', i);
+// clearInterval(timerId);

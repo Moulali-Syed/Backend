@@ -1,0 +1,129 @@
+how run time helps in async nature of JS:
+----------------------------------------
+Javascript is synchronous in nature
+Javascript is single Threaded 
+
+
+below code will take some time and executes synchronous only
+
+console.log('hi');
+
+for (let i = 0; i < 10000000000; i++) {
+  //
+}
+
+console.log('hello');
+
+
+
+
+================================================================================================================
+but look at below code it will execute , in asynchronously 
+
+ console.log('hi there');
+setTimeout(() => {
+  console.log('inside setTimeout');
+}, 2000);
+
+console.log('after timeout but prints before it');
+
+
+hi there
+after timeout but prints before it
+inside setTimeout
+
+
+================================================================================================================
+
+lets see the difference
+
+whenever we run Javascript code , we need runtime to run our code 
+runtime provides so many features to our js code 
+
+inorder to cope up as a child we get support from parents, teachers 
+
+browser is a runtime - which provides so many features to Javascript which are 
+not native to Javascript , so that Javascript can work with good potential
+
+DOM - is an API , not native to Javascript , it is provided by browser (runtime)
+setTimeout is not part of Javascript
+
+Timer provided by browser 
+================================================================================================================
+Thus Javascript is synchronous in nature , for the piece of code that is native to Javascript
+
+for example for loop 
+
+but setTimeout is provided by runtime , so it is asynchronous 
+
+
+Runtime plays a very crucial role in making Javascript so powerful , it not only 
+provides what can be done and also provide implementation how Javascript  can handle it 
+
+================================================================================================================
+
+
+function functionTakesTime() {
+  console.log('hi there');
+
+  for (let i = 0; i < 10000000; i++) {
+    //some task
+  }
+
+  console.log('bye ');
+}
+
+function functionwithTimeout() {
+  console.log('hello from timeout func');
+  setTimeout(() => {
+    console.log('from setTimeout');
+  }, 5000);
+  console.log('from timeout function ');
+}
+functionTakesTime();
+functionwithTimeout();
+functionTakesTime();
+/**
+hi there
+bye 
+hello from timeout func
+from timeout function
+hi there
+bye 
+from setTimeout
+ */
+
+/*
+
+
+code will start executing in call stack , once it sees something that takes time 
+
+then this code will execute after the time mentioned and will be inside event queue
+
+we have event loop that will keep on checking if our callstack is empty 
+
+if it finds empty then it will send the functions inside event queue one by one 
+inside call stack , only if there is nothing left from my native javascript code 
+
+
+eventloop will keep on checking our callstack if it is empty and push code from event queue 
+*/
+================================================================================================================
+because of eventloop and event queue - javascript code becomes non blocking for runtime features 
+
+because of this javascript is able to handle all the time taking tasks in background
+================================================================================================================
+
+
+console.log('hi');
+setTimeout(() => {
+  console.log('hello there');
+});
+
+console.log('tom cat');
+for (let i = 0; i < 10000000; i++) {}
+console.log('sdff');
+
+
+though we donot pass 2nd argument , in setTimeout we still get it done only after all 
+our native javascript code is executed

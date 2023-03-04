@@ -1,0 +1,47 @@
+
+var teacher = 'Apple';
+
+function fun() {
+  var teacher = 'Mango';
+  console.log(teacher); //Mango
+}
+
+function gun() {
+  var student = 'Grapes';
+  console.log(student); //Grapes
+}
+
+fun();
+gun();
+console.log(teacher); //Apple
+
+
+scope - represents  the visibility of the variables 
+
+everything inside your code will be used in one of the following 2 ways 
+1.either it will be getting some value assigned to it
+2.or some value will be retrieved from it
+
+
+How javascript is executed?
+javascript is not purely interpreted and it is also not purely compiled  
+
+if our js is interpreted then below code must have at least executed the first line
+console.log('hello');
+function fun() {
+    console.....log('ansf');
+}
+
+but our javascript code will throw error without printing anything
+
+-----
+it is not even purely compiled
+
+console.log('hi')
+console.lo('we);
+it will print hi and then throw error in seen thru browser console
+
+
+
+compiler - reads whole code and throw error if any error is found 
+javascript is compiled and interpreted as well 

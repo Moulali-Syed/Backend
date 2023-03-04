@@ -1,0 +1,23 @@
+Promises:
+
+we have 2 problems with call backs  - 1.Inversion of Control 2.callback hell a readability problem 
+
+Promises are nothing but readability enhancers 
+They can solve problem of Inversion of control 
+
+
+Promises are special type of objects that get returned immediately when we call them 
+
+
+lets recap Inversion of control
+function fun(x,cb){
+    cb();
+}
+
+fun(10,()=>{
+    console.log('done');
+})
+
+problem with this is we dont know whether the higher order function is gonna execute our callback 
+function or not
+
