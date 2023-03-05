@@ -1,0 +1,203 @@
+//observe the below execution
+
+
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    console.log('loading data from ', url);
+
+    setTimeout(() => {
+      resolve('sending data');
+    }, 1000);
+  });
+}
+
+console.log('Start');
+let p = fetchData('sfdsa');
+console.log(p);
+
+p.then(
+  (value) => {
+    console.log('hi ', value);
+  },
+  () => {
+    console.log('reject');
+  }
+);
+/*
+Start
+loading data from  sfdsa
+Promise { <pending> }
+hi  sending data
+*/
+
+============================================================================
+
+//observe below execution 
+
+
+function fetchData(url) {
+  return new Promise((resolve, reject) => {
+    console.log('loading data from ', url);
+
+    setTimeout(() => {
+      resolve('sending data');
+      console.log('download done');
+    }, 1000);
+  });
+}
+
+console.log('Start');
+let p = fetchData('sfdsa');
+console.log(p);
+
+p.then(
+  (value) => {
+    console.log('hi ', value);
+  },
+  () => {
+    console.log('reject');
+  }
+);
+/*
+Start
+loading data from  sfdsa
+Promise { <pending> }
+download done
+hi  sending data
+*/
+
+============================================================================
+Promise handlers goes to micro task queue 
+
+callback goes to callback queue 
+
+
+priority is microtask Queue > callback Queue 
+
+
+callstack/global code > micro task queue > callback Queue 
+
+============================================================================
+
+//below code gives a resolved promise 
+
+Promise.resolve("Gives a resolve promise");
+
+
+
+============================================================================
+day3 promises is examples on promises 
+
+
+
+============================================================================
+lets understand how promises helps us from Inversion of control of callback
+
+using callback 
+
+function download(url, cb) {
+  console.log('fetching data from ', url);
+  setTimeout(() => {
+    const content = 'ABCDE';
+    cb(content); //here we are deciding in other function when to call our callback, we can comment it
+    //or we can call twice - problem of Inversion of control
+  }, 1000);
+}
+
+download('xyz.com', (data) => {
+  console.log(data);
+});
+
+/*
+fetching data from  xyz.com
+ABCDE
+*/
+
+using promise :
+
+function downloadProm(url) {
+  console.log('fetching data from ', url);
+  return new Promise((resolve, reject) => {
+    resolve('data fetch successful');
+    resolve('hi there'); //this resolve will never be called
+    //because once a resolve is executed , no matter how many resolve we have they wont execute,or have no affect
+    //thus overcome the issue of callback , in which we dont have any control, how many times our function
+    //might get called
+  });
+}
+
+downloadProm('https://xyz.com').then((val) => {
+  console.log('data from fulfilhandler ', val);
+});
+/*
+fetching data from  https://xyz.com
+data from fulfilhandler  data fetch successful
+*/
+
+
+we handled Inversion of control , still in promises we have the Promise hell
+
+============================================================================
+promise chaining:
+
+to register handlers we use .then() function 
+
+
+the .then() function  returns Promise object , it immediatley returns a new Promise object
+
+
+we can use this new Promise object to chain a bunch of .then()
+
+
+function downloadProm(url) {
+  console.log('fetching data from ', url);
+  return new Promise((resolve, reject) => {
+    resolve('data fetch successful');
+    resolve('hi there'); //this resolve will never be called
+    //because once a resolve is executed , no matter how many resolve we have they wont execute,or have no affect
+    //thus overcome the issue of callback , in which we dont have any control, how many times our function
+    //might get called
+  });
+}
+
+downloadProm('https://xyz.com')
+  .then((val) => {
+    console.log('data from fulfilhandler ', val);
+    return 'New Promise String';
+  })
+  .then((val) => {
+    console.log(val);
+  });
+/*
+fetching data from  https://xyz.com
+data from fulfilhandler  data fetch successful
+New Promise String
+*/
+
+
+
+============================================================================
+
+
+
+
+
+
+============================================================================
+
+
+
+
+
+
+
+============================================================================
+
+
+
+
+
+
+
+
+============================================================================

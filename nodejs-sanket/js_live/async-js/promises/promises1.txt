@@ -5,9 +5,9 @@ we have 2 problems with call backs  - 1.Inversion of Control 2.callback hell a r
 Promises are nothing but readability enhancers 
 They can solve problem of Inversion of control 
 
-
+------
 Promises are special type of objects that get returned immediately when we call them 
-
+----
 
 lets recap Inversion of control
 function fun(x,cb){
@@ -20,4 +20,154 @@ fun(10,()=>{
 
 problem with this is we dont know whether the higher order function is gonna execute our callback 
 function or not
+we dont know whether it is handled or not , if handled how it got handled we dont
+this is the problem of Inversion of control 
 
+this problem will get resolved by promises 
+
+-----------
+Promises acts as a placeholder for the data we hope to get back sometime in future 
+====================================================================================
+
+lets assume we have a function fetch and we give an url to it 
+
+x = fetch('https://www.xyx.com');
+
+say we passed url to fetch and expecting some html or json to get loaded 
+downloading is a heavy task , this cannot be immediately completed 
+
+javascript will call the api when it hit that line 
+as it is not a native javascript code , javascript will not wait for that to complete 
+
+
+if we write fetch using promises , then it will immediately returns 
+a promise object which will act as a placeholder for the result 
+till the time whole content is not downloaded the placeholder will be pointing to that 
+
+-------
+In promise objects we can attach the functionality we want to execute once the 
+future task is done 
+-------
+once the future task is done , promises will automatically execute the attached functionality 
+
+with promises we get placeholder, we can execute any task in future on this object 
+but with callbacks we cannot we have to execute then and there only 
+
+====================================================================================
+How we can create a Promise ?
+
+
+How can we consume a Promise? 
+
+
+Promise - may be fulfill the promsie or might not get fulfilled 
+
+====================================================================================
+Promises are native to javascript
+
+Creation of promsie object is synchronous in nature 
+
+
+====================================================================================
+Promsie Objects:
+A promise is an object that is used as a placeholder for the eventual results of a 
+deffered (and possibly asynchronous) computation
+
+Any promise object is in one of three mutually exclusive states : fulfilled , rejected and pending 
+
+
+When we create a new Promise object - Pending is default state (it represents work in progress)
+
+If the operation is completed successfully - it is Fulfilled state 
+
+If operation is not successful - it is Rejected 
+
+
+====================================================================================
+lets see how to create a promise?
+
+we can do using below
+new Promise(callbackfunction);
+
+callbackfunction takes 2 parameters - resolve and reject , it can be anonymous or can be named function
+
+any type of time consuming or non time consuming , it can be written inside the 
+callback function 
+
+callbackfunction also called executor function
+the parameters resolve and reject are also kind of functions , kind of inbuilt functions
+
+if we call resolve - our promise will go to fulfilled state 
+
+if we call reject - our promise goes to rejected state 
+
+if we donot call either , our promsie will forever be in Pending state
+
+
+apart from this , we have value , when our promsie is pending it will be undefined 
+the movement we go to fulfill or reject state - then value will be changed 
+
+const a = new Promise((resolve, reject) => {});
+console.log(a); //Promise { <pending> }
+
+const b = new Promise((resolve, reject) => {
+  resolve('hi');
+});
+console.log(b); //Promise { 'hi' }
+
+const c = new Promise((resolve, reject) => {
+  reject('bye');
+});
+console.log(c); //Promise { <rejected> 'bye' }
+
+====================================================================================
+when we by new car - it doesnot have a number plate 
+
+till then we have a dummy number plate , it will be acting as a placeholder for the 
+original number plate till it actually comes 
+
+
+====================================================================================
+
+function getRandomInt(num) {
+  return Math.floor(Math.random() * 10);
+}
+
+function createPromsieWithLoop() {
+  return new Promise(function execute(resolve, reject) {
+    for (let i = 0; i < 10000000; i++) {}
+    let num = getRandomInt(10);
+    if (num % 2 == 0) {
+      resolve(num);
+    } else {
+      reject(num);
+    }
+  });
+}
+
+
+====================================================================================
+function createPromsieWithTimeout() {
+  return new Promise(function execute(resolve, reject) {
+    setTimeout(() => {
+      let num = getRandomInt(10);
+      if (num % 2 == 0) {
+        resolve(num);
+      } else {
+        reject(num);
+      }
+    }, 3000);
+  });
+}
+let x = createPromsieWithTimeout();
+console.log(x);
+
+
+x - will be promise object , we can play with it 
+====================================================================================
+state of promise will only change only if we call resolve or reject 
+
+if we can resolve multiple times , only the first change will be shown 
+doesnot matter how many times we call resolve only the first resolve will be shown 
+
+====================================================================================
