@@ -18,29 +18,61 @@ all these libraries have their own pros and cons
 these libraries are just packages, we can use multiple packages together 
 but we should not use these multiple frameworks at a time 
 
+
+we have so many ways to write css:
+Normal Native CSS
+scss
+inline css 
+component libraries - material ui , Base UI , Ant , Chakra 
+Styled components   
+tailwind CSS framework
+
 ------------------------------------------------------------------------------
 Lets see how to use Tailwind CSS 
 
-54 minutes
+we can write css on the go , it is also reusable 
+it comes with many reusable classes 
+less bundle size 
 
 
 
 ------------------------------------------------------------------------------
+lets see how to add tailwind css to our code 
 
-
-
-------------------------------------------------------------------------------
-
-
-
-------------------------------------------------------------------------------
-
+1.using cdn 
+<script src="https://cdn.tailwindcss.com"></script>
 
 
 ------------------------------------------------------------------------------
+tailwind css works with class name -  every new style we want to put is a new classname
+
+to make text bold ---> font-bold
+
+to increase size of font - text-xl  
+
+to make more big - text-2xl ,text-3xl, ...text-9xl
+
+we also have ---> text-md, text-sm , text-lg ,text-xs 
+------------------------------------------------------------------------------
+to install tailwind css into our parcel project 
+
+go to installation guide specific to the project , given in documentation
+
+npm install -D tailwindcss postcss
+npx tailwindcss init 
 
 
+configure --> tailwind.config.js 
 
+configure -->.postcssrc file (to tell our bundler to compile our tailwindcss)
+
+
+in index.css file - write 3 lines as mentioned
+------------------------------------------------------------------------------
+install tailwindcss Intellisense extension
+
+we have square bracket notation --> w-52  ---> i can give a dynamic value =  w-[200], which means
+width set to 200px
 
 ------------------------------------------------------------------------------
 
