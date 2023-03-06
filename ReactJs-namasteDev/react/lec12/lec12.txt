@@ -1,0 +1,198 @@
+Lets build the store - Redux:
+-----------------------------
+cons:
+
+Redux has so much to setup task 
+
+so we have Redux toolkit 
+
+
+===================================================================================
+Store:
+
+Redux store can be accessed by all the components
+
+we have a single store for everything , unlike multiple
+context in case of useContext 
+
+
+we create logical separation - that is slices of our store 
+
+
+what all slices we can have - we can have multiple 
+slices cart slice, userAuth, 
+
+
+Our components cannot directly modify the store 
+
+I will have to dispatch an action ,this action will call a fucntion
+and this function will modify our cart slice in the redux store
+the function is called reducer  
+
+**************************
+when i click on a button , we  dispatch an action which  
+calls reducer function which updates the slice of store 
+************************
+===================================================================================
+
+click on + button , it dispatches an action which calls reducer
+function which updates a slice in the store , we use selector(selecting slice -portion of store)
+to read data , which updates our cart 
+
+selector is a hook useSelector , which is a function at end of day 
+
+when we use selector , it is known as subscribing to store 
+when we subscribe to store when ever store modifies my cart 
+component will modify 
+
+===================================================================================
+we need to install redux toolkit 
+
+
+npm i @reduxjs/toolkit    (core library)
+
+npm i react-redux (bridge between react and redux -toolkit)
+
+===================================================================================
+inside utils , create store.js 
+
+
+Step1:
+//configure store comes from redux-toolkit
+
+import { configureStore } from '@reduxjs/toolkit';
+const store = configureStore({});
+
+export default store;
+
+Step2:
+mostly store is used by all components, so go to  App.js 
+provide store to whole app 
+
+import {Provider} from 'react-redux';
+import store from './utils/store';
+
+wrap whole components with Provider 
+
+    return <Provider store={store}>
+                    <Header/>
+                    <Body/>
+                    <Footer/>
+            </Provider>
+
+now we are ready to do actions , dispatch ,subscribe
+as we have completed with creating a store and providing it to our app 
+
+
+Step3:
+lets create slices  - inside utils folder , create cartSlice.js 
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: {
+    items: [],
+  },
+  reducers: {
+    //mapping between action(is addItem) and reducer(it is function)
+    //state - here is the initialState
+    //action - is the data coming in from our action like button click
+    addItem: (state, action) => {
+      state.items.push(action.payload());
+    },
+    //on clearing cart we are not sending any data
+    clearCart: (state) => {
+      state.items = [];
+    },
+    removeItem: (state, action) => {
+      state.items.pop();
+    },
+  },
+});
+
+//actions* here
+export const { addItem, removeItem, clearCart } = cartSlice.actions;
+//we need to export reducers , it is decided by redux to call it reducer only
+//while exporting, so is below(reducer*)
+export default cartSlice.reducer;
+
+
+----
+
+Step4:
+place your slice into store 
+
+import { configureStore } from '@reduxjs/toolkit';
+import cartSlice from './cartSlice';
+const store = configureStore({
+  reducer: {
+    cart: cartSlice,
+  },
+});
+
+export default store;
+---------
+Step5:
+lets subscribe to the store , inside Header.js
+
+import { useSelector } from 'react-redux';
+
+ //we can subscribe to the required part of store
+  const cartItems = useSelector((store) => store.cart.items); //** subscribing ******
+
+<p>{cartItems.length}</p>
+
+-------
+Step6:
+
+lets dispatch an action , inside RestuarantMenu.js 
+
+created a button attach onClick handler
+
+import { addItem } from '../utils/cartSlice';
+import { useDispatch } from 'react-redux';
+
+  const dispatch = useDispatch();
+  //handling - dispatch an action
+  const handleAddItem = () => {
+    dispatch(addItem('Grapes'));
+  };
+
+      <div>
+        <button
+          className="p-2 m-5 bg-green-400"
+          onClick={() => handleAddItem()}
+        >
+          Add Item
+        </button>
+      </div>
+===================================================================================
+
+
+revise 
+    created a store using --> configureStore  imported from RTK
+    provide my store to app using Provider component we used key as store
+    then we created a slice using createSlice() comes from RTK
+    slice needs - name , initialState , reducers with action and reduce function
+    then we export reducer 
+    export actions 
+    put the slice into store 
+
+
+When we click on the AddButton --> an action is getting dispatched -->
+which is calling the reducer function --> which is updating the slice of our store 
+and in turn --> The cart is subscribed to our store using useSelector 
+
+and everything is working behind the scenes very fast
+
+on clicking button ---> it calls handleAddItem --> this calls dispatch which is an action (addItem here)
+and we passed in grapes ---> then it will goto cartSlice which has the reducer function 
+
+===================================================================================
+
+
+
+read about - redux thunk , RTK Query , Middlewares 
+
+

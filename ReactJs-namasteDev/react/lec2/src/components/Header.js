@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import Logo from '../../assets/images/foodVilla.jpg';
 import { Link } from 'react-router-dom';
 import userContext from '../utils/UserContext';
+import { useSelector } from 'react-redux';
 
 const Title = () => (
   <a href="/">
@@ -16,6 +17,10 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { user } = useContext(userContext);
+
+  //we can subscribe to the required part of store
+  const cartItems = useSelector((store) => store.cart.items); //** subscribing ******
+
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg">
       <Title />
@@ -33,9 +38,12 @@ const Header = () => {
           <Link to="/instamart">
             <li className="px-2">Instamart</li>
           </Link>
-          <li className="px-2">Cart</li>
+          <Link>
+            <li className="px-2">Cart</li>
+          </Link>
         </ul>
       </div>
+      <p>{cartItems.length}</p>
       {user.name}
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>Logout</button>

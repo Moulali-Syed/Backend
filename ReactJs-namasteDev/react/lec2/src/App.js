@@ -10,6 +10,9 @@ import RestuarantMenu from './components/RestuarantMenu';
 import Profile from './components/Profile';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Shimmer from './components/Shimmer';
+import { Provider } from 'react-redux';
+import store from './utils/store';
+import Cart from './components/Cart';
 /*
       Header
         logo
@@ -33,18 +36,20 @@ const Instamart = lazy(() => import('./components/Instamart'));
 
 const AppLayout = () => {
   return (
-    <React.Fragment>
-      <Header />
-      {
-        /* <About /> // if path is /about
+    <Provider store={store}>
+      <React.Fragment>
+        <Header />
+        {
+          /* <About /> // if path is /about
       <Body /> // if path is /
       <Contact /> // if path is /contact */
-        // this is the outlet to fill in different pages
-        //react-router-dom gives us Outlet - this is filled by the children configuration we need
-      }
-      <Outlet />
-      <Footer />
-    </React.Fragment>
+          // this is the outlet to fill in different pages
+          //react-router-dom gives us Outlet - this is filled by the children configuration we need
+        }
+        <Outlet />
+        <Footer />
+      </React.Fragment>
+    </Provider>
   );
 };
 
@@ -85,6 +90,10 @@ const appRouter = createBrowserRouter([
             <Instamart />
           </Suspense>
         ),
+      },
+      {
+        path: '/Cart',
+        element: <Cart />,
       },
     ],
   },
