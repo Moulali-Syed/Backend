@@ -1,0 +1,216 @@
+UI Layer - everything we see on the browser is UI Layer , to build this we use JSX , which at the 
+            end converts JSX to javascript object ,this object is virtual DOM , then we calcluate
+            diff between renders
+
+Data Layer - whole UI layer is powered by Data Layer ,we use State and Props to manage the UI 
+            data handled by state and props , and also more things are there 
+
+            state - i have a container , i want its scope only in the js file  
+            prop - pass data from one component to other component
+
+
+UI + Data Layer = our front end 
+
+==============================================================================
+say i have to pass a state variable from 
+    AppLayout
+        Body
+            RestaurantCard 
+
+            it is like a chain , state is maintained in AppLayout 
+            and iam using it in RestaurantCard
+
+This is called Prop Drilling 
+
+
+
+==============================================================================
+Install React Dev Tools  - we see components and profiler 
+
+components - show the hierarchy
+==============================================================================
+
+
+how to overcome prop drilling ?
+
+one way is using redux -  lets see this next    
+
+we have to share state across , so that any component can use that data 
+
+we can do using ReactContext
+==============================================================================
+how to pass data from child to parent?
+
+because data flows in one way - parent to child 
+
+
+==============================================================================
+
+accordion component:
+
+import { useState } from "react";
+
+const Section = ({ title, description, isVisible, setIsVisible }) => {
+  return (
+    <div className="border border-black p-2 m-2">
+      <h3 className="font-bold text-xl">{title}</h3>
+      {isVisible ? (
+        <button
+          onClick={() => setIsVisible(false)}
+          className="cursor-pointer underline"
+        >
+          Hide
+        </button>
+      ) : (
+        <button
+          onClick={() => setIsVisible(true)}
+          className="cursor-pointer underline"
+        >
+          Show
+        </button>
+      )}
+
+      {isVisible && <p>{description}</p>}
+    </div>
+  );
+};
+
+const Instamart = () => {
+  const [visibleSection, setIsVisibleSection] = useState("team");
+  return (
+    <div>
+      <h1 className="text-3xl p-2 m-2 font-bold"> Instamart</h1>
+      <Section
+        title={"About Instamart"}
+        description={
+          "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+        }
+        isVisible={visibleSection === "about"}
+        setIsVisible={() => setIsVisibleSection("about")}
+      />
+
+      <Section
+        title={"Team Instamart"}
+        description={
+          "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+        }
+        isVisible={visibleSection === "team"}
+        setIsVisible={() => setIsVisibleSection("team")}
+      />
+
+      <Section
+        title={"Careers "}
+        description={
+          "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+        }
+        isVisible={visibleSection === "career"}
+        setIsVisible={() => setIsVisibleSection("career")}
+      />
+
+      {/* <AboutInstaMart/>
+      <DetailsofInstaart/>
+      <TeamInstamart/>
+      <Product/>
+      <Careers/> */}
+    </div>
+  );
+};
+
+export default Instamart;
+
+
+
+==============================================================================
+Lifting the state up :
+
+If we have state in the Section , then all siblings will have the control over state
+
+so get a common control , we lift the state from Section to Parent , Instamart here 
+
+This is very important 
+
+==============================================================================
+
+
+ReactContext - to get the state accessible every where in all components
+
+step1:
+create context inside utils 
+
+import { createContext } from 'react';
+
+const userContext = createContext({
+    user: {
+        name: 'DummyName',
+        email: 'dummy@gmail.com',
+    }
+});
+//to display the context name , we can provide a name as below
+userContext.displayName = "UserContext";//very helpful in debugging
+
+export default userContext;
+
+
+
+step2:
+whichever component we want to use the userContext , import useContext hook 
+
+we can have multiple context in our app 
+
+import {useContext} from 'react';
+import userContext from  '../utils/UserContext';
+
+ const { user } = useContext(userContext);
+ {user.name};//now we can use the data 
+
+
+==============================================================================
+
+
+context is to store the data that we need all across the application
+
+state is tied to the component
+
+context is like useState for our whole application
+
+==============================================================================
+using userContext in class based component:
+
+
+just import the context 
+and use it as a component 
+
+import userContext from  '../utils/UserContext';
+
+
+<userContext.Consumer>
+      {(value)=>console.log(value)}
+</userContext.Consumer>
+
+//value in above function holds the value what ever we are passing in context
+
+we can destructure and use 
+<userContext.Consumer>
+      {({user})=><h4>{user.name } - {user.email}</h4>}
+</userContext.Consumer>
+==============================================================================
+say i have a state , managed by useState and i do a api call in useEffect and
+fetch user data and i want to pass dynamic value to context 
+
+we can do using Provider 
+
+import {useContext} from 'react';
+import userContext from  '../utils/UserContext';
+
+ const { user } = useContext(userContext);
+ {user.name};//now we can use the data 
+
+ <userContext.Provider value={{user:user,}}>
+
+ </userContext.Provider>
+
+
+
+==============================================================================
+
+
