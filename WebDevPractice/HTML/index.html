@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML</title>
+  </head>
+  <body>
+    <!-- Headings -->
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <img
+      src="https://images.unsplash.com/photo-1421091242698-34f6ad7fc088?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8aW5zcGlyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      alt="image"
+      id="idn"
+    />
+    <br />
+
+    <hr style="color: pink" />
+    <span style="color: red">helllo</span>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, ipsa?</p>
+
+    <pre>
+        sdf
+        asgf
+
+        wfg  fd 
+
+                    k
+    </pre>
+
+    <!-- formating html elements -->
+    <b>bold text</b>
+    <strong>new way of bolding and giving importance to text</strong>
+
+    <i>italic tags</i>
+    <em>new way of italicing text</em>
+
+    <small>small text here</small>
+
+    <mark>marker like color</mark>
+
+    <del>this creates a strikethrough effect</del>
+
+    <ins>inserted new text</ins>
+
+    <p>x<sub>2</sub></p>
+    <p>x<sup>2</sup></p>
+
+    <q
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
+      numquam!</q
+    >
+
+    <blockquote>it is a block quote leaves some space on both sides</blockquote>
+
+    <blockquote cite="https://google.com">
+      this is also having the source from where i took this quote
+    </blockquote>
+
+    <abbr title="WorldHealthOrganisation">WHO</abbr>
+
+    <cite>The LostKid</cite>
+
+    <div>
+      <a href="https://google.com">GoToGoogle</a>
+
+      <a href="https://google.com" target="_blank">googlein New Page</a>
+
+      <a href="#idn">gotoSection</a>
+
+      <a href="#">Top</a>
+
+      <a href="https://google.com" title="takes to google">google</a>
+    </div>
+
+    <div>
+      <!-- email -->
+      <a href="mailto:dummy@gmail.com">mailbox</a>
+      <br />
+      <a href="mailto:dummy@email.com?subject=How are you">mailbox</a>
+    </div>
+
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aW5zcGlyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+        alt="image address"
+        width="200"
+        height="200"
+      />
+    </div>
+
+    <div>
+      <!-- default right to left , i.e is direction is left by default-->
+      <!-- we can specify right , up , down -->
+      <marquee behavior="" direction="down">moving text </marquee>
+    </div>
+
+    <!-- unorder list -->
+    <!-- list-style-type: disc (default)| circle| square |none -->
+    <ul style="list-style-type: square">
+      <li>asdf</li>
+    </ul>
+
+    <!-- ordered list -->
+    <!-- type = "1" | "a"|"A"|"i"|"I"    , start = "1" |"10"...any number-->
+    <ol type="a" start="10">
+      <li>edsf</li>
+      <li>edsf</li>
+    </ol>
+
+    <!-- description list -->
+    <dl>
+      <dt>coffee</dt>
+      <dd>Hot to Drink</dd>
+    </dl>
+
+    <div>
+      <table border="1">
+        <caption>
+          table heading
+        </caption>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+      </table>
+
+      <table border="1" style="border-collapse: collapse">
+        <thead>
+          <th>hreeasdfd</th>
+          <th>saaj</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dsf</td>
+            <td>edfgh</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>dsf</td>
+            <td>dsfh</td>
+          </tr>
+        </tfoot>
+      </table>
+      <br />
+      <table border="1" style="border-collapse: collapse">
+        <tr>
+          <td rowspan="2">ealksdfj</td>
+          <td>wadf</td>
+          <td>sdfg</td>
+          <td>sdfggf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td colspan="2">klasdjgjjf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+
+          <td>klasdjgjjf</td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <span>asfd</span>
+      <span>asdfg</span>
+    </div>
+    <!-- canvas element will help in creating a box in which we can draw using javascript -->
+    <canvas style="border: 2px solid red" width="300" height="300"
+      >kasjdf</canvas
+    >
+
+    <div>
+      <iframe src="https://youtube.com" frameborder="0"></iframe>
+      <iframe
+        width="1080"
+        height="760"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/"
+        frameborder="0"
+        allowfullscreen
+        target="_blank"
+      ></iframe>
+      <br />
+      <!-- <iframe
+        src="https://ndtv.com"
+        frameborder="0"
+        width="300"
+        height="300"
+      ></iframe> -->
+    </div>
+
+    <div>
+      <audio controls>
+        <source src="./audio.mp3" type="audio/mpeg" />
+
+        Your browser doesnot support audio
+      </audio>
+    </div>
+
+    <div>
+      <video src="./video.mp4" controls autoplay></video>
+    </div>
+
+    <div>
+      <embed src="pdf.pdf" type="application/pdf" />
+      <iframe src="pdf.pdf" frameborder="0"></iframe>
+
+      <object data="pdf.pdf" type="application/pdf"></object>
+    </div>
+
+    <div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/AJ_kMDLwlFA"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448196.05314710614!2d76.81303774470669!3d28.643795372162113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1678154316498!5m2!1sen!2sin"
+        width="600"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+  </body>
+</html>
+<!-- 
+    What is HTML?
+    HTML Elements
+    Attributes
+    Semantic HTML
+    Accessibility
+ -->
+<!--
+    HTML - Hyper text Mark up language
+
+  --   Headings -->
+<!-- <h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6> -->
+
+<!-- insert a line break -->
+<!-- <br/> -->
+
+<!-- insert an image -->
+<!-- <img src="" alt=""/> -->
+
+<!-- insert horizontal line -->
+<!-- <hr/> -->
+
+<!-- insert a bunch of text - we can do as a paragraph -->
+<!-- <p></p> -->
+
+<!-- pre tag - this maintains the same way the content is written -->
+<!-- <pre></pre> -->
+
+<!-- formating html elements -->
+<!-- <b>bold text</b>
+    <strong>new way of bolding and giving importance to text</strong>
+
+    <i>italic tags</i>
+    <em>new way of italicing text</em>
+
+    <small>small text here</small>
+
+    <mark>marker like color</mark>
+
+    <del>this creates a strikethrough effect</del>
+
+    <ins>inserted new text</ins>
+
+    <p>x<sub>2</sub></p>
+    <p>x<sup>2</sup></p> -->
+
+<!-- Quotation and citation tags -->
+<!-- 
+        <q
+      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
+      numquam!</q
+    >
+
+    <blockquote>it is a block quote leaves some space on both sides</blockquote>
+
+    <blockquote cite="https://google.com">
+      this is also having the source from where i took this quote
+    </blockquote>
+
+    <abbr title="WorldHealthOrganisation">WHO</abbr>
+
+    <cite>The LostKid</cite>
+ -->
+
+<!-- anchor tag -->
+<!-- 
+        <div>
+      <a href="https://google.com">GoToGoogle</a>
+
+      <a href="https://google.com" target="_blank">googlein New Page</a>
+
+      <a href="#idn">gotoSection</a>
+
+      <a href="#">Top</a>
+
+      <a href="https://google.com" title="takes to google">google</a>
+    </div>
+  -->
+
+<!-- specify mail links -->
+<!-- 
+       <div>
+      
+      <a href="mailto:dummy@gmail.com">mailbox</a>
+      <br />
+      <a href="mailto:dummy@email.com?subject=How are you">mailbox</a>
+    </div>
+   -->
+
+<!-- image tag -->
+
+<!-- <div>
+  <img
+    src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aW5zcGlyaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    alt="image address"
+    width="200"
+    height="200"
+  />
+</div> -->
+
+<!-- <div> -->
+<!-- default right to left , i.e is direction is left by default-->
+<!-- we can specify right , up , down -->
+<!-- <marquee behavior="" direction="down">moving text </marquee> -->
+<!-- </div> -->
+
+<!-- unorder list -->
+<!-- list-style-type: disc (default)| circle| square |none -->
+<!-- <ul style="list-style-type: square">
+      <li>asdf</li>
+    </ul> -->
+
+<!-- ordered list -->
+<!-- type = "1" | "a"|"A"|"i"|"I"    , start = "1" |"10"...any number-->
+<!-- <ol type="a" start="10">
+      <li>edsf</li>
+      <li>edsf</li>
+    </ol> -->
+
+<!-- description list -->
+<!-- <dl>
+      <dt>coffee</dt>
+      <dd>Hot to Drink</dd>
+    </dl> -->
+
+<!-- table -->
+
+<!-- <div>
+      <table border="1">
+        <caption>
+          table heading
+        </caption>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>4</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>6</td>
+        </tr>
+      </table>
+
+      <table border="1" style="border-collapse: collapse">
+        <thead>
+          <th>hreeasdfd</th>
+          <th>saaj</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dsf</td>
+            <td>edfgh</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>dsf</td>
+            <td>dsfh</td>
+          </tr>
+        </tfoot>
+      </table>
+      <br />
+      <table border="1" style="border-collapse: collapse">
+        <tr>
+          <td rowspan="2">ealksdfj</td>
+          <td>wadf</td>
+          <td>sdfg</td>
+          <td>sdfggf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td colspan="2">klasdjgjjf</td>
+        </tr>
+        <tr>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+          <td>klasdjgjjf</td>
+
+          <td>klasdjgjjf</td>
+        </tr>
+      </table>
+    </div> -->
+
+<!-- canvas element will help in creating a box in which we can draw using javascript -->
+<!-- <canvas style="border: 2px solid red" width="300" height="300"
+      >kasjdf</canvas
+    > -->
+<!-- to embed an external video into our website -->
+<!-- <iframe
+        src="https://ndtv.com"
+        frameborder="0"
+        width="300"
+        height="300"
+      ></iframe> -->
+
+<!-- <div>
+  <audio controls>
+    <source src="./audio.mp3" type="audio/mpeg" />
+
+    Your browser doesnot support audio
+  </audio>
+</div>
+
+<div>
+  <video src="./video.mp4" controls autoplay></video>
+</div> -->
+
+<!-- <div>
+      <embed src="pdf.pdf" type="application/pdf" />
+      <iframe src="pdf.pdf" frameborder="0"></iframe>
+
+      <object data="pdf.pdf" type="application/pdf"></object>
+    </div>
+
+    <div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/AJ_kMDLwlFA"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div> -->
