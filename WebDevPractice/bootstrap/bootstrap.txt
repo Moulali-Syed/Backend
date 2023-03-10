@@ -1,0 +1,345 @@
+bootstrap - it is a most popular HTML,CSS,Javascript framework for developing responsive
+mobile first websites
+------------------------------------------------------------------------------
+new features in bootstrap 5:
+no longer will be using jquery cdn
+improved grid system
+the gutter class(.gutter)  has been replaced with utility(.g*) much like margin and padding 
+vertical spacing classes have also been included
+columns are no longer defaulted to position relative
+bootstrap has improved its form controls,input groups and more 
+bootstrap has its own open source svg icon library with over 1300 icons 
+------------------------------------------------------------------------------
+lets add cdn to our html file :
+
+we have starter template in bootstrap documentation  , we can copy it (css and js cdn links)
+and place accordingly
+
+------------------------------------------------------------------------------
+container:
+
+in bootstrap we have 2 types of containers , this only needs css 
+
+1. .container ---> provides a responsive fixed witdh container
+2. .container-fluid ----> this class is used to create a full width container , that will always 
+                            span the entire width of the screen , width is always 100%
+
+    <div class="container"></div>  --> leaves a space on left and right
+    <div class="container-fluid"></div> --> always occupy 100% width 
+
+    all conatiners by default has a padding of 15px 
+------------------------------------------------------------------------------
+
+padding: - giving space from inside 
+
+px ---> left and right (x-axis)
+py ---> top and bottom (y-axis)
+
+px-3   , means , apply padding left and right of 16px
+py-3   , means , apply padding top and bottom of 16px
+
+pt-3 , padding top 
+pb-3 , padding bottom 
+
+ps-3, padding start , means padding-left
+pe-3,padding end meand padding-right 
+------------------------------------------------------------------------------
+margin:
+
+similarly as padding , we have margin classes 
+
+mx-3 , margin-left and margin-right 
+my-3 , margin-top and margin-bottom 
+mt-3 ,margin-top
+mb-3 , margin-bottom
+ms-3  ,margin-left , which means marginstart
+me-3 , margin-right , which means marginend
+
+
+------------------------------------------------------------------------------
+grid system using bootstrap:
+
+different break points in grid system:
+
+extrasmall  ---  xs  --  <576px
+Small       ---  sm  --  >=576px 
+medium     ----  md  --  >=768px
+large       ---  lg  --  >=992px
+extralarge  ---  xl  --  >=1200px
+extraextralarge- xxl --  >=1400px
+
+
+grid system: it allows upto 12 columns across the page 
+
+grid classes: there are 6 grid classes 
+        .col-(extra small device) screen width less than 576px
+        .col-sm-(small device) screen width greater than or equal to 576px
+        .col-md-(medium device) screen width greater than or equal to 768px 
+        .col-lg-(large device) screen width greater than or equal to 992px 
+        .col-xl-(extra large)  screen width greater than or equal to 1200px
+        .col-xxl-(extraextralarge) screen width greater than or equal to 1400px 
+
+
+Grid System Rules:
+Rows must be placed within a .container  or .container-fluid for proper alignment and padding 
+Use rows to create horizontal groups of columns 
+Content should be placed within columns and only columns may be immediate children of rows 
+Column widths are in percentage so they are always fluid and sized relative to their parent element
+
+examples:
+
+4 coulmns each occupying 3 cols width  
+   <div class="container">
+      <div class="row">
+        <div class="col-md-3"><h1>1</h1></div>
+        <div class="col-md-3"><h1>2</h1></div>
+        <div class="col-md-3"><h1>3</h1></div>
+        <div class="col-md-3"><h1>4</h1></div>
+      </div>
+    </div>
+
+3 columns occupying 4 cols width
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"><h1>1</h1></div>
+        <div class="col-md-4"><h1>2</h1></div>
+        <div class="col-md-4"><h1>3</h1></div>
+      </div>
+    </div>
+
+1:2:2:1
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1"><h1>1</h1></div>
+        <div class="col-md-2"><h1>2</h1></div>
+        <div class="col-md-2"><h1>3</h1></div>
+        <div class="col-md-1"><h1>4</h1></div>
+      </div>
+    </div>
+5:7
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5"><h1>1</h1></div>
+        <div class="col-md-7"><h1>2</h1></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 col-md-5 col-3"><h1>1</h1></div>
+        <div class="col-sm-9 col-md-7 col-9"><h1>2</h1></div>
+      </div>
+    </div>
+
+Which ever container in the cols have a greater height , remaining all cols 
+will take same height 
+
+------------------------------------------------------------------------------
+
+nesting inside :  1 row , with 2 columns , 1st column with 2 rows , each row has one column of 12 width 
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 one">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Necessitatibus nam quam fugiat in. Quod error sequi earum, vero
+                voluptatibus nobis.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 two">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Necessitatibus nam quam fugiat in. Quod error sequi earum, vero
+                voluptatibus nobis.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 three">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam
+            perspiciatis recusandae itaque tenetur ab libero consequuntur cumque
+            eius nobis ut esse quaerat adipisci amet dicta, dolor fuga ex
+            placeat totam provident soluta quidem nihil. Magnam corrupti qui
+            delectus ab reiciendis.
+          </p>
+        </div>
+      </div>
+    </div>
+------------------------------------------------------------------------------
+
+Typography:
+
+By default 
+we have ----->  font-size: 16px;
+                line-height: 1.5;
+                all paragraphs will have margin top as 0 , margin-bottom as 16px 
+
+
+.h1 to .h6 class :
+these h1 to h6 classes replicate our h1 to h6 html tags
+
+.display-1 to .display-6 classes;
+these classes will display bigger than h1 to h6 classes 
+
+.small - this class is to display text as small
+
+.mark - this class is to display text as mark tag in html does
+
+
+      <blockquote class="blockquote">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, aut.
+        </p>
+        <footer class="blockquote-footer">author name</footer>
+      </blockquote>
+
+
+lead class:
+<p class="lead"></p> --> content inside will stand out 
+
+<p class="text-left"></p>
+<p class="text-center"></p>
+<p class="text-end"></p>
+
+<p class="text-break"></p>
+<p class="text-nowrap"></p>
+
+<p class="text-lowercase"></p>
+<p class="text-uppercase"></p>
+<p class="text-capitalize"></p>
+
+<ul class="list-unstyled list-inline">
+    <li class="list-inline-item"></li>
+    <li class="list-inline-item"></li>
+    <li class="list-inline-item"></li>
+</ul>
+------------------------------------------------------------------------------
+Colors:
+
+text and background colors:
+
+    <!-- text colors -->
+    <h1 class="text-dark">StyleSheet</h1>
+    <h1 class="text-light">StyleSheet</h1>
+    <h1 class="text-success">StyleSheet</h1>
+    <h1 class="text-danger">StyleSheet</h1>
+    <h1 class="text-info">StyleSheet</h1>
+    <h1 class="text-warning">StyleSheet</h1>
+    <h1 class="text-muted">StyleSheet</h1>
+    <h1 class="text-white">StyleSheet</h1>
+    <h1 class="text-white-50">StyleSheet</h1>
+    <!-- below class gives default color of body -->
+    <h1 class="text-body">StyleSheet</h1>
+    <h1 class="text-black">StyleSheet</h1>
+    <!-- reduce opacity by 50 -->
+    <h1 class="text-black-50">StyleSheet</h1>
+    <h1 class="text-primary">StyleSheet</h1>
+    <h1 class="text-secondary">StyleSheet</h1>
+
+    <!-- background colors -->
+    <h2 class="bg-success">Hyper Text</h2>
+    <h2 class="bg-danger">Hyper Text</h2>
+    <h2 class="bg-primary">Hyper Text</h2>
+    <h2 class="bg-info">Hyper Text</h2>
+    <h2 class="bg-warning">Hyper Text</h2>
+    <h2 class="bg-dark text-light">Hyper Text</h2>
+    <h2 class="bg-light">Hyper Text</h2>
+
+------------------------------------------------------------------------------
+Images:
+
+rounded
+rounded-circle
+img-thumbnail
+mx-auto d-block : to center an image 
+img-fluid :  to get responsive image 
+img-responsive : to get responsive image
+
+ <body>
+    <!-- Images -->
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="rounded"
+    />
+
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="rounded-circle"
+    />
+
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="img-thumbnail"
+    />
+
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="float-start"
+    />
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="float-end"
+    />
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="mx-auto d-block"
+    />
+    <img
+      src="https://cdn.pixabay.com/photo/2018/08/12/15/29/hintersee-3601004_960_720.jpg"
+      alt=""
+      class="img-fluid"
+    />
+  </body>
+
+------------------------------------------------------------------------------
+
+tables:
+
+    <!-- tables -->
+    <!-- table-borderless - to be used if no need of borders    , similarly we can apply
+    color ,  table-warning  , table-success  -->
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
