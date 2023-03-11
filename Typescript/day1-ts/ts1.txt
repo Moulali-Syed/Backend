@@ -33,7 +33,7 @@ Typescript - whole job is to Analyze the code as we type . That's it
 Our TypeScript code will be transpiled/compiled to JavaScript code
 
 TypeScript is a development tool . Your project still runs JS 
-The chancing of producing errors is less 
+The chances of producing errors is less 
 
 
 We can see typescript running in ---> typescriptlang.org ,  https://www.typescriptlang.org/play?#
@@ -82,4 +82,4 @@ we have to do
 
         this will create a intro.js file for us 
 */
-
+27:08
