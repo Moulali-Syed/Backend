@@ -1,0 +1,85 @@
+Typescript is superset of javascript
+
+
+Typescript is not about reinventing javascript
+
+Don't use typescript unless it is necessary 
+
+
+Typescript is all about Type Safety
+
+
+TypeSafety is nothing but javascript allows to do some odd things
+
+        like   2+"2" = '22'  , this shouldnot have been allowed ,happening because of no typesafety 
+        2+null = 2
+        undefined+2 = NaN 
+
+------------------------------------------------------------------------------------
+What Typescript does :
+                Static Checking , this is only job done by typescript 
+                this is done by many languages like  , Java , Go lang 
+
+What is static checking?
+When we are writing code the syntax of language  will be continuosly checked by IDEs 
+but not in javascript , it will only be checked when we see in browser env or node js run time 
+
+It will be a great help , if there is a static checker that checks my code when i try to 
+write it
+
+Typescript - whole job is to Analyze the code as we type . That's it 
+
+
+Our TypeScript code will be transpiled/compiled to JavaScript code
+
+TypeScript is a development tool . Your project still runs JS 
+The chancing of producing errors is less 
+
+
+We can see typescript running in ---> typescriptlang.org ,  https://www.typescriptlang.org/play?#
+
+if i write below code in a ts playground , i will get a red swiggly line , indicating that
+the property is not present
+
+let user = {name:'apple',age:1};
+
+console.log(user.email);
+
+but at the end of day it is converted to javascript and when we run it will give result as
+undefined  
+
+
+TypeScript is just a wrapper around javascript, remember it is a development tool 
+------------------------------------------------------------------------------------       
+How to install TypeScript:
+
+1.global install
+        npm install -g typescript 
+
+    to check version
+        tsc -v 
+
+2.with config file in react projects 
+        npm install typescript --save-dev 
+
+------------------------------------------------------------------------------------       
+
+create a intro.ts file  
+
+
+console.log('Moulali Syed');
+
+let user = { name: 'moulali', age: 10 };
+
+console.log(user.name);
+
+/*
+but this typescript not gonna work in production
+
+
+we have to do
+        tsc intro.ts
+
+        this will create a intro.js file for us 
+*/
+
